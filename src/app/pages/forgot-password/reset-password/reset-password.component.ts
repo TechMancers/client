@@ -2,7 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from './service/user.service';
-import e from 'express';
+
 
 @Component({
   selector: 'app-reset-password',

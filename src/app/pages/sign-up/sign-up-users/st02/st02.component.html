@@ -10,8 +10,9 @@
           <div *ngIf="Message" class="alert alert-success" role="alert">
             {{ Message }}
           </div>
-         <p>Step 02 of 03</p> 
+         <p>Step 02 of 02</p> 
          <div class="row">
+
           <div class="col-md-6">
           
             <input type="text" class="form-control" formControlName="fName" placeholder="First Name">
@@ -26,37 +27,14 @@
               Last Name is required
             </div>
           </div>
-        </div>
-          <div class="col-11">
-          
-            <select class="form-select" formControlName="address">
-              <option value="" disabled selected>Select your location</option>
-              <option value="Australia">Australia</option>
-              <option value="Belgium">Belgium</option>
-              <option value="Brazi">Brazil</option>
-              <option value="Canada">Canada</option>
-              <option value="Chaina">Chaina</option>
-              <option value="Denmark">Denmark</option>
-              <option value="France">France</option>
-              <option value="Germany">Germany</option>
-              <option value="Greece">Greece</option>
-              <option value="India">India</option>
-              <option value="Japan">Japan</option>
-              <option value="Netherland">Netherland</option>
-              <option value="New Zealand">New Zealand</option>
-              <option value="Russia">Russia</option>
-              <option value="South Africa">South Africa</option>
-              <option value="South Korea">South Korea</option>
-              <option value="Sri Lanka">Sri Lanka</option>
-              <option value="Switzerland">Switzerland</option>
-              <option value="United Kingdom">United Kingdom</option>
-              <option value="United State">United States</option>
-            </select>
+          <div class="col-12">
+            <input type="text" class="form-control" formControlName="address" placeholder="Address">
             <div *ngIf="signupForm.get('address')?.invalid && signupForm.get('address')?.touched" class="text-danger">
               Address is required
             </div>
           </div>
-          <div class="col-11">
+
+          <div class="col-12">
            
             <select class="form-select" formControlName="role">
               <option value="" disabled selected>Select your role</option>
@@ -67,10 +45,12 @@
               Role is required
             </div>
           </div>
+        </div>
+         
          
           <div class="row">
           <div class="col-5">
-            <label class="form-label">SignUp Date :</label>
+            <label class="form-label">SignUp Date:</label>
           </div>
             <div class="col-7">
             <input type="date" class="form-control" formControlName="registered_at" readonly>
@@ -78,10 +58,12 @@
              Registration Date  is required
             </div>
           </div>
-          </div>
+          <br><br>
           <div class="col-12">
             <button type="submit" class="btn btn-primary" [disabled]="signupForm.invalid">Create Account</button>
           </div>
+          </div>
+          
         </form>
       </div>
       <div class="toggle-container">

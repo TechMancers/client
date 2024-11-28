@@ -6,10 +6,8 @@
           <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
              
               <h1>Sign Up</h1>
-              <p>Step 01 of 03</p>
-              <div class="social-icons">
-                 <!-- google auth -->
-              </div>
+              <p>Step 01 of 02</p>
+             
              
               <input type="email" formControlName="email" class="form-control" placeholder="Email" required>
               <div *ngIf="email?.invalid && (email?.dirty || email?.touched)" class="text-danger">
