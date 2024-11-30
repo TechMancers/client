@@ -1,0 +1,28 @@
+app-modal {
+    display: none;
+  
+    .app-modal {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      justify-content: center;
+      z-index: 10000;
+      background-color: rgba(0, 0, 0, .75);
+      padding: 40px;
+      overflow: auto;
+    }
+  
+    .app-modal-body {
+      padding: 20px;
+      background: #ffffff;
+      border-radius: 5px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, .5);
+      width: fit-content;
+      height: fit-content;
+    }
+  }
+  
+  body.app-modal-open {
+    overflow: hidden;
+  }
+  
