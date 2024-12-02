@@ -1,21 +1,11 @@
 export const navbarData = [
     {
-        routeLink: '/admin/dashboard',
-        icon: 'bi bi-speedometer2',
-        label: 'Dashboard'
-    },
-    {
-        routeLink: '/admin/art-categories',
+        routeLink: '/category-management',
         icon: 'bi bi-tag',
-        label: 'Art Categories'
+        label: 'Book Categories'
     },
     {
-        routeLink: '/admin/artist-requests',
-        icon: 'bi bi-person-check-fill',
-        label: 'Artist Requests'
-    },
-    {
-        routeLink: '/admin/user-management',
+        routeLink: '/user-management',
         icon: 'bi bi-person-fill-gear',
         label: 'User Management'
     }
