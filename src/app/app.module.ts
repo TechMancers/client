@@ -9,7 +9,7 @@ import { NewPasswordComponent } from './pages/forgot-password/new-password/new-p
 import { ResetPasswordComponent } from './pages/forgot-password/reset-password/reset-password.component';
 import { St01Component } from './pages/sign-up/sign-up-users/st01/st01.component';
 import { St02Component } from './pages/sign-up/sign-up-users/st02/st02.component';
-import { St03Component } from './pages/sign-up/sign-up-users/st03/st03.component';
+
 
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -22,7 +22,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ResetPasswordComponent,
     St01Component,
     St02Component,
-    St03Component
+  
   ],
   imports: [
     BrowserModule,

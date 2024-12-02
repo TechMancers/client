@@ -1,11 +1,11 @@
-
+<!-- 
 <div class="ss">
 
     <div class="container" id="container">
             
       <div class="form-container sign-in">
           <form [formGroup]="loginForm" (ngSubmit)="signIn()">
-              <!-- Error and success messages -->
+             
               <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
                   {{ errorMessage }}
                 </div>
@@ -48,4 +48,55 @@
           </div>
       </div>
     </div>
+    </div> -->
+
+    <div class="ss">
+      <div class="container" id="container">
+        <div class="form-container sign-in">
+          <form [formGroup]="loginForm" (ngSubmit)="signIn()">
+            
+            <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+              {{ errorMessage }}
+            </div>
+            <div *ngIf="Message" class="alert alert-success" role="alert">
+              {{ Message }}
+            </div>
+            <div *ngIf="successMessage" class="alert alert-success" role="alert">
+              {{ successMessage }}
+            </div>
+    
+            <h1>Sign In</h1>
+    
+            <input type="email" id="inputEmail" formControlName="email" class="form-control" placeholder="Email" />
+            <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched" class="text-danger">
+              Please enter a valid email
+            </div>
+    
+            <input type="password" id="inputPassword" formControlName="password" class="form-control" placeholder="Password" />
+            <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="text-danger">
+              <div *ngIf="loginForm.get('password')?.errors?.['required']">Password is required</div>
+              <div *ngIf="loginForm.get('password')?.errors?.['minlength']">Password must be at least 8 characters long</div>
+              <div *ngIf="loginForm.get('password')?.errors?.['passwordStrength']">
+                Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character
+              </div>
+            </div>
+    
+            <a routerLink="/reset">Forget Your Password?</a>
+            <div class="mb-3">
+              <a routerLink="/st01">New User?</a>
+              <a routerLink="/st01">Signing In</a>
+            </div>
+            <button type="submit" class="btn btn-primary" [disabled]="loginForm.invalid">Sign In</button>
+          </form>
+        </div>
+    
+        <div class="toggle-container">
+          <div class="toggle">
+            <div class="toggle-panel toggle-right">
+              <img class="image" src="../../../../assets/fire logo.jpg" alt="Logo" style="width: 250px; height: 250px;" />
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+    
