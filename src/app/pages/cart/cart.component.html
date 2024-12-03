@@ -1,0 +1,85 @@
+<app-navbar></app-navbar>
+<body>
+<!-- Show this message when cart is empty -->
+<section class="head-title-section section-margin ">
+  <div class="wrapper">
+  <div class="container-fluid">
+    <div class="row justify-content-center align-items-center empty-cart-container">
+      <div *ngIf="cartItems.length === 0" class="text-center">
+       
+        <i class="bi bi-cart-x-fill cart-icon"></i>
+        <p class="empty-text">
+         <br>
+          Add your favourite books to the cart and make them yours.
+        </p>
+        <button type="button" class="btn shadow btn-primary btn-lg custom-button" routerLink="/foryou">
+          Add Books
+        </button>
+      </div>
+    </div>
+  </div>
+  </div>
+</section>
+
+
+<!-- this part is for when the cart has items in it-->
+<section class="head-title-section section-margin ">
+  <div *ngIf="cartItems.length > 0">
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12 text-center mt-5 ">
+        <h3 class="text-color">Your cart items await you, just a step away from making them yours.</h3>
+      </div>
+    </div>
+    
+    <div class="row">
+      <!-- Left side with cart items -->
+      <div *ngIf="cartItems">
+        <div class="col-md-9">
+          <div class="d-flex flex-wrap " *ngFor="let getCartDetail of cartItems">
+            <app-cart-card [cartItem]="getCartDetail" (itemChanged)="onItemChanged()"
+            (itemRemoved)="onItemRemoved(getCartDetail.book_id)"></app-cart-card>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right side with card summary -->
+      <div class="col-md-3 summary-card position-fixed" style="right: 60px; top: 159px; ">
+        <div class="d-flex justify-content-center align-items-center flex-column h-100">
+          <div class="card shadow">
+            <div class="card-body">
+              <h5 class="card-title">Cart Summary</h5>
+              <div class="row">
+                <div class="col-md-7">
+                  <p class="card-text">Total Quantity : </p>
+                </div>
+                <div class="col-md-5">
+                  <p class="card-text">{{ totalQuantity }} </p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-7">
+                  <p class="card-text">Sub Total : </p>
+                </div>
+                <div class="col-md-5">
+                  <p class="card-text">{{ subTotal | currency:'USD':'symbol':'1.2-2' }} </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button type="button" class="btn btn-success btn-change mt-3 shadow"  (click)="checkout()">Checkout</button>
+          <button
+            type="button" class="btn btn-danger btn-customize mt-3 shadow " (click)="removeAll()"
+           >
+            Clear Cart
+          </button>
+         
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</section>
+</body>
+<app-footer ></app-footer>

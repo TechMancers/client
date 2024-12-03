@@ -1,0 +1,18 @@
+<div class="container" (click)="goToPreview(book)">
+    <div class="image">
+        <img [src]="book.thumbnail_url" alt="Artwork Image">
+        <div class="details">
+            <h2>{{book.artwork_title}}</h2>
+            <p>{{book.artist_name}}</p>   
+        </div>
+            <div class="more">
+                <p class="price">{{book.price | currency:'USD':'symbol':'1.2-2'}}</p>
+                <p class="like-count"> <button class="btn like-btn" (click)="likeArtwork(book); $event.stopPropagation()">
+                    <i class="bi" [ngClass]="book.liked ? 'bi-heart-fill' : 'bi-heart'"></i>
+                  </button>
+                  {{book.total_likes}}
+                </p>
+                <button class="btn cart-icon-btn" (click)="addCart(book); $event.stopPropagation()"> <i class="bi bi-cart-plus-fill"></i></button>
+            </div>
+        </div>
+    </div>

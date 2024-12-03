@@ -1,0 +1,43 @@
+<nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+    <div class="container-fluid">
+      <!-- Artista Logo -->
+      <img src="../../../../assets/logo.png" alt="Artista Logo" class="custom-logo img-fluid" />
+  
+      <!-- Toggle button -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
+        aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+  
+      <!-- Navbar links -->
+      <div class="collapse navbar-collapse" id="navbarColor01">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link " routerLink="/foryou" routerLinkActive="active">Home<span class="visually-hidden">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link " routerLink="/artist" routerLinkActive="active">Authors</a>
+          </li>
+        </ul>
+  
+        <!-- Search Bar -->
+        <form class="d-flex searchbox"  (submit)="onSearchSubmit()">
+          <input class="form-control me-sm-2" style="border-radius: 5px; height: 40px;" type="search" placeholder="Search"  name="searchTerm">
+          <button class="btn btn-light my-2 my-s m-0" type="submit" style="border-radius: 4px;">Search</button>
+        </form>
+  
+  
+   <!-- Icon Section -->
+   
+    <a routerLink="/contactus" class="navbar-text me-3">
+        <i class="bi bi-envelope-fill"></i>
+      </a>
+    <a href="/cart" class="navbar-text me-3">
+      <i class="bi bi-cart-fill"></i>
+    </a>
+    <a href="/customer-profile-gallery" class="navbar-text">
+      <i class="bi bi-person-circle"></i>
+    </a>
+  </div>
+  </div>
+  

@@ -1,0 +1,103 @@
+/* Add margin to the left to move the logo to the right */
+.custom-logo {
+    margin-left: 50px;
+    max-height: 50px;
+    max-width: 900px;
+    margin-right: 60px; /* Add margin to the right of the logo */
+  
+  }
+  
+  /* icons */
+  .navbar-text .bi-envelope-fill,
+  
+  .navbar-text .bi-cart-fill,
+  .navbar-text .bi-person-circle {
+    color: white;
+    font-size: 1.5rem;
+    text-shadow: 5px 5px 8px rgba(0, 0, 0, 0.2);
+    margin-right: 2vw;
+    transition: color 0.3s;
+  }
+
+  .navbar-text .bi-envelope-fill{
+    margin-left: 4vw;
+  }
+  
+  .navbar-text:hover .bi-envelope-fill,
+  
+  .navbar-text:hover .bi-cart-fill,
+  .navbar-text:hover .bi-person-circle {
+    color: rgb(231, 115, 57);
+  }
+  
+  /* Increase the size and make the text bold for "ForYou" and "Artist" */
+  .navbar-nav .nav-link {
+    font-size: 1.2rem; /* Adjust the size as needed */
+    font-weight: 320; /* Make the text bold */
+    margin-right: 5vw;
+    transition: transform 0.3s ease, color 0.3s ease; /* Added transform */
+  }
+  
+  .navbar-nav .nav-link:hover {
+    color: rgb(250, 171, 145);
+    transform: scale(1.1); /* Zoom-in effect */
+  }
+  
+  .navbar-nav .nav-link:active,
+  .navbar-nav .nav-link.active {
+    font-weight: 400; /* Make the text bold when selected */
+  }
+  
+  /* Increase the width of the search bar and add round corners */
+  .form-control {
+    width: 18vw; /* Adjust the width as needed */
+    border-radius: 14px; /* Add round corners */
+    margin-left: 8vw;
+  }
+  
+  
+  
+  .btn{
+    color: rgb(0, 21, 47);
+    
+   
+  }
+  
+  /*icons to the right corner*/
+  .d-flex {
+    margin-left: auto;
+  }
+  
+  
+  .icon {
+    cursor: pointer;
+    margin-right: 10px;
+    line-height: 60px;
+  }
+  
+  .icon img {
+    display: inline-block;
+    width: 40px;
+    margin-top: 20px;
+  }
+  
+  .icon:hover {
+    opacity: 0.7;
+  }
+  
+  .notifi-count span {
+    background: rgb(227, 92, 92);
+    padding: 7px;
+    border-radius: 50%;
+  }
+  
+  .navbar{
+    width: 100%;
+  background-color:  #b52727;
+  }
+  
+  .searchbox{
+    margin-left:2px;
+    justify-content: center;
+    align-items: center;
+  }

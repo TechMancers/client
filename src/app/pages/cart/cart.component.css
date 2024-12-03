@@ -1,0 +1,114 @@
+.text-color{
+    color: var(--body-text-color);
+    font-size: 130%;
+    font-weight: bold;
+    margin-bottom: 25px;
+    margin-top: -25px;
+}
+
+.container-fluid {
+    overflow-x: hidden; /* Hide horizontal scrollbar */
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 60vh; /* Ensure it takes full viewport height */
+}
+.section-margin{
+    margin-left: 5vw;
+    margin-right: 10vw;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+section:last-of-type {
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+/* Ensure the footer sticks to the bottom */
+footer {
+    margin-top: 0;
+    padding-top: 0;
+}
+
+.btn-customize{
+    width: 70%;
+    margin-top: 5%;
+
+}
+.btn-change{
+    width: 70%;
+    margin-top: 5%;
+  
+}
+
+.card-text{
+    color: var(--body-text-color);
+    font-size: 100%;
+    font-weight:500;
+   
+}
+
+.empty-text{
+    color: #0b466e;
+    font-size: 20px;
+    font-weight:600;
+    margin-top: -3%;
+    margin-bottom: 20px;
+    opacity: 0.8;
+    white-space: nowrap;
+}
+
+.card{
+    width: 80%;
+    padding-left: 6%;
+    padding-right: 3%;
+}
+
+.cart-icon{
+    
+    font-size: 100px;
+    font-weight: 8000;
+    opacity: 0.6;
+    margin-bottom: 20px;
+
+}
+
+  .custom-button {
+    font-size: 1.2rem;
+    border-color: #792d04;
+    background-color: #b52727;
+    border-radius: 2px;
+  }
+  .custom-button:hover {
+    color: rgb(145, 222, 250);
+  
+    background-color: #e17878;
+  }
+  
+
+  .summary-card {
+   position: fixed;
+   margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .body{
+   
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+.btn-success{
+    border-color: #3b7904;
+    background-color: #249c0f;
+    border-radius: 4px;
+    transition: transform 0.3s ease, color 0.3s ease; /* Added transform */
+}
+
+.btn-success:hover {
+  color: rgb(145, 250, 155);
+
+  background-color: #134414;
+}
