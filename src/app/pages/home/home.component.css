@@ -1,451 +1,761 @@
-section.banner {
+General Adjustments
+.custom-logo {
+  margin-left: 20px;
+  max-height: 60px;
+  max-width: 200px;
+}
 
-    padding: 160px 24px 110px;
-    background-size: auto 100%;
-    background-repeat: no-repeat;
-    background-position: 70% top;
+.form-control {
+  width: 450px;
+  border-radius: 10px;
+}
+
+.d-flex {
+  gap: 20px;
+}
+
+.navbar {
+  background-color: #489eb9;
+}
+
+/* Navbar Custom Styling */
+.navbar-custom {
+  background-color: #31bb9f; /* Modern dark color */
+  padding: 10px 20px; /* Comfortable padding */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+/* Brand Styling */
+.navbar-brand {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.brand-name {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #f8f9fa;
+}
+
+/* Logo */
+.custom-logo {
+  height: 40px; /* Adjust logo size */
+}
+
+/* Search Form */
+.search-form {
+  flex: 1;
+  max-width: 600px;
+}
+
+.search-input {
+  border: none;
+  border-radius: 20px 20px 20px 20px;
+  padding: 10px 15px;
+  font-size: 0.9rem;
+  outline: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.search-btn {
+  border-radius: 20px 20px 20px 20px;
+  padding: 10px 15px;
+  font-weight: bold;
+  background-color: #17a2b8;
+  color: #fff;
+  border: none;
+  transition: background-color 0.3s ease;
+  
+}
+
+.search-btn:hover {
+  background-color: #138496;
+}
+
+/* Buttons */
+.btn {
+  padding: 8px 12px;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+.btn-primary {
+  background-color: #0069d9;
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+
+.btn-outline-primary {
+  color: #0069d9;
+  border-color: #0069d9;
+}
+
+.btn-outline-primary:hover {
+  background-color: #0069d9;
+  color: #fff;
+}
+
+.btn-outline-light {
+  color: #f8f9fa;
+  border-color: #f8f9fa;
+}
+
+.btn-outline-light:hover {
+  background-color: #f8f9fa;
+  color: #2e3b4e;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .search-form {
+    flex: 1;
+    max-width: 100%;
   }
-  
-  .inner{
-    display: block;
-    max-width: 2386px;
-    margin: 0 auto;
-    text-align: center;
-    
+
+  .navbar-custom {
+    flex-wrap: wrap;
+    padding: 15px;
   }
-  canvas {
-    width: 100% !important;
-    height: 100% !important;
+}
+
+
+/* Banner Section */
+section.banner {
+  background-image: url('../../../assets/herosection.png');
+  background-size: cover;
+  background-position: center;
+  color: white;
+  text-align: start;
+  padding: 100px 20px;
+}
+
+.banner-div h1 {
+  font-size: 3rem;
+  color: #257261;
+  text-align: left;
+}
+
+.banner-div h2 {
+  font-size: 1.5rem;
+  margin-top: 10px;
+  color: #257261;
+  text-align: left;
+}
+
+.sign-up-button {
+  background: linear-gradient(135deg, #2eabc1, #1b7384); /* Beautiful gradient background */
+  color: #ffffff; /* Contrasting text color */
+  border: none; /* Clean button edge */
+  border-radius: 30px; /* Slightly larger pill shape for elegance */
+  padding: 12px 24px; /* Comfortable and inviting spacing */
+  font-size: 18px; /* Slightly larger, readable text */
+  font-weight: bold; /* Emphasize button text */
+  text-transform: uppercase; /* Modern, clean text style */
+  letter-spacing: 0.8px; /* Subtle spacing for a refined look */
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15); /* Enhanced shadow for a floating effect */
+  cursor: pointer; /* Indicate clickability */
+  text-align: center; /* Center-align text */
+  display: inline-block; /* Inline block for better positioning */
+  transition: all 0.4s ease; /* Smooth animations */
+  user-select: none; /* Prevent text selection */
+  position: relative; /* Required for pseudo-elements */
+  overflow: hidden; /* Contain animated effects */
+  
+}
+
+.sign-up-button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 200%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.2); /* Subtle shimmer effect */
+  transform: skewX(-45deg); /* Stylish diagonal shimmer */
+  transition: 0.5s ease; /* Smooth shimmer transition */
+}
+
+.sign-up-button:hover::before {
+  left: 100%; /* Move shimmer across the button */
+}
+
+.sign-up-button:hover {
+  background: linear-gradient(135deg, #1b7384, #145a66); /* Darker gradient for hover */
+  transform: translateY(-4px) scale(1.05); /* Elegant lift and zoom effect */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Enhance hover shadow */
+}
+
+.sign-up-button:active {
+  background: linear-gradient(135deg, #145a66, #103f48); /* Deeper tones for active state */
+  transform: translateY(2px) scale(0.97); /* Slight press-down effect */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Subtle shadow reduction */
+}
+
+.sign-up-button:focus {
+  outline: none; /* Remove default focus outline */
+  box-shadow: 0 0 0 4px rgba(46, 171, 193, 0.4); /* Glowing focus ring for accessibility */
+}
+
+.sign-up-button:disabled {
+  background: linear-gradient(135deg, #b0dbe4, #8baab2); /* Muted gradient for disabled state */
+  color: #ffffff; /* Maintain readable text */
+  cursor: not-allowed; /* Show not-allowed cursor */
+  opacity: 0.7; /* Subtle disabled effect */
+  transform: none; /* No transform for disabled state */
+  box-shadow: none; /* Remove shadow for disabled state */
+}
+
+/* Add responsiveness */
+@media (max-width: 768px) {
+  .sign-up-button {
+    font-size: 16px; /* Adjust text size for smaller screens */
+    padding: 10px 20px; /* Adjust padding for compact design */
   }
-  .loader {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 4px;
-    color: white;
-    z-index: 10;
+}
+
+ 
+
+/* Carousel */
+.carousel-container {
+  position: relative;
+  width: 100%;
+  max-width: 2000px;
+  margin: 70px auto;
+  overflow: hidden;
+  border-radius: 5px;
+  background-color: #97dbd8;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.carousel-container h2 {
+  text-align: center;
+}
+
+.carousel {
+  display: flex;
+  transition: transform 0.3s ease-in-out;
+}
+
+.carousel-item {
+  min-width: 210px; /* Adjust according to the width of your items */
+  flex-shrink: 0;
+  text-align: center;
+  padding: 10px;
+  background-color: #cbecf5;
+  margin: 5px;
+  border-radius: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.carousel-item:hover {
+  background-color: #a4e1e2;
+}
+
+.category-image {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.category-name {
+  margin-top: 10px;
+  font-size: 25px;
+  color: #276f75;
+}
+
+.category-name:hover {
+  margin-top: 10px;
+  font-size: 25px;
+  color: #246487;
+}
+
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(40, 123, 239, 0.5);
+  color: #fff;
+  border: none;
+  font-size: 24px;
+  padding: 15px;
+  cursor: pointer;
+  border-radius: 10%;
+  z-index: 1000;
+}
+
+.carousel-btn.prev {
+  left: 10px;
+}
+
+.carousel-btn.next {
+  right: 10px;
+}
+
+.carousel-btn:hover {
+  background-color: rgba(58, 215, 223, 0.7);
+}
+
+
+#banner3 {
+
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+#banner3 .banner-box {
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  background-image: url("../../../assets/banner.jpg");
+  min-width: 650px;
+  height: 50vh;
+  background-size: cover;
+  background-position: center;
+  padding: 30px;
+  
+
+}
+
+#banner3 .banner-box2{
+
+  background-image: url("../../../assets/banner.jpg");
+}
+
+
+
+/*.container {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+h1, h2 {
+  color: #333;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  padding: 10px 15px;
+  margin: 5px 0;
+  background-color: #f4f4f4;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+li:hover {
+  background-color: #e9e9e9;
+} */
+
+
+/* Book Card */
+#product1 {
+
+  text-align: center;
+
+}
+
+#product1 .pro-container {
+
+  display: flex;
+  justify-content: space-between;
+  padding-top: 20px;
+  flex-wrap: wrap;
+}
+
+#product1 .pro {
+
+  width: 10%;
+  min-width: 250px;
+  padding: 10px 12px;
+  border: 1px solid #cce7d0;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 20px 20px 30px rgba(0, 0, 0, 0.02);
+  margin: 15px 0;
+  transition: 0.2s ease;
+  position: relative;
+
+}
+
+#product1 .pro:hover {
+
+  box-shadow: 20px 20px 30px rgba(0, 0, 0, 0.06);
+
+
+}
+
+#product1 .pro img {
+
+  width: 100%;
+  height: 300px;
+
+}
+
+#product1 .pro .des {
+
+  text-align: start;
+  padding: 10px 0;
+}
+
+#product1 .pro .des span {
+
+  color: #606063;
+  font-size: 25px;
+  
+}
+
+#product1 .pro .des h5 {
+
+  padding-top: 7px;
+  color: #1a1a1a;
+  font-size: 15px;
+  
+
+}
+
+
+
+#product1 .pro .des h4 {
+
+  padding-top: 7px;
+  font-size: 20px;
+  font-weight: 800;
+  color: #088178;
+  
+}
+
+.section-p1{
+  padding: 40px 80px;
+}
+
+
+
+.add-to-cart {
+  background-color: #088178; /* Matches the price color */
+  color: white; /* Contrasting text color */
+  border: none; /* Remove border */
+  border-radius: 5px; /* Smooth corners */
+  padding: 10px 15px; /* Spacing for the button */
+  font-size: 14px; /* Readable font size */
+  font-weight: bold; /* Emphasize button text */
+  cursor: pointer; /* Pointer on hover */
+  margin-top: 10px; /* Space above the button */
+  margin-bottom: 10px;
+  transition: background-color 0.3s, transform 0.3s; /* Smooth hover and click effects */
+}
+
+.add-to-cart:hover {
+  background-color: #066a56; /* Slightly darker shade */
+  transform: translateY(-2px); /* Lift effect on hover */
+}
+
+.add-to-cart:active {
+  background-color: #055845; /* Even darker for active state */
+  transform: translateY(0); /* Pressed down effect */
+}
+
+
+/* Category Section */
+.ss ul {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.ss a {
+  color: #3498db;
+}
+
+.ss a:hover {
+  text-decoration: underline;
+}
+
+/* Carousel Section */
+/* .carousel-container {
+  margin: 20px auto;
+}
+
+.card-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.card1 {
+  background-color: #ecf0f1;
+  padding: 20px;
+  text-align: center;
+  border-radius: 5px;
+}
+
+.carousel-control {
+  background-color: rgba(0, 0, 0, 0.3);
+} */
+
+/* Footer */
+/* footer {
+  text-align: center;
+  padding: 10px;
+  background-color: #34495e;
+  color: white;
+  margin-top: 20px;
+} */
+
+
+
+
+/* General Adjustments */
+.custom-logo {
+  margin-left: 20px;
+  max-height: 60px;
+  max-width: 200px;
+}
+
+.form-control {
+  width: 100%;
+  max-width: 450px;
+  border-radius: 10px;
+}
+
+.d-flex {
+  display: flex;
+  gap: 20px;
+}
+
+.navbar {
+  background-color: #489eb9;
+  flex-wrap: wrap;
+}
+
+/* Navbar Custom Styling */
+.navbar-custom {
+  background-color: #31bb9f;
+  padding: 10px 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.brand-name {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #f8f9fa;
+}
+
+.custom-logo {
+  height: 40px;
+}
+
+/* Search Form */
+.search-form {
+  flex: 1;
+  max-width: 100%;
+}
+
+.search-input,
+.search-btn {
+  border-radius: 20px;
+  padding: 10px 15px;
+  font-size: 0.9rem;
+}
+
+.search-input {
+  border: none;
+  outline: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 100%;
+}
+
+.search-btn {
+  background-color: #17a2b8;
+  color: #fff;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+.search-btn:hover {
+  background-color: #138496;
+}
+
+/* Buttons */
+.btn {
+  padding: 8px 12px;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+.btn-primary {
+  background-color: #0069d9;
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+
+.btn-outline-primary,
+.btn-outline-light {
+  border-width: 2px;
+}
+
+.btn-outline-primary:hover {
+  background-color: #0069d9;
+  color: #fff;
+}
+
+.btn-outline-light:hover {
+  background-color: #f8f9fa;
+  color: #2e3b4e;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .navbar-custom {
+    flex-wrap: wrap;
+    padding: 15px;
   }
-  
-  .loader p {
-    font-size: large;
-    margin: 0;
+
+  .search-form {
+    max-width: 100%;
   }
-  
-  .banner-div{
-    flex: 0 0 586px;
-  
-    h1{
-      margin: 0;
-      font-size: 48px;
-      font-weight: 600;
-      line-height: 56px;
-      color: white !important;
-    }
-    h2{
-      font-size: 14px;
-      line-height: 22px;
-      font-weight: 400;
-      margin: 20px 0 36px;
-      color: white !important;
-    }
-    .sign-up-button{
-      position: relative;
-      display: inline-block;
-      padding: 10px 20px;
-      color: #fff;
-      background-color:#0F969C;
-      border: none;
-      border-radius: 5px;
-      text-transform: uppercase;
-      font-weight: bold;
-      cursor: pointer;
-      overflow: hidden;
-      min-width: 260px;
-      height: 62px;
-      font-size: 20px;
-      padding: 0px 20px;
-      font-weight: 500;
-      line-height: 24px;
-      transition: background 0.3s, box-shadow 0.3s;
-    }
-  
-    .sign-up-button::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -35%;
-      height: 100%;
-      width: 0;
-      background: rgba(255, 255, 255, 0.137);
-      transform: skew(50deg);
-      transition: width 0.6s;
-      transform-origin: top left;
-    }
-  
-    .sign-up-button:hover::after {
-      width: 135%;
-    }
-  
-    .sign-up-button:hover{
-      background: #072e33;
-    }
+
+  .search-input,
+  .search-btn {
+    font-size: 0.8rem;
   }
-  
-  .banner-canvas{
-    flex: 1 1 auto;
-    margin-top: 36px;
+}
+
+/* Banner Section */
+.banner {
+  background-image: url('../../../assets/herosection.png');
+  background-size: cover;
+  background-position: center;
+  color: white;
+  text-align: center;
+  padding: 100px 20px;
+}
+
+.banner h1 {
+  font-size: 2.5rem;
+  color: #257261;
+}
+
+.banner h2 {
+  font-size: 1.2rem;
+  margin-top: 10px;
+  color: #257261;
+}
+
+/* Carousel Section */
+.carousel-container {
+  position: relative;
+  width: 100%;
+  margin: 50px auto;
+  overflow: hidden;
+  background-color: #97dbd8;
+  border-radius: 5px;
+}
+
+.carousel {
+  display: flex;
+  transition: transform 0.3s ease-in-out;
+}
+
+.carousel-item {
+  min-width: 200px;
+  flex-shrink: 0;
+  padding: 10px;
+  background-color: #cbecf5;
+  margin: 5px;
+  border-radius: 20px;
+  text-align: center;
+}
+
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(40, 123, 239, 0.5);
+  color: #fff;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.carousel-btn:hover {
+  background-color: rgba(58, 215, 223, 0.7);
+}
+
+/* Product Section */
+#product1 .pro-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+#product1 .pro {
+  min-width: 250px;
+  padding: 10px;
+  text-align: center;
+  margin: 15px;
+  border: 1px solid #cce7d0;
+  border-radius: 10px;
+  transition: box-shadow 0.2s;
+}
+
+#product1 .pro:hover {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 10px;
+  background-color: #34495e;
+  color: white;
+  margin-top: 20px;
+}
+
+/* Responsive Adjustments for Small Screens */
+@media (max-width: 576px) {
+  .banner h1 {
+    font-size: 2rem;
   }
-  
-  .model-viewer {
-    width: 100%;
-    position: relative;
-    max-width: 1100px;
-    padding-top: 60%;  
-    justify-content: center;
-    align-items: center;
+
+  .banner h2 {
+    font-size: 1rem;
   }
-  
-  .model-hint {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    text-align: center;
-    font-size: 12px;
-    line-height: 1;
-    z-index: 1;
-    color: #ccc;
-    text-shadow: 0 0 1px 1px rgba(0, 0, 0, .1);
+
+  #product1 .pro {
+    min-width: 100%;
   }
-  
-  .model-canvas {
-    background-color: initial !important;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-  }
-  
-  .custom-logo {
-    margin-left: 50px;
-    max-height: 50px;
-    max-width: 600px;
-    margin-right: 60px; /* Add margin to the right of the logo */
-  
-  }
-  
-  /* Increase the width of the search bar and add round corners */
-  .form-control {
-    width: 400px; /* Adjust the width as needed */
-    border-radius: 14px; /* Add round corners */
-    margin-left: 180px;
-  }
-  
-  
-  .d-flex {
-    
-    gap: 25px;
-  }
-  
-  
-  .navbar{
-    background-color: #055287;
-  }
-  
-  .navbar .sign-up-button
-  {
-    position: relative;
-    display: inline-block;
-    padding: 10px 20px;
-    color: #fff;
-    background-color:#0F969C;
-    border: none;
-    border-radius: 5px;
-    text-transform: uppercase;
-    font-weight: bold;
-    cursor: pointer;
-    overflow: hidden;
-    min-width: 150px;
-    height: 47px;
-    font-size: 20px;
-   
-    font-weight: 500;
-    line-height: 24px;
-    transition: background 0.3s, box-shadow 0.3s;
-  }
-  .navbar .sign-up-button::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -35%;
-    height: 100%;
-    width: 0;
-    background: rgba(255, 255, 255, 0.137);
-    transform: skew(50deg);
-    transition: width 0.6s;
-    transform-origin: top left;
-  }
-  
-  .navbar .sign-up-button:hover::after {
-    width: 135%;
-  }
-  
-  .navbar .sign-up-button:hover{
-    background: #072e33;
-  }
-  
-  
-  
-    .form-control {
-        width: 400px;
-      
-    }
-  
-    .xx
-    {
-      gap: 2px;
-    }
-  .xx .btn
-  {
-    height:37px;
-    border-radius: 15%;
-  }
-  
-  .title {     
-    font-size: 6vw;  /* Using viewport width to make the font size responsive */
-    font-weight: bold;
-    color: white;
-    margin-top: 60px;
-    
-  }
-  
-  .row{
-    gap: 10px;
-  }
-  
-  
-  .carousel-control-next-icon {
-    background-color: black; /* Ensure background is transparent */
-    background-size: 100% 100%;
-    color: black;
-  }
-  .carousel-control-prev-icon{
-  
-    background-color: black; /* Ensure background is transparent */
-    background-size: 100% 100%;
-    color: black;
-  }
-  
-  
-  
-  
-  
-  /* For large devices (desktops) */
-  @media (min-width: 1024px) {
-  
-    section.banner {
-      background-size: cover;
-      background-position: 50%;
-      padding: 160px 82px 110px 134px;
-    }
-    .inner{
-      display: flex;
-      align-items: center;
-      text-align: left;
-    }
-  
-    .banner-canvas{
-      display: flex;
-      margin-top: 0;
-      align-items: flex-end;
-      justify-content: flex-end;
-    }
-    .model-viewer {
-      width: 95%;
-      padding-top: 53%;  
-  }
-  
-    .title {
-        font-size: 4vw;  /* Adjust font size for large screens */
-        
-    }
-  
-    .hero-body {
-        height: 60vh;  /* Adjust height for large screens */
-        min-height: 300px;  /* Maintain minimum height */
-    }
-  }
-  
-  .card-container {
-      display: flex;
-      row-gap: 10px;
-     
-    }
-    
-    .card-container-artist {
-      display: flex;
-    }
-   
-  
-  
-  .paragraph{
-  
-    font-size: 20px;
-    color: black;
-    margin-left: 50px;
-    margin-right: 50px;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    text-align: justify;
-    font-size: 16px; /* Adjust the font size as needed */
-  
-  }
-  .button{
-    color: tomato;
-    align-items: center;
-    text-align: center;
-  
-  }
-  
-  
-  /* Media queries for responsiveness */
-  @media (max-width: 768px) {
-      #search-input {
-          width: 75%;
-      }
-  
-      #search-button {
-          width: 20%;
-          padding: 10px;
-      }
-  }
-  
-  @media (max-width: 480px) {
-      #search-input {
-          width: 70%;
-      }
-  
-      #search-button {
-          width: 15%;
-          padding: 8px;
-        
-      }
-  }
-  
-  
-    h1{
-      font-weight: bold;
-      font-size: 30px;
-      color:black;
-      
-    }
-  
-    h3{
-      
-      font-size: 15px;
-    }
-    h2{
-      
-      font-weight: bold;
-      font-size: 15px;
-    }
-  
-  
-   
-  
-   /* Add this to your styles.css or home.component.css */
-  
-  .carousel-container {
-    position: relative;
-    width: 100%;
-    overflow: hidden;
-  }
-  
-  .carousel {
-    display: flex;
-    transition: transform 0.6s ease-in-out;
-  }
-  
-  .card2 {
-    min-width: calc(100% / 5); /* Adjust based on itemWidth */
-   
-  }
-  .card1 {
-    min-width: calc(100% / 4); /* Adjust based on itemWidth */
-   
-  }
-  
-  .carousel-control {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-  }
-  
-  .carousel-control.prev {
-    left: 0;
-  }
-  
-  .carousel-control.next {
-    right: 0;
-  }
-   
-  @media (min-width: 1440px) {
-    .model-viewer {
-        width: 70%;
-    }
-  }
-  
-  .ss .row
-  {
-    padding-left: 50px;
-  }
-  .ss h2
-  {
-    text-align: center;
-    font-size: 20px;
-  
-  }
-  
-  .section#category-listing{ 
-    color: #474747;
-      font: 1em iStock Maquette,Helvetica,Arial,sans-serif;
-      line-height: 1.5em;
-      -webkit-text-size-adjust: none;
-      font-size: 100%;
-      -webkit-font-smoothing: subpixel-antialiased;
-      box-sizing: border-box;
-      background: transparent;
-      border: 0;
-      padding: 0;
-  
-      display: block;
-      margin: 0 auto;
-      max-width: 1146px;
-      padding-bottom: 35px;
-      text-align: center;
-      width: 100%;
-  }
-  
-  .ss ul {
-    list-style: none; /* Remove bullet points */
-    padding: 0;
-    margin: 0;
-  }
-  .ss a {
-    text-decoration: none;
-    color: #0F969C;
-    font-size: 20px;
-    font-weight: bold;
-  }
-  
+}
