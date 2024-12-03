@@ -16,7 +16,8 @@ import { AdminModule } from './pages/admin/admin.module';
     AppRoutingModule,
     HttpClientModule,
     AdminModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+
   ],
   providers: [
     provideClientHydration(),

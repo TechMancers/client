@@ -11,13 +11,16 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { CategoryManagementComponent } from './category-management/category-management.component';
 import { UserManagementComponent } from './user-management/user-management.component';
+import { BookUploadComponent } from './book-upload/book-upload.component';
+
 
 
 @NgModule({
   declarations: [
     AdminComponent,
     CategoryManagementComponent,
-    UserManagementComponent
+    UserManagementComponent,
+    BookUploadComponent
   ],
   imports: [
     CommonModule,

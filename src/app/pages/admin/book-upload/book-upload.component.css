@@ -1,0 +1,90 @@
+v/* General Styles */
+body {
+  background-color: #d8d8d8;
+  font-family: 'Karla', sans-serif;
+
+}
+
+/* Section Styling */
+.intro-section {
+  background-image: url(https://i.ibb.co/t2tbbh6/pexels-luis-quintero-2471234.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  padding: 10px 25px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  color: #ffffff;
+}
+
+/* Form and Button Styles */
+.form-control {
+  background-color: rgba(255, 255, 255, 0.6); /* Light background */
+  color: #000;
+  border: 2px solid #000; /* Border style */
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.form-control::placeholder {
+  color: #030000;
+}
+
+.btn-custom {
+  background-color: #000;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-custom:hover {
+  background-color: #444;
+}
+
+/* Input Group Styling */
+.input-group {
+  display: flex;
+  align-items: center;
+}
+
+.input-group-text {
+  border: 2px solid #000;
+  border-radius: 5px;
+}
+
+.input-group-text:hover {
+  background-color: #444;
+}
+
+/* Tags, Tools, and File Formats */
+.badge {
+  margin-bottom: 5px;
+  margin-right: 5px;
+}
+
+.d-flex.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.uploading-animation {
+  animation: blinkingText 1.2s infinite;
+}
+
+@keyframes blinkingText {
+  0% { color: #000; }
+  49% { color: #000; }
+  60% { color: transparent; }
+  99% { color: transparent; }
+  100% { color: #000; }
+}
+
+/* Responsiveness and Layout Adjustments */
+@media (max-width: 768px) {
+  .intro-section {
+    padding: 20px;
+  }
+}
+
