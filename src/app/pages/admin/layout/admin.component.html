@@ -1,0 +1,440 @@
+<div class="top-nav">
+  <button class="sidenav-toggle d-flex" (click)="toggleSidenav()">
+    <i class="bi bi-list"></i>
+  </button>
+  <div class="admin-details gap-3">
+    <img
+      [src]="adminDetails.profile_photo"
+      class="rounded"
+      style="height: 50px; width: 50px"
+    />
+    <span class="admin-name"
+      >{{ adminDetails.FName }} {{ adminDetails.LName }}</span
+    >
+    <i class="bi bi-gear" style="cursor: pointer" (click)="openEditModal()"></i>
+    <i
+      class="bi bi-box-arrow-right text-danger"
+      style="cursor: pointer"
+      (click)="logout()"
+    ></i>
+  </div>
+</div>
+
+<app-alert></app-alert>
+
+<div class="sidenav" [ngClass]="collapsed ? 'sidenav-collapsed' : ''">
+  <div class="logo-container">
+    <button class="logo" (click)="toggleCollapse()">
+      <i class="bi bi-list"></i>
+    </button>
+    <div class="logo-text" *ngIf="collapsed">Artista</div>
+    <button
+      class="btn-close"
+      @rotate
+      *ngIf="collapsed"
+      (click)="closeSidenav()"
+    >
+      <i class="bi bi-x-lg close-icon"></i>
+    </button>
+  </div>
+  <div class="sidenav-nav">
+    <li class="sidenav-nav-item" *ngFor="let data of navData">
+      <a
+        class="sidenav-nav-link"
+        [routerLink]="[data.routeLink]"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        <i class="sidenav-link-icon" [class]="data.icon"></i>
+        <span class="sidenav-link-text" *ngIf="collapsed">{{
+          data.label
+        }}</span>
+        <span
+          class="badge bg-danger rounded-pill"
+          style="font-size: 10px"
+          *ngIf="data.label == 'Artist Requests'"
+        ></span>
+      </a>
+    </li>
+  </div>
+</div>
+
+<div class="body" [ngClass]="getBodyClass()">
+  <router-outlet></router-outlet>
+</div>
+
+<app-modal id="modal-editAdminDetails">
+  <div class="new-modal">
+    <div class="new-modal-body">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title border-bottom border-primary border-2">
+            Edit Details
+          </h5>
+        </div>
+        <div class="modal-body">
+          <form
+            #editDetailsForm="ngForm"
+            (ngSubmit)="updateDetails()"
+            class="mb-4"
+          >
+            <div class="d-flex align-items-start mb-4">
+              <div class="me-3 mt-4">
+                <img
+                  *ngIf="adminDetails.profile_photo; else defaultImage"
+                  [src]="adminDetails.profile_photo"
+                  alt="Profile Photo"
+                  class="img-thumbnail"
+                  style="width: 300px; height: 300px; object-fit: cover"
+                />
+                <ng-template #defaultImage>
+                  <img
+                    src="../../../../assets/logo.jpeg"
+                    alt="Default Profile Photo"
+                    class="img-thumbnail"
+                    style="width: 300px; height: 300px; object-fit: cover"
+                  />
+                </ng-template>
+              </div>
+              <div class="flex-grow-1">
+                <div class="mb-3">
+                  <label for="editProfilePhoto" class="form-label mt-4 w-100"
+                    >Profile Photo</label
+                  >
+                  <button
+                    *ngIf="adminDetails.profile_photo"
+                    (click)="removeExistingImage()"
+                    class="btn btn-danger"
+                    style="margin-top: 5px; margin-right: 10px"
+                    type="button"
+                  >
+                    Remove
+                  </button>
+                </div>
+                <div *ngIf="!adminDetails.profile_photo">
+                  <input
+                    type="file"
+                    class="form-control"
+                    id="profileImage"
+                    placeholder="Profile Photo"
+                    name="profileImage"
+                    (change)="onFileSelected($event)"
+                  />
+                  <button
+                    (click)="
+                      newImageUpload('kiyawanalk-admin', 'profilePicture')
+                    "
+                    class="btn btn-primary"
+                    style="margin-top: 10px; margin-right: 10px"
+                    type="button"
+                  >
+                    Upload Image
+                  </button>
+                </div>
+                <div class="mb-3">
+                  <label for="editAdminName" class="form-label"
+                    >First Name</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="editAdminName"
+                    placeholder="Name"
+                    [(ngModel)]="adminDetails.FName"
+                    name="FName"
+                    required
+                    #newname="ngModel"
+                    [ngClass]="{
+                      'border-danger':
+                        newname.invalid && (newname.dirty || newname.touched)
+                    }"
+                  />
+                  <div
+                    *ngIf="
+                      newname.invalid && (newname.dirty || newname.touched)
+                    "
+                    class="alert"
+                  >
+                    <div
+                      *ngIf="newname.errors?.['required']"
+                      class="text-danger lead fs-6"
+                    >
+                      Name is required
+                    </div>
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <label for="editAdminLName" class="form-label"
+                    >Last Name</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="editAdminLName"
+                    placeholder="Last Name"
+                    [(ngModel)]="adminDetails.LName"
+                    name="LName"
+                    required
+                    #newLName="ngModel"
+                    [ngClass]="{
+                      'border-danger':
+                        newLName.invalid && (newLName.dirty || newLName.touched)
+                    }"
+                  />
+                  <div
+                    *ngIf="
+                      newLName.invalid && (newLName.dirty || newLName.touched)
+                    "
+                    class="alert"
+                  >
+                    <div
+                      *ngIf="newLName.errors?.['required']"
+                      class="text-danger lead fs-6"
+                    >
+                      Last Name is required
+                    </div>
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <label for="editAdminEmail" class="form-label">Email</label>
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="editAdminEmail"
+                    placeholder="Email"
+                    [(ngModel)]="adminDetails.email"
+                    name="email"
+                    required
+                    email
+                    #newemail="ngModel"
+                    [ngClass]="{
+                      'border-danger':
+                        newemail.invalid && (newemail.dirty || newemail.touched)
+                    }"
+                  />
+                  <div
+                    *ngIf="
+                      newemail.invalid && (newemail.dirty || newemail.touched)
+                    "
+                    class="alert"
+                  >
+                    <div
+                      *ngIf="newemail.errors?.['required']"
+                      class="text-danger lead fs-6"
+                    >
+                      Email is required
+                    </div>
+                    <div
+                      *ngIf="newemail.errors?.['email']"
+                      class="text-danger lead fs-6"
+                    >
+                      Invalid email address
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer d-flex justify-content-between">
+              <button
+                type="submit"
+                class="btn btn-primary"
+                [disabled]="newname.invalid || newLName.invalid || newemail.invalid"
+              >
+                Save changes
+              </button>
+            </div>
+          </form>
+
+          <hr />
+          <form #editPasswordForm="ngForm" (ngSubmit)="updatePassword()">
+            <div class="mb-3">
+              <label for="newPassword" class="form-label">New Password</label>
+              <input
+                type="password"
+                class="form-control"
+                id="newPassword"
+                placeholder="New Password"
+                [(ngModel)]="passwordDetails.newPassword"
+                name="newPassword"
+                #newPwd="ngModel"
+                [ngClass]="{
+                  'border-danger':
+                    newPwd.invalid && (newPwd.dirty || newPwd.touched)
+                }"
+                (ngModelChange)="checkPasswordStrength()"
+              />
+              <div
+                *ngIf="newPwd.invalid && (newPwd.dirty || newPwd.touched)"
+                class="alert"
+              >
+                <div
+                  *ngIf="newPwd.value === passwordDetails.currentPassword"
+                  class="text-danger lead fs-6"
+                >
+                  New Password cannot be the same as the current password
+                </div>
+              </div>
+              <div *ngIf="passwordStrength">
+                <p
+                  [ngClass]="{
+                    'text-danger': passwordStrength === 'Weak',
+                    'text-warning': passwordStrength === 'Moderate',
+                    'text-success': passwordStrength === 'Strong'
+                  }"
+                >
+                  Password Strength: {{ passwordStrength }}
+                </p>
+                <ul style="list-style: none; padding: 0">
+                  <li
+                    [ngClass]="{
+                      'text-success': passwordCriteria.length,
+                      'text-danger': !passwordCriteria.length
+                    }"
+                  >
+                    <i
+                      [ngClass]="{
+                        'text-success': passwordCriteria.length,
+                        'text-danger': !passwordCriteria.length
+                      }"
+                      class="bi bi-check"
+                    ></i>
+                    At least 8 characters
+                  </li>
+                  <li
+                    [ngClass]="{
+                      'text-success': passwordCriteria.symbol,
+                      'text-danger': !passwordCriteria.symbol
+                    }"
+                  >
+                    <i
+                      [ngClass]="{
+                        'text-success': passwordCriteria.symbol,
+                        'text-danger': !passwordCriteria.symbol
+                      }"
+                      class="bi bi-check"
+                    ></i>
+                    At least one symbol
+                  </li>
+                  <li
+                    [ngClass]="{
+                      'text-success': passwordCriteria.number,
+                      'text-danger': !passwordCriteria.number
+                    }"
+                  >
+                    <i
+                      [ngClass]="{
+                        'text-success': passwordCriteria.number,
+                        'text-danger': !passwordCriteria.number
+                      }"
+                      class="bi bi-check"
+                    ></i>
+                    At least one number
+                  </li>
+                  <li
+                    [ngClass]="{
+                      'text-success': passwordCriteria.uppercase,
+                      'text-danger': !passwordCriteria.uppercase
+                    }"
+                  >
+                    <i
+                      [ngClass]="{
+                        'text-success': passwordCriteria.uppercase,
+                        'text-danger': !passwordCriteria.uppercase
+                      }"
+                      class="bi bi-check"
+                    ></i>
+                    At least one uppercase letter
+                  </li>
+                  <li
+                    [ngClass]="{
+                      'text-success': passwordCriteria.lowercase,
+                      'text-danger': !passwordCriteria.lowercase
+                    }"
+                  >
+                    <i
+                      [ngClass]="{
+                        'text-success': passwordCriteria.lowercase,
+                        'text-danger': !passwordCriteria.lowercase
+                      }"
+                      class="bi bi-check"
+                    ></i>
+                    At least one lowercase letter
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="confirmNewPassword" class="form-label"
+                >Confirm New Password</label
+              >
+              <input
+                type="password"
+                class="form-control"
+                id="confirmNewPassword"
+                placeholder="Confirm New Password"
+                [(ngModel)]="passwordDetails.confirmNewPassword"
+                name="confirmNewPassword"
+                #confirmNewPwd="ngModel"
+                [ngClass]="{
+                  'border-danger':
+                    (confirmNewPwd.invalid &&
+                      (confirmNewPwd.dirty || confirmNewPwd.touched)) ||
+                    passwordDetails.newPassword !==
+                      passwordDetails.confirmNewPassword
+                }"
+                (blur)="validateConfirmPassword(confirmNewPwd)"
+              />
+              <div
+                *ngIf="
+                  confirmNewPwd.invalid &&
+                  (confirmNewPwd.dirty || confirmNewPwd.touched)
+                "
+                class="alert"
+              >
+                <div
+                  *ngIf="confirmNewPwd.errors?.['required']"
+                  class="text-danger lead fs-6"
+                >
+                  Confirm New Password is required
+                </div>
+                <div
+                  *ngIf="
+                    passwordDetails.newPassword !==
+                    passwordDetails.confirmNewPassword
+                  "
+                  class="text-danger lead fs-6"
+                >
+                  Passwords do not match
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer d-flex justify-content-between">
+              <button
+                type="submit"
+                class="btn btn-primary"
+                [disabled]="
+                  !isPasswordStrong ||
+                  passwordDetails.newPassword !==
+                    passwordDetails.confirmNewPassword ||
+                  passwordDetails.newPassword ===
+                    passwordDetails.currentPassword
+                "
+              >
+                Update Password
+              </button>
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+                (click)="this.modalservice.close('modal-editAdminDetails')"
+              >
+                Close
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</app-modal>
