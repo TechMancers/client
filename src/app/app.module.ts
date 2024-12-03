@@ -3,10 +3,14 @@ import { BrowserModule, provideClientHydration } from '@angular/platform-browser
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { UploadBookDetailsComponent } from './shared/components/upload-book-details/upload-book-details.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    UploadBookDetailsComponent
+
+
   ],
   imports: [
     BrowserModule,

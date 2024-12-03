@@ -1,0 +1,149 @@
+<section class="intro-section">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <form>
+          <!-- Delete Book Button -->
+          <div class="d-flex justify-content-center mb-3">
+            <button class="btn btn-danger" type="button">
+              Delete Book
+            </button>
+          </div>
+
+          <!-- Book Title -->
+          <div class="form-group">
+            <label for="title">Book Title</label>
+            <input
+              type="text"
+              id="title"
+              name="title"
+              class="form-control input-area"
+              placeholder="Enter book title"
+              required
+            />
+          </div>
+
+          <!-- Book Author -->
+          <div class="form-group">
+            <label for="author">Author</label>
+            <input
+              type="text"
+              id="author"
+              name="author"
+              class="form-control input-area"
+              placeholder="Enter author's name"
+              required
+            />
+          </div>
+
+          <!-- Book Genre -->
+          <div class="form-group">
+            <label for="genre">Book Genre</label>
+            <select id="genre" name="genre" class="form-control input-area" required>
+              <option value="fiction">Fiction</option>
+              <option value="non-fiction">Non-fiction</option>
+              <option value="science">Science</option>
+              <option value="fantasy">Fantasy</option>
+              <option value="biography">Biography</option>
+              <!-- Add other genres as needed -->
+            </select>
+          </div>
+
+          <!-- Book Price -->
+          <div class="form-group">
+            <label for="price">Price</label>
+            <input
+              type="number"
+              id="price"
+              name="price"
+              class="form-control input-area"
+              placeholder="Enter book price"
+              required
+            />
+          </div>
+
+          <!-- Book Description -->
+          <div class="form-group">
+            <label for="description">Description</label>
+            <textarea
+              id="description"
+              name="description"
+              class="form-control input-area"
+              placeholder="Enter book description"
+              required
+            ></textarea>
+          </div>
+
+          <!-- Tags -->
+          <div class="mb-3">
+            <label for="tags" class="form-label">Tags</label>
+            <div class="d-flex flex-wrap">
+              <span class="badge bg-primary" style="margin-bottom: 5px; margin-right: 5px">
+                Fiction
+              </span>
+            </div>
+            <div class="input-group mt-2">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Add tag"
+                required
+              />
+              <button class="btn btn-primary" type="button">Add</button>
+            </div>
+          </div>
+
+          <!-- Tools (Optional) -->
+          <div class="mb-3">
+            <label for="tools" class="form-label">Tools (Optional)</label>
+            <div class="d-flex flex-wrap">
+              <span class="badge bg-primary" style="margin-bottom: 5px; margin-right: 5px">
+                Kindle
+              </span>
+            </div>
+            <div class="input-group mt-2">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Add tool"
+              />
+              <button class="btn btn-primary" type="button">Add</button>
+            </div>
+          </div>
+
+          <!-- File Formats -->
+          <div class="mb-3">
+            <label for="fileFormats" class="form-label">File Formats</label>
+            <div class="d-flex flex-wrap">
+              <span class="badge bg-primary" style="margin-bottom: 5px; margin-right: 5px">
+                PDF
+              </span>
+            </div>
+            <div class="input-group mt-2">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Add file format"
+                required
+              />
+              <button class="btn btn-primary" type="button">Add</button>
+            </div>
+          </div>
+
+          <!-- Submit and Cancel Buttons -->
+          <div class="form-group d-flex justify-content-between">
+            <button type="submit" class="btn btn-custom">
+              Upload Book
+            </button>
+            <button type="button" class="btn btn-custom">Cancel</button>
+          </div>
+
+          <!-- Uploading Animation -->
+          <div class="uploading-animation">Uploading...</div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<button type="button" class="btn btn-danger">Danger</button>
