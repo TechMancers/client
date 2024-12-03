@@ -79,20 +79,20 @@
             class="mb-4"
           >
             <div class="d-flex align-items-start mb-4">
-              <div class="me-3">
+              <div class="me-3 mt-4">
                 <img
                   *ngIf="adminDetails.profile_photo; else defaultImage"
                   [src]="adminDetails.profile_photo"
                   alt="Profile Photo"
                   class="img-thumbnail"
-                  style="width: 150px; height: 150px; object-fit: cover"
+                  style="width: 300px; height: 300px; object-fit: cover"
                 />
                 <ng-template #defaultImage>
                   <img
                     src="../../../../assets/logo.jpeg"
                     alt="Default Profile Photo"
                     class="img-thumbnail"
-                    style="width: 150px; height: 150px; object-fit: cover"
+                    style="width: 300px; height: 300px; object-fit: cover"
                   />
                 </ng-template>
               </div>
@@ -121,7 +121,9 @@
                     (change)="onFileSelected($event)"
                   />
                   <button
-                    (click)="newImageUpload('adminPhotos', 'profilePicture')"
+                    (click)="
+                      newImageUpload('kiyawanalk-admin', 'profilePicture')
+                    "
                     class="btn btn-primary"
                     style="margin-top: 10px; margin-right: 10px"
                     type="button"
@@ -130,14 +132,16 @@
                   </button>
                 </div>
                 <div class="mb-3">
-                  <label for="editAdminName" class="form-label">Name</label>
+                  <label for="editAdminName" class="form-label"
+                    >First Name</label
+                  >
                   <input
                     type="text"
                     class="form-control"
                     id="editAdminName"
                     placeholder="Name"
-                    [(ngModel)]="adminDetails.name"
-                    name="name"
+                    [(ngModel)]="adminDetails.FName"
+                    name="FName"
                     required
                     #newname="ngModel"
                     [ngClass]="{
@@ -156,6 +160,38 @@
                       class="text-danger lead fs-6"
                     >
                       Name is required
+                    </div>
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <label for="editAdminLName" class="form-label"
+                    >Last Name</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="editAdminLName"
+                    placeholder="Last Name"
+                    [(ngModel)]="adminDetails.LName"
+                    name="LName"
+                    required
+                    #newLName="ngModel"
+                    [ngClass]="{
+                      'border-danger':
+                        newLName.invalid && (newLName.dirty || newLName.touched)
+                    }"
+                  />
+                  <div
+                    *ngIf="
+                      newLName.invalid && (newLName.dirty || newLName.touched)
+                    "
+                    class="alert"
+                  >
+                    <div
+                      *ngIf="newLName.errors?.['required']"
+                      class="text-danger lead fs-6"
+                    >
+                      Last Name is required
                     </div>
                   </div>
                 </div>
@@ -202,7 +238,7 @@
               <button
                 type="submit"
                 class="btn btn-primary"
-                [disabled]="newname.invalid || newemail.invalid"
+                [disabled]="newname.invalid || newLName.invalid || newemail.invalid"
               >
                 Save changes
               </button>

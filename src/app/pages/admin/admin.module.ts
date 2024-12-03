@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { AdminRoutingModule } from './admin-routing.module';
-import { AdminComponent } from './admin.component';
+import { AdminComponent } from './layout/admin.component';
 import { ModalModule } from "../../shared/components/modal/modal.module";
 import { AlertModule } from '../../shared/components/alert/alert.module';
 
