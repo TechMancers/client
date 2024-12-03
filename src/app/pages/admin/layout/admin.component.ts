@@ -1,12 +1,12 @@
 import { Component, EventEmitter, HostListener, OnInit, Output } from '@angular/core';
-import { ModalService } from '../../shared/components/modal/modal.service';
+import { ModalService } from '../../../shared/components/modal/modal.service';
 import { navbarData } from './nav-data';
 import { SideNavToggle } from './SideNavToggle';
 import { animate, keyframes, style, transition, trigger } from '@angular/animations';
 import { Router } from '@angular/router';
-import { AlertService } from '../../shared/components/alert/alert.service';
+import { AlertService } from '../../../shared/components/alert/alert.service';
 import { AdminService } from './admin.service';
-import { ImageUploadService } from '../../shared/services/image-upload.service';
+import { ImageUploadService } from '../../../shared/services/image-upload.service';
 
 @Component({
   selector: 'app-admin',
@@ -232,24 +232,21 @@ export class AdminComponent implements OnInit {
   }
 
   updatePassword() {
-    if (this.passwordDetails.newPassword === this.passwordDetails.confirmNewPassword) {
-      if (this.passwordDetails.newPassword !== this.passwordDetails.currentPassword) {
-        console.log(this.passwordDetails);
+    if (this.passwordDetails.newPassword !== this.passwordDetails.confirmNewPassword) {
+      alert('Passwords do not match.');
+      return;
+    }
+  
     this.adminService.updateAdminPassword(this.adminId, this.passwordDetails.newPassword).subscribe(
-      (response:any) => {
+      (response: any) => {
         this.modalservice.close('modal-editAdminDetails');
-        this.alertService.showMessage('Password updated successfully', true);
+        this.alertService.showMessage(response.message, true);
       },
-      (error) => {
+      (error: any) => {
         this.modalservice.close('modal-editAdminDetails');
-        this.alertService.showMessage('Error updating password', false, error.message);
+        this.alertService.showMessage(error.error.message || 'Error updating password', false);
       }
     );
-      } else {
-        alert('New password cannot be the same as the current password');
-      }
-    } else {
-      alert('Passwords do not match');
-    }
   }
+  
 }
