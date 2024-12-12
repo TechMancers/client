@@ -1,3 +1,208 @@
-* {
-    background: #000;
+/* category-management.component.css */
+
+.category-management {
+  margin: 30px;
+  font-family: 'Arial', sans-serif;
+  height: 100%;
+  background-color: #fff; 
+  color: #333; 
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #800000; 
+  padding: 20px;
+  border-radius: 8px;
+  color: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.header h4 {
+  font-size: 28px;
+  margin: 0;
+  font-weight: 600;
+}
+
+.add-button {
+  background-color: #800000; /* Maroon */
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: background-color 0.3s ease;
+}
+
+.add-button:hover {
+  background-color: #b93b3b; /* Lighter maroon on hover */
+}
+
+.category-list {
+  margin-top: 30px;
+}
+
+.category-list table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.category-list th, .category-list td {
+  padding: 15px;
+  border: 1px solid #e0e0e0;
+  text-align: left;
+  font-size: 16px;
+}
+
+.category-list th {
+  background-color: #f8f9fa;
+  color: #333;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.category-list tr {
+  transition: background-color 0.3s ease;
+}
+
+.category-list tr:hover {
+  background-color: #f1f1f1; /* Subtle hover effect for rows */
+}
+
+.edit-button, .delete-button {
+  padding: 8px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: transform 0.2s ease, background-color 0.3s ease;
+}
+
+.edit-button {
+  background-color: #007bff; /* Blue for edit */
+  color: white;
+}
+
+.edit-button:hover {
+  background-color: #0056b3; /* Darker blue */
+  transform: translateY(-2px); /* Slight lift effect */
+}
+
+.delete-button {
+  background-color: #dc3545; /* Red for delete */
+  color: white;
+}
+
+.delete-button:hover {
+  background-color: #c82333; /* Darker red */
+  transform: translateY(-2px); /* Slight lift effect */
+}
+
+.modal-header {
+  background-color: #800000; /* Maroon */
+  color: white;
+  padding: 15px;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  border-radius: 8px 8px 0 0;
+}
+
+.modal-body {
+  padding: 20px;
+  background-color: white;
+  border-radius: 0 0 8px 8px;
+}
+
+.modal-body label {
+  font-size: 16px;
+  font-weight: 500;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.modal-body input {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  color: #333;
+  background-color: #f9f9f9;
+  margin-bottom: 20px;
+  transition: border-color 0.3s ease;
+}
+
+.modal-body input:focus {
+  border-color: #800000; /* Maroon focus effect */
+  outline: none;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+  padding: 15px;
+}
+
+.save-button, .cancel-button {
+  padding: 12px 20px;
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: uppercase;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.save-button {
+  background-color: #800000; /* Maroon */
+  color: white;
+}
+
+.save-button:hover {
+  background-color: #b93b3b; /* Lighter maroon */
+  transform: translateY(-2px); /* Slight lift effect */
+}
+
+.cancel-button {
+  background-color: #6c757d; /* Grey */
+  color: white;
+}
+
+.cancel-button:hover {
+  background-color: #5a6268; /* Darker grey */
+  transform: translateY(-2px); /* Slight lift effect */
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+  .category-management {
+    margin: 10px;
+  }
+
+  .header {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .category-list table {
+    font-size: 14px;
+  }
+
+  .modal-body input {
+    font-size: 14px;
+  }
+
+  .modal-footer {
+    flex-direction: column;
+    gap: 10px;
+  }
 }

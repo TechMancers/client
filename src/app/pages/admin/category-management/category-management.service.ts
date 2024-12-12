@@ -30,6 +30,7 @@ export class CategoryManagementService {
   }
 
   createCategory(category: any): Observable<any> {
+    console.log(category);
     return this.http.post<any>(`${this.apiUrl}/create-category`, category);
   }
 
