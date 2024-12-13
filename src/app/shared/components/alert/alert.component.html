@@ -1,0 +1,18 @@
+<div *ngIf="message" class="message-overlay">
+    <div *ngIf="message" [ngClass]="{'success': isSuccess, 'error': !isSuccess}">
+        <div *ngIf="isSuccess" >
+          <img src="../../../../assets/icons/success-svgrepo-com.svg" alt="success" class="message_icon">
+        </div>
+        <div *ngIf="!isSuccess" >
+          <img src="../../../../assets/icons/fail-svgrepo-com.svg" alt="fail" class="message_icon">
+        </div>
+        <div class="msg-body">
+          <div class="message">
+            {{ message }}
+          </div>
+          <div class="error-message" *ngIf="!isSuccess && errorMessage"> 
+            {{ errorMessage }}
+          </div>
+        </div>  
+    </div>
+  </div>
