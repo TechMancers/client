@@ -1,0 +1,164 @@
+<app-navbar></app-navbar>
+<section class="head-title-section section-margin">
+  <div class="container-fluid">
+    <form [formGroup]="reactiveForm" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <div class="col-md-9">
+          <div class="text-center mt-5">
+            <p class="text-color">Checkout Form<p>
+          </div>
+
+
+          <!--form content -->
+
+          <fieldset>
+            <legend class="mt-4">Personal Details</legend>
+            <div class="form-group">
+              <label for="firstNameInput" class="form-label mt-4">First Name</label>
+              <input type="text" class="form-control" id="firstNameInput" placeholder="Enter your first name"
+                formControlName="firstNameInput" [(ngModel)]="fiName" readonly (click)="showMessage($event)">
+              <div *ngIf="submitted && f['firstNameInput'].errors" class="text-danger">
+                <div *ngIf="f['firstNameInput'].errors?.['required']">First Name is Required</div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="lastNameInput" class="form-label mt-4">Last Name</label>
+              <input type="text" class="form-control" id="lastNameInput" placeholder="Enter your last name"
+                formControlName="lastNameInput" [(ngModel)]="lastName" readonly (click)="showMessage($event)">
+              <div *ngIf="submitted && f['lastNameInput'].errors" class="text-danger">
+                <div *ngIf="f['lastNameInput'].errors?.['required']">Last Name is Required</div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="exampleInputEmail1" class="form-label mt-4">Email address</label>
+              <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email"
+                formControlName="emailInput" [(ngModel)]="email" readonly (click)="showMessage($event)">
+              <div *ngIf="submitted && f['emailInput'].errors" class="text-danger">
+                <div *ngIf="f['emailInput'].errors?.['required']">Email address is required</div>
+                <div *ngIf="f['emailInput'].errors?.['email']">Enter a valid email address</div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="locationInput" class="form-label mt-4">Location</label>
+              <input type="text" class="form-control" id="locationInput" placeholder="Enter your location"
+                formControlName="locationInput" [(ngModel)]="address" readonly (click)="showMessage($event)">
+              <div *ngIf="submitted && f['locationInput'].errors" class="text-danger">
+                <div *ngIf="f['locationInput'].errors?.['required']">Location is required</div>
+              </div>
+            </div>
+
+            <!-- <div class="form-group">
+              <label for="phoneNumberInput" class="form-label mt-4">Phone Number</label>
+              <input type="tel" class="form-control" id="phoneNumberInput" placeholder="Enter your phone number" formControlName="phoneNumberInput">
+              <div *ngIf="submitted && f['phoneNumberInput'].errors" class="text-danger">
+                <div *ngIf="f['phoneNumberInput'].errors?.['required']">Phone number is required</div>
+                <div *ngIf="f['phoneNumberInput'].errors?.['invalidPhoneNumber']">Enter a valid phone number</div>
+              </div>
+            </div> -->
+
+            <div class="form-group">
+              <label for="phoneNumberInput" class="form-label mt-4">Phone Number</label>
+              <input type="text" class="form-control" id="phoneNumberInput" formControlName="phoneNumberInput"  placeholder="Enter your phonenumber">
+              <div *ngIf="submitted && f['phoneNumberInput'].errors" class="text-danger">
+                <div *ngIf="f['phoneNumberInput'].errors?.['required']">Phone number is required</div>
+                <div *ngIf="f['phoneNumberInput'].errors?.['invalidPhoneNumber']">Enter a valid Sri Lankan phone number</div>
+              </div>
+            </div>
+            
+            
+
+
+
+          
+
+            <fieldset class="form-group">
+              <legend class="mt-4">Payment Method</legend>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" id="paymentOption1" value="credit_card"
+                  formControlName="paymentOption">
+                <label class="form-check-label" for="paymentOption1">Credit Card</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" id="paymentOption2" value="paypal"
+                  formControlName="paymentOption">
+                <label class="form-check-label" for="paymentOption2">PayPal</label>
+              </div>
+              <div *ngIf="submitted && f['paymentOption'].errors" class="text-danger">
+                <div *ngIf="f['paymentOption'].errors?.['required']">Payment option is required</div>
+              </div>
+            </fieldset>
+
+            <fieldset class="form-group">
+              <legend class="mt-4">Agreements</legend>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="agreeTermsCheckbox"
+                  formControlName="agreeTermsCheckbox">
+                <label class="form-check-label" for="agreeTermsCheckbox">I agree to the terms and conditions</label>
+                <div *ngIf="submitted && f['agreeTermsCheckbox'].errors" class="text-danger">
+                  <div *ngIf="f['agreeTermsCheckbox'].errors?.['required']">You must agree to the terms</div>
+                </div>
+              </div>
+
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="agreePrivacyCheckbox"
+                  formControlName="agreePrivacyCheckbox">
+                <label class="form-check-label" for="agreePrivacyCheckbox">I agree to the privacy policy</label>
+                <div *ngIf="submitted && f['agreePrivacyCheckbox'].errors" class="text-danger">
+                  <div *ngIf="f['agreePrivacyCheckbox'].errors?.['required']">You must agree to the privacy policy</div>
+                </div>
+              </div>
+
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="agreeMarketingCheckbox"
+                  formControlName="agreeMarketingCheckbox">
+                <label class="form-check-label" for="agreeMarketingCheckbox">I agree to receive marketing
+                  communications</label>
+              </div>
+            </fieldset>
+
+          </fieldset>
+        </div>
+
+        <div class="col-md-3 ">
+          <div class="order-summary">
+            <!-- Your card content goes here -->
+            <div class="card shadow">
+              <div class="card-body">
+                <h5 class="card-title">Order Summary</h5>
+                <div class="row">
+                  <div class="col-md-7">
+                    <p class="card-text">Total Quantity : </p>
+                  </div>
+                  <div class="col-md-5">
+                    <p class="card-text">{{ quantity }} </p>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-7">
+                    <p class="card-text">Sub Total : </p>
+                  </div>
+                  <div class="col-md-5">
+                    <p class="card-text">{{ price | currency:'USD':'symbol':'1.2-2' }} </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <button class="btn btn-success btn-change mt-3 shadow" type="submit">Proceed to Checkout</button>
+            <button type="button" class="btn btn-danger btn-customize mt-3 shadow" routerLink="/cart">Cancel
+              Order</button>
+          </div>
+
+          <!-- Success message -->
+          <div *ngIf="submissionSuccess" class="alert alert-success" role="alert">
+            Your order has been successfully submitted! Check your email for confirmation.
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</section>
+<app-footer></app-footer>
