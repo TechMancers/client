@@ -8,9 +8,15 @@ import { AppComponent } from './app.component';
 import { AdminModule } from './pages/admin/admin.module';
 import { CustomerModule } from './pages/customer/customer.module';
 
+
+
+
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    
+  
+
   ],
   imports: [
     BrowserModule,
