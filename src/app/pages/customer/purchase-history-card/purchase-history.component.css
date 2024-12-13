@@ -1,0 +1,63 @@
+.request-card{
+  background: #c6cfd1; /* Semi-transparent background */
+  margin-top: 30px;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  color: #000;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  height: auto;
+  text-decoration: none;
+  color: #000;
+  backdrop-filter: blur(-10px); /* Glass effect */
+  -webkit-backdrop-filter: blur(-10px);
+
+}
+.buttons {
+  align-self: flex-end;
+}
+
+
+.buttons .btn {
+  margin: 5px;
+  height: 40px;
+}
+.request-card {
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.gray-background {
+  background-color: #f3f3f3; /* Slightly gray background color */
+}
+
+.card {
+  border-radius: 10px; /* Rounded corners */
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.profile-pic {
+  margin-right: 10px;
+}
+
+.artwork-image {
+  min-width: 80px;
+  min-height: 80px;
+  border-radius: 5px; /* Rounded corners for the image */
+}
+
+.artwork-details {
+  font-size: 14px;
+  color: #666; /* Light font color */
+}
+
+.detail-label {
+  font-weight: bold;
+}

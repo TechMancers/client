@@ -1,0 +1,76 @@
+<div class="header__wrapper">
+  <div class="container cols__container">
+    <div class="row">
+      <div class="col-md-3 left__col">
+
+
+        <div class="customer-info" style="margin-top: 40px; margin-left:40px;" >
+          <h2 class="customer-name m-0" style="font-size: 34px;">{{ CustomerData.fName }} {{ CustomerData.LName }}</h2>
+          <p class="customer-location text-muted">
+            <i class="bi bi-geo-alt-fill me-2" style="font-size: 20px;"></i> {{ CustomerData.address }}
+          </p>
+        </div>
+
+        <div class="d-flex justify-content-between mt-5 mx-auto" style="margin-top: 100px;">
+          <a [routerLink]="['/edit-profile', userId]" class="edit-profile-btn">
+            <i class="bi bi-pencil"></i> Edit Your Profile
+          </a>
+        </div>
+
+        <ul class="about" style="margin-top: 40px;">
+          <li style="margin-left: 30px;"><span>{{ CustomerData.total_wishlist_items }}</span> WishList </li>
+          <li style="margin-left: 60px;"><span>{{ CustomerData.total_purchases }}</span> Purchases</li>
+        </ul>
+
+        <div class="content mt-4">
+          <button class="delete-btn" (click)="deactivateCustomer()">
+            <i class="bi bi-trash"></i> Delete Profile
+          </button>
+          <button class="logout-btn" (click)="logout()">
+            <i class="bi bi-box-arrow-right"></i> Logout
+          </button>
+        </div>
+      </div>
+
+      <div class="col-md-9 right__col">
+        <div class="d-flex align-items-center" style="margin-top: 20px;">
+          <div class="ms-auto d-flex align-items-center" style="border-radius: 10px; font-size: 14px;">
+            <i class="bi bi-calendar-check me-2" style="font-size: 20px; margin-right: 10px;"></i>
+            <b>Member Since:</b>&nbsp;{{ CustomerData.joined_date | date: "yyyy-MM-dd" }}
+          </div>
+        </div>
+
+        <ul class="nav nav-tabs" role="tablist" style="margin-top: 20px;">
+          <li class="nav-item" style="width:50%; text-align: center; font-weight: 600; font-size: larger;">
+            <a class="nav-link active" data-bs-toggle="tab" href="#wishlist" role="tab">WishList</a>
+          </li>
+          <li class="nav-item" style="width:50%; text-align: center; font-weight: 600; font-size: larger;">
+            <a class="nav-link" data-bs-toggle="tab" href="#purchaseHistory" role="tab">Purchase History</a>
+          </li>
+        </ul>
+
+        <div class="tab-content">
+          <div class="tab-pane fade show active" id="wishlist" role="tabpanel">
+            <nav class="navbar bg-light p-3">
+              <div class="container-fluid">
+                <form class="d-flex w-100" role="search">
+                  <input #searchkeyword (keyup)="searchByKeyword(searchkeyword.value)" class="form-control me-2 rounded-pill border border-primary" type="search" placeholder="Search" aria-label="Search" />
+                </form>
+              </div>
+            </nav>
+            <div class="WishList row row-cols-1 row-cols-md-3 g-4" style="margin-top:0.5px;">
+              <div class="col" *ngFor="let book of filteredBooks">
+                <app-book-card [book]="book"></app-book-card>
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane fade purchase-history" id="purchaseHistory" role="tabpanel" style="max-height: 500px; overflow-y: scroll; overflow-x: hidden;">
+            <app-purchase-history></app-purchase-history>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <app-footer></app-footer> -->

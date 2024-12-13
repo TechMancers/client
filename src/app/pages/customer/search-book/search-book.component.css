@@ -1,0 +1,66 @@
+.container {
+  margin-top: 20px;
+}
+
+.theme-color {
+  color: var(--body-text-color);
+  font-size: 130%;
+  font-weight: bold;
+}
+
+.find-book-column {
+  padding: 1rem;
+}
+
+.book-gallery-column {
+  padding: 1rem;
+}
+
+.col > .wrapper {
+  padding: 1rem;
+}
+
+.btnrx {
+  background-color: #4b5358; /* Custom button background */
+  color: white; /* Custom button text color */
+  border: none;
+  border-radius: 10px; /* Rounded corners */
+  font-size: 14px; /* Font size */
+  font-weight: bold; /* Bold text */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100% ; /* Full width */
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.results-container {
+  display: flex;
+  align-items: center;
+  gap: 20px; /* Adjust the gap between the button and the tags as needed */
+  margin: 20px 0;
+}
+
+.rounded-text {
+  display: inline-block;
+  padding: 5px 50px;
+  border: 1px solid black;
+  border-radius: 50px; /* Makes the border rounded */
+  text-align: center;
+  font-weight: 400;
+  background-color: #b6b6b6; /* Optional: add background color */
+  transition: background-color 0.3s ease; /* Optional: smooth background color transition on hover */
+}
+
+.rounded-text:hover {
+  background-color: #dad6d6; /* Optional: change background color on hover */
+}
+
+.found {
+  border: 1px solid #0F969C;
+  border-radius: 5px;
+  padding: 10px 20px;
+  color: white;
+  background-color: #0F969C;
+}

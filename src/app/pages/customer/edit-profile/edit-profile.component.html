@@ -1,0 +1,180 @@
+<div class="container pt-3">
+  <h1>Edit Profile</h1>
+  <div class="row">
+    <div class="col-12 col-md-6">
+      <p>Edit your information and click save to make changes.</p>
+    </div>
+    <div class="col-12 col-md-6 text-md-end">
+      <a routerLink="/customer-profile">
+        <button type="button" class="btn btn-primary mb-3 mb-md-0">View Profile</button>
+      </a>
+    </div>
+  </div>
+
+  <br>
+
+  <form
+    #editCustomerProfileForm="ngForm"
+    (ngSubmit)="editDetails(editCustomerProfileForm)"
+    ngModelOptions="{standalone: true}"
+  >
+    <div class="form-section">
+      <h2>Basic Information</h2>
+      <div class="row mb-3">
+        <div class="col-sm-6">
+          <label for="first-name" class="form-label">First Name:</label>
+          <input
+            type="text"
+            class="form-control"
+            id="first-name"
+            [(ngModel)]="customer.fName"
+            name="first-name"
+            required
+            #newfname="ngModel"
+          />
+          <div *ngIf="newfname.invalid && (newfname.dirty || newfname.touched)" class="alert">
+            <div *ngIf="newfname.errors?.['required']" class="text-danger lead fs-6">
+              First Name is required
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <label for="last-name" class="form-label">Last Name:</label>
+          <input
+            type="text"
+            class="form-control"
+            id="last-name"
+            [(ngModel)]="customer.LName"
+            name="last-name"
+            required
+            #newlname="ngModel"
+          />
+          <div *ngIf="newlname.invalid && (newlname.dirty || newlname.touched)" class="alert">
+            <div *ngIf="newlname.errors?.['required']" class="text-danger lead fs-6">
+              Last Name is required
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h2>Regional Details</h2>
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <label for="address" class="form-label">Address:</label>
+          <input
+            type="text"
+            class="form-control"
+            id="address"
+            [(ngModel)]="customer.address"
+            name="address"
+            required
+          />
+        </div>
+        <div class="col-md-6">
+          <label for="phone-number" class="form-label">Phone Number:</label>
+          <input
+            type="tel"
+            class="form-control"
+            id="phone-number"
+            [(ngModel)]="customer.phone"
+            name="phone-number"
+          />
+        </div>
+      </div>
+
+      <div class="d-flex justify-content-between mt-4">
+        <button type="button" class="btn btn-secondary" (click)="discardChanges()">Discard Profile</button>
+        <button type="submit" class="btn btn-primary">Save Profile</button>
+      </div>
+    </div>
+  </form>
+
+  <form (ngSubmit)="changePassword()" #changePasswordForm="ngForm">
+    <div class="form-section mt-5">
+      <h2>Change Password</h2>
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <label for="email" class="form-label">Email:</label>
+          <input
+            type="email"
+            class="form-control"
+            [(ngModel)]="email"
+            name="email"
+            #emailField="ngModel"
+            required
+          />
+          <div *ngIf="emailField.invalid && (emailField.dirty || emailField.touched)" class="alert">
+            <div *ngIf="emailField.errors?.['required']" class="text-danger lead fs-6">
+              Email is required
+            </div>
+            <div *ngIf="emailField.errors?.['email']" class="text-danger lead fs-6">
+              Invalid email address
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <label for="old-password" class="form-label">Old Password:</label>
+          <input
+            type="password"
+            class="form-control"
+            [(ngModel)]="oldPassword"
+            name="old-password"
+            #oldPasswordField="ngModel"
+            required
+          />
+          <div *ngIf="oldPasswordField.invalid && (oldPasswordField.dirty || oldPasswordField.touched)" class="alert">
+            <div *ngIf="oldPasswordField.errors?.['required']" class="text-danger lead fs-6">
+              Old Password is required
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <label for="new-password" class="form-label">New Password:</label>
+          <input
+            type="password"
+            class="form-control"
+            [(ngModel)]="newPassword"
+            name="new-password"
+            #newPasswordField="ngModel"
+            required
+            minlength="6"
+          />
+          <div *ngIf="newPasswordField.invalid && (newPasswordField.dirty || newPasswordField.touched)" class="alert">
+            <div *ngIf="newPasswordField.errors?.['required']" class="text-danger lead fs-6">
+              New Password is required
+            </div>
+            <div *ngIf="newPasswordField.errors?.['minlength']" class="text-danger lead fs-6">
+              New Password must be at least 6 characters long
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <label for="confirm-password" class="form-label">Confirm Password:</label>
+          <input
+            type="password"
+            class="form-control"
+            [(ngModel)]="confirmPassword"
+            name="confirm-password"
+            #confirmPasswordField="ngModel"
+            required
+          />
+          <div *ngIf="confirmPasswordField.invalid && (confirmPasswordField.dirty || confirmPasswordField.touched)" class="alert">
+            <div *ngIf="confirmPasswordField.errors?.['required']" class="text-danger lead fs-6">
+              Confirm Password is required
+            </div>
+            <div *ngIf="confirmPasswordField.errors?.['compare']" class="text-danger lead fs-6">
+              Passwords do not match
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-end">
+        <button type="submit" class="btn btn-primary">Change Password</button>
+      </div>
+    </div>
+  </form>
+</div>
