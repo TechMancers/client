@@ -8,11 +8,12 @@ import { Observable } from 'rxjs';
 })
 export class PurchaseHistoryService {
 
-  private apiUrl = environment.apiUrl + '/purchase-history';
+  private apiUrl = environment.apiUrl + '/purchasehistory';
 
   constructor(private http: HttpClient) { }
 
   getPurchaseHistory(userId: string): Observable<any> {
+    console.log('userId in purchase service',userId);
     return this.http.get(`${this.apiUrl}/${userId}`);
   }
 

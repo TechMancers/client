@@ -7,8 +7,8 @@ import { CustomerProfileComponent } from './customer-profile/customer-profile.co
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { SearchBookComponent } from './search-book/search-book.component';
 import { PurchaseHistoryComponent } from './purchase-history-card/purchase-history.component';
-
-
+import { BookCardComponent } from '../../shared/cards/book-card/book-card.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -17,12 +17,13 @@ import { PurchaseHistoryComponent } from './purchase-history-card/purchase-histo
     CustomerProfileComponent,
     EditProfileComponent,
     SearchBookComponent,
-    PurchaseHistoryComponent
-
+    PurchaseHistoryComponent,
+    BookCardComponent
   ],
   imports: [
     CommonModule,
-    CustomerRoutingModule
+    CustomerRoutingModule,
+    FormsModule
   ]
 })
 export class CustomerModule { }

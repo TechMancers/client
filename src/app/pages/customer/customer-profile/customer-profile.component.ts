@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CustomerProfileService } from './customer-profile.service';
-// import { CustomerDataService } from '../../../shared/services/customerData.service';
+import { CustomerDataService } from '../../../shared/services/customerData.service';
 import { Router } from '@angular/router';
 @Component({
   selector: 'app-customer-profile',
@@ -16,13 +16,13 @@ export class CustomerProfileComponent implements OnInit {
 
   constructor(
     public CustomerProfileService: CustomerProfileService,
-    // private customerDataService: CustomerDataService,
+    private customerDataService: CustomerDataService,
     private router: Router
   ) { }
 
   ngOnInit(): void {
     if (typeof window !== 'undefined' && localStorage) {
-      this.userId = 'Cu-00001';
+      this.userId = '1';
 
     }
 
@@ -39,7 +39,7 @@ export class CustomerProfileComponent implements OnInit {
     this.CustomerProfileService.getAllCustomers(userId).subscribe(
       (data: any[]) => {
         this.CustomerData = data[0];
-        // this.customerDataService.setCustomerData(data[0]);
+        this.customerDataService.setCustomerData(data[0]);
       },
       (error: any) => {
         console.log(error);
@@ -47,13 +47,12 @@ export class CustomerProfileComponent implements OnInit {
     );
   }
 
-
-
-  getCustomerWishList(userId: string): void {
+ getCustomerWishList(userId: string): void {
+    console.log('userId',userId);
     this.CustomerProfileService.getCustomerWishList(userId).subscribe(
       (data: any[]) => {
         this.booksData = data.map((book: any) => ({
-          book_image_url: book.book_image_url,
+          book_cover_image: book.cover_image,
           book_name: book.book_name,
           book_price: book.book_price,
           author_name: book.author_name,
@@ -61,7 +60,7 @@ export class CustomerProfileComponent implements OnInit {
           book_id: book.book_id
         }));
         this.filteredBooks = this.booksData;
-        console.log(this.filteredBooks);
+        console.log('filteredbooks',this.filteredBooks);
       },
       (error: any) => {
         console.log(error);

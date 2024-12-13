@@ -19,15 +19,16 @@ export class PurchaseHistoryComponent implements OnInit {
 
   ngOnInit(): void {
     if (typeof window !== 'undefined' && localStorage) {
-      this.userId = 'Cu-00001';
+      this.userId = '1';
 
     }
 
     this.getPurchaseHistory(this.userId);
-    console.log(this.purchaseData);
+    console.log(this.purchaseData,'purchase data');
   }
 
   getPurchaseHistory(userId: string):void {
+    console.log('userId in purchase history',userId);
     this.purchaseHistoryService.getPurchaseHistory(userId)
     .subscribe((data: any[]) => {
       this.purchaseData = data;

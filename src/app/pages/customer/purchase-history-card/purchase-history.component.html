@@ -1,10 +1,10 @@
-<div *ngFor="let purchase of purchaseData" class="request-card">
+<div *ngFor="let purchase of purchaseData" class=" card request-card">
   <div class="d-flex" style="height: auto">
     <div class="card-body">
       <div class="d-flex justify-content-between">
         <div>
           <span class="fs-6">Purchase ID: </span> <span class="fs-6"> {{ purchase.purchase_id }} </span> |
-          <span class="fs-6">Date: </span> <span class="fs-6"> {{ purchase.purchase_datetime
+          <span class="fs-6">Date: </span> <span class="fs-6"> {{ purchase.purchase_datetime | date:'yyyy-MM-dd HH:mm'
             }} </span>
         </div>
         <div>

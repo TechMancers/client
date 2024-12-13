@@ -60,12 +60,12 @@
             </nav>
             <div class="WishList row row-cols-1 row-cols-md-3 g-4" style="margin-top:0.5px;">
               <div class="col" *ngFor="let book of filteredBooks">
-                <!-- <app-art-card [book]="book" [showRemoveButton]="true" [customerUserId]="userId" (removeItemFromWishList)="onItemRemoved(book.book_id)"></app-art-card> -->
+                <app-book-card [book]="book"></app-book-card>
               </div>
             </div>
           </div>
           <div class="tab-pane fade purchase-history" id="purchaseHistory" role="tabpanel" style="max-height: 500px; overflow-y: scroll; overflow-x: hidden;">
-            <!-- <app-purchase-history></app-purchase-history> -->
+            <app-purchase-history></app-purchase-history>
           </div>
         </div>
       </div>

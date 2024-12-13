@@ -1,1 +1,68 @@
-<p>search-book works!</p>
+
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-lg-3 find-book-column">
+      <h3> Find A Book </h3>
+      <br>
+      <button class="btnrx"><h5> Category </h5></button>
+      <br>
+      <ul>
+        <li *ngFor="let category of categories">
+          <input type="checkbox" id="{{ category.category_id }}" name="category" [value]="category.name"
+            (change)="updateCategoryFilter($event, category.name)">
+          <label for="{{ category.category_id }}">{{ category.name }}</label>
+        </li>
+      </ul>
+      <br>
+      <button class="btnrx"><h5>Price Range</h5></button>
+      <br>
+      <label for="customRange2" class="form-label">Min - Max ($)</label>
+      <input type="range" class="form-range" min="10" max="1000" id="customRange2" (input)="onPriceRangeChange($event)">
+      <div class="d-flex justify-content-between">
+        <small>10$</small>
+        <small>1000$</small>
+      </div>
+      <br>
+      <div class="dropdown-container">
+        <button class="btnrx"><h5>Sort By</h5></button>
+        <br>
+        <select id="sort-options" name="sort-options" [(ngModel)]="selectedOption" (change)="onSortChange($event)">
+          <option value="name-asc">Name (A-Z)</option>
+          <option value="name-desc">Name (Z-A)</option>
+          <option value="date-asc">Date (Oldest to Newest)</option>
+          <option value="date-desc">Date (Newest to Oldest)</option>
+          <option value="price-asc">Price (Low to High)</option>
+          <option value="price-desc">Price (High to Low)</option>
+          <option value="popularity-asc">Total Likes (Low to High)</option>
+          <option value="popularity-desc">Total Likes (High to Low)</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="col-lg-9 book-gallery-column">
+      <section class="head-title-section">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-12 text-center mt-5">
+              <h4 class="theme-color">Embark on a journey through our book gallery to find your perfect masterpiece!</h4>
+              <br>
+              <div class="results-container">
+                <div class="found" style="margin-left: 20px;">
+                  {{ searchResults.length }} results found for
+                </div>
+                <div class="suggested-tags" style="margin-left: 10px;">
+                  Searched Term :  <div class="rounded-text">{{ searchQuery }}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mt-5 mb-3" style="max-height: 800px; overflow-y: scroll; overflow-x: hidden;">
+            <div class="col-lg-4 col-md-6 col-sm-12 mb-4" *ngFor="let book of searchResults">
+              <!-- <app-book-card [book]="book"></app-book-card> -->
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
