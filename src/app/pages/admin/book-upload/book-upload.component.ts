@@ -1,138 +1,108 @@
-import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import Swal from 'sweetalert2';
-import { AbstractControl, ValidationErrors } from '@angular/forms';
+import { BookUploadService } from './book-upload.service';
+import { Component, OnInit } from '@angular/core';
 
-// import { BookService } from '../../services/book.service';
-
-// Custom Validator: Word limit for description
-function wordCountValidator(maxWords: number) {
-  return (control: AbstractControl): ValidationErrors | null => {
-    if (!control.value) return null;
-
-    const wordCount = control.value.trim().split(/\s+/).length;
-    return wordCount > maxWords ? { wordLimitExceeded: true } : null;
-  };
-}
 
 @Component({
   selector: 'app-book-upload',
   templateUrl: './book-upload.component.html',
   styleUrl: './book-upload.component.css',
 })
-export class BookUploadComponent implements OnInit {
-  bookForm: FormGroup;
-  bookId: string | null;
-  isEdit: boolean = false;
+export class BookUploadComponent implements OnInit{
+  books: any[] = []; // Array to hold all books
+  categories: any[] = []; // Array to hold all categories
+  errorMessage: string = '';
+  bookForm: any;
+  successMessage: string | null = null;
+  errorMessages: string | null = null;
+  newErrorMessage: string | null = null;
+  selectedBook: any = null;
 
-  constructor(
-    private fb: FormBuilder,
-    // private bookService: BookService,
-    private route: ActivatedRoute,
-    private router: Router
-  ) {
-    this.bookId = this.route.snapshot.paramMap.get('id');
+  constructor(private bookService:BookUploadService, private fb:FormBuilder ){
     this.bookForm = this.fb.group({
-      book_name: ['', [Validators.required]],
-      author_name: ['', [Validators.required]],
-      price: ['', [Validators.required, Validators.pattern(/^\d+$/)]],
-      description: ['', [Validators.required, wordCountValidator(1000)]],
-      stock: ['', [Validators.required, Validators.pattern(/^\d+$/)]],
-      category_id: ['', [Validators.required]],
-      book_image: [null],
+      name: ['', [Validators.required]],
+      author: ['', [Validators.required]],
+      price: ['', [Validators.required, Validators.min(0)]],
+      description: ['', [Validators.required, Validators.minLength(10)]],
+      stock: ['', [Validators.required, Validators.min(1)]],
+      category_id: ['', [Validators.required]]
     });
   }
 
-  ngOnInit(): void {
-    if (this.bookId) {
-      this.isEdit = true;
-      this.fetchBookDetails();
-    }
+  ngOnInit():void{
+    this.getBooks();
+
   }
 
-  fetchBookDetails(): void {
-    // Assuming `bookService` is implemented and uncommented
-    /*
-    this.bookService.getBookById(this.bookId!).subscribe(
-      (data) => {
-        this.bookForm.patchValue({
-          book_name: data.book_name,
-          author_name: data.author_name,
-          price: data.price,
-          description: data.description,
-          stock: data.stock,
-          category_id: data.category_id,
-          book_image: null, // For file inputs, Angular doesn't prefill values
-        });
+  viewBookDetails(bookId: string) {
+    this.bookService.getBookById(bookId).subscribe({
+      next: (data) => {
+        this.selectedBook = data;  // Store the selected book details
       },
-      (error) => {
-        console.error('Error fetching book details', error);
+      error: (err) => {
+        this.errorMessage = 'Failed to fetch book details.';
       }
-    );
-    */
+    });
   }
 
-  onFileChange(event: any): void {
-    const file = event.target.files[0];
-    if (file && file.size > 2 * 1024 * 1024) {
-      Swal.fire({
-        icon: 'error',
-        title: 'File Too Large',
-        text: 'Book image size should not exceed 2MB.',
+
+  getBooks() {
+    this.bookService.getBooks().subscribe({
+      next: (data) => {
+        console.log('Books:', data); // Log to inspect data
+        this.books = data;
+      },
+      error: (err) => {
+        console.error('Error fetching books:', err);
+        this.errorMessage = 'Failed to fetch books.';
+      }
+    });
+  }
+
+  deleteBook(bookId: string) {
+    if (confirm('Are you sure you want to delete this book?')) {
+      this.bookService.deleteBook(bookId).subscribe({
+        next: () => {
+          this.successMessage = 'Book deleted successfully!';
+          this.newErrorMessage = null;
+          this.getBooks(); // Refresh the book list
+        },
+        error: (error) => {
+          console.error('Error deleting book:', error);
+          this.errorMessage = 'Failed to delete book. Please try again.';
+          this.successMessage = null;
+        }
       });
-      this.bookForm.get('book_image')?.setErrors({ invalidSize: true });
+    }
+  }
+
+  onSubmit() {
+    if (this.bookForm.valid) {
+      this.bookService.addBook(this.bookForm.value).subscribe({
+        next: (response) => {
+          console.log('Book added successfully:', response);
+          this.successMessage = 'Book added successfully!';
+          this.errorMessages = null;
+          this.bookForm.reset();
+        },
+        error: (error) => {
+          console.error('Error adding book:', error);
+          this.errorMessage = 'Failed to add book. Please try again.';
+          this.successMessage = null;
+        }
+      });
     } else {
-      this.bookForm.get('book_image')?.setValue(file); // Ensure the file is set
-      this.bookForm.get('book_image')?.updateValueAndValidity(); // Trigger validation updates
+      this.errorMessage = 'Please fill in all fields correctly.';
+      this.successMessage = null;
     }
-  }
-  
-
-  submitForm(): void {
-    if (this.bookForm.invalid) {
-      this.bookForm.markAllAsTouched();
-      return;
-    }
-
-    const formData = new FormData();
-    Object.entries(this.bookForm.value).forEach(([key, value]) => {
-      if (key === 'book_image' && value instanceof File) {
-        formData.append(key, value); // Append the file directly
-      } else if (value !== null && value !== undefined) {
-        formData.append(key, String(value)); // Ensure everything else is a string
-      }
-    });
-    
-    
-
-    // Assuming `bookService` is implemented and uncommented
-    /*
-    const request = this.isEdit
-      ? this.bookService.updateBook(this.bookId!, formData)
-      : this.bookService.addBook(formData);
-
-    request.subscribe(
-      () => {
-        Swal.fire({
-          icon: 'success',
-          title: 'Success',
-          text: `Book ${this.isEdit ? 'updated' : 'added'} successfully!`,
-        }).then(() => this.router.navigate(['/admin/booklist']));
-      },
-      (error) => {
-        console.error('Error submitting form', error);
-        Swal.fire({
-          icon: 'error',
-          title: 'Error',
-          text: 'An error occurred. Please try again.',
-        });
-      }
-    );
-    */
-  }
-
-  cancel(): void {
-    this.router.navigate(['/admin/booklist']);
   }
 }
+
+
+
+
+
+
+
+
+
