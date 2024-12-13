@@ -147,3 +147,121 @@
 </section>
 
 
+<div class="container">
+  <h1>Books</h1>
+
+  <!-- Error Message -->
+  <div *ngIf="errorMessage" class="alert alert-danger">
+    {{ errorMessage }}
+  </div>
+
+  <!-- Books List -->
+  <ul *ngIf="books.length > 0; else noBooks">
+    <li *ngFor="let book of books">
+      <strong>{{ book.name }}</strong> by {{ book.author }}
+      <p>
+        <span>Price: ${{ book.price }}</span> |
+        <span>Stock: {{ book.stock }}</span>
+      </p>
+      <p>
+        <em>Category ID: {{ book.category_id }}</em>
+      </p>
+    </li>
+  </ul>
+
+  <!-- Fallback Message for No Books -->
+  <ng-template #noBooks>
+    <p>No books available.</p>
+  </ng-template>
+</div>
+
+<div *ngIf="books">
+  <h3>Bookss:</h3>
+  <ul>
+    <li *ngFor="let book of books">
+      {{ book.name }} - {{ book.author }}
+    </li>
+  </ul>
+</div>
+
+<p *ngIf="errorMessage" style="color: red;">{{ errorMessage }}</p>
+
+
+
+<!-- ///////////////////////////////////////////  upload book -->
+<div class="container">
+  <h2>Add New Book</h2>
+
+  <form [formGroup]="bookForm" (ngSubmit)="onSubmit()">
+    <div>
+      <label for="name">Book Name</label>
+      <input id="name" formControlName="name" type="text" />
+      <span *ngIf="bookForm.get('name')?.invalid && bookForm.get('name')?.touched">
+        Book name is required.
+      </span>
+    </div>
+
+    <div>
+      <label for="author">Author</label>
+      <input id="author" formControlName="author" type="text" />
+      <span *ngIf="bookForm.get('author')?.invalid && bookForm.get('author')?.touched">
+        Author name is required.
+      </span>
+    </div>
+
+    <div>
+      <label for="price">Price</label>
+      <input id="price" formControlName="price" type="number" />
+      <span *ngIf="bookForm.get('price')?.invalid && bookForm.get('price')?.touched">
+        Price must be a positive number.
+      </span>
+    </div>
+
+    <div>
+      <label for="description">Description</label>
+      <textarea id="description" formControlName="description"></textarea>
+      <span *ngIf="bookForm.get('description')?.invalid && bookForm.get('description')?.touched">
+        Description must be at least 10 characters.
+      </span>
+    </div>
+
+    <div>
+      <label for="stock">Stock</label>
+      <input id="stock" formControlName="stock" type="number" />
+      <span *ngIf="bookForm.get('stock')?.invalid && bookForm.get('stock')?.touched">
+        Stock must be at least 1.
+      </span>
+    </div>
+
+    <div>
+      <label for="category_id">Category ID</label>
+      <input id="category_id" formControlName="category_id" type="number" />
+      <span *ngIf="bookForm.get('category_id')?.invalid && bookForm.get('category_id')?.touched">
+        Category ID is required.
+      </span>
+    </div>
+
+    <button type="submit" [disabled]="bookForm.invalid">Add Book</button>
+  </form>
+
+  <!-- Success and Error Messages -->
+  <p *ngIf="successMessage" class="success">{{ successMessage }}</p>
+  <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
+</div>
+
+
+
+<h3>All Books</h3>
+  <ul class="list-group">
+    <li *ngFor="let book of books" class="list-group-item">
+      <strong>{{ book.name }}</strong> by {{ book.author }}
+      <p>{{ book.description }}</p>
+      <p>Price: ${{ book.price }}</p>
+      <p>Stock: {{ book.stock }}</p>
+      <p>Category: {{ book.category_name }}</p>
+
+      <!-- Delete Button -->
+      <button class="btn btn-danger" (click)="deleteBook(book.id)">Delete</button>
+      <button class="btn btn-info" (click)="viewBookDetails(book.id)">View Details</button>
+    </li>
+  </ul>
