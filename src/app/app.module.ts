@@ -23,10 +23,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     NewPasswordComponent,
     ResetPasswordComponent,
     St01Component,
-    St02Component,
-   
-    
-  
+    St02Component
   ],
   imports: [
     BrowserModule,
