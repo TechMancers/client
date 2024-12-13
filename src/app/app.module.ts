@@ -12,6 +12,7 @@ import { St02Component } from './pages/sign-up/sign-up-users/st02/st02.component
 
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+// import { CategoryCardComponent } from './shared/cards/category/category-card/category-card.component';
 // import { BookCardComponent } from './shared/cards/book-card/book-card.component';
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ResetPasswordComponent,
     St01Component,
     St02Component,
+   
     
   
   ],

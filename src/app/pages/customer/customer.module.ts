@@ -5,12 +5,15 @@ import { CustomerRoutingModule } from './customer-routing.module';
 import { CustomerComponent } from './customer.component';
 import { HomeComponent } from './home/home.component';
 import { BookCardComponent } from './../../shared/cards/book-card/book-card.component';
+import { CategoryCardComponent } from '../../shared/cards/category/category-card/category-card.component';
 
 @NgModule({
   declarations: [
     CustomerComponent,
     HomeComponent,
-    BookCardComponent
+    BookCardComponent,
+    CategoryCardComponent
+
   ],
   imports: [
     CommonModule,
