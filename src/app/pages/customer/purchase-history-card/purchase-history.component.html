@@ -1,0 +1,36 @@
+<div *ngFor="let purchase of purchaseData" class=" card request-card">
+  <div class="d-flex" style="height: auto">
+    <div class="card-body">
+      <div class="d-flex justify-content-between">
+        <div>
+          <span class="fs-6">Purchase ID: </span> <span class="fs-6"> {{ purchase.purchase_id }} </span> |
+          <span class="fs-6">Date: </span> <span class="fs-6"> {{ purchase.purchase_datetime | date:'yyyy-MM-dd HH:mm'
+            }} </span>
+        </div>
+        <div>
+          <span class="fs-6">Payment Method: {{purchase.paymentMethod}}</span>
+        </div>
+      </div>
+      <div *ngFor="let book of purchase.cartItems" style="margin-top: 10px;" class="item-card">
+        <div class="d-flex">
+          <div class="card d-flex gray-background" style="width: 100%;">
+            <div class="row">
+              <div class="col-3 profile-pic">
+                <img [src]="book.cover_image" alt="book" class="book-image" style="width:80px">
+              </div>
+              <div class="col-6 artwork-details text-left">
+                <div><span class="detail-label">Book_title: </span>{{ book.book_title }}</div>
+                <div><span class="detail-label">Author: </span>{{ book.author_name }}</div>
+                <div><span class="detail-label">Price: </span>{{ book.book_price }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="buttons d-flex flex-column align-items-end mt-2">
+        <button class="btn btn-rm" style="color:#fff; background-color: #0f4d55; border-color: #fff;"  type="button" (click)="deletePurchase(purchase.purchase_id)">Remove</button>
+      </div>
+    </div>
+  </div>
+</div>
+

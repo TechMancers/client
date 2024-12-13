@@ -1,18 +1,18 @@
 <div class="container" (click)="goToPreview(book)">
   <div class="image">
-    <img [src]="book.book_image_url" alt="Book Cover Image">
+    <img [src]="book.book_cover_image" alt="Book Cover Image">
     <div class="details">
       <h2>{{book.book_name}}</h2>
       <p>{{book.author_name}}</p>
     </div>
     <div class="more">
       <p class="price">{{book.book_price| currency:'USD':'symbol':'1.2-2'}}</p>
-      <button class="btn cart-icon-btn" (click)="addToCart(book); $event.stopPropagation()"> 
+      <button class="btn cart-icon-btn" (click)="addToCart(book); $event.stopPropagation()">
         <i class="bi bi-cart-plus-fill"></i> Add to Cart
       </button>
     </div>
  </div>
-</div> 
+</div>
 
 
-  
+
