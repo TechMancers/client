@@ -1,0 +1,257 @@
+/* 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  font-family: "Raleway", sans-serif;
+  background: #2F3238;
+}
+
+.container {
+  margin: -20px;
+}
+
+.row {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.image {
+  background: #50A7FF;
+  position: relative;
+  flex: 1;
+  max-width: 1500px;
+  height: 300px;
+  margin: 12px;
+  margin-right: -10px;
+  overflow: hidden;
+}
+
+.image::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 70%;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0) 30%);
+  z-index: 1;
+}
+
+.image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.99;
+  position: relative;
+  vertical-align: top;
+  transition: 0.6s;
+  transition-property: opacity;
+}
+
+.image:hover img {
+  opacity: 1;
+}
+
+.image .details {
+  z-index: 1;
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: #fff;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.image .details h2 {
+  z-index: 2;
+  position: absolute;
+  text-align: left;
+  font-size: 15px;
+  margin-left: 15px;
+  font-weight: 300;
+  margin-top: 12px;
+  transition: 0.4s;
+  transition-property: transform, background-color;
+}
+
+.image .details h2 span {
+  font-weight: 900;
+}
+
+.image:hover .details h2 {
+  transform: translateY(10px);
+  font-weight: bold;
+}
+
+.image .details p {
+  z-index: 2;
+  position: absolute;
+  margin: 30px 30px 0 30px;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: left;
+  margin-left: 12px;
+  margin-top: 265px;
+  opacity: 0;
+  transition: 0.6s;
+  transition-property: opacity, transform;
+}
+
+.image:hover {
+  box-shadow: #50A7FF 0px 0px 10px 0px;
+}
+
+.image:hover .details p {
+  opacity: 1;
+  transform: translateY(-40px);
+}
+
+.more {
+  position: absolute;
+  background: linear-gradient(to top, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0) 80%);
+  height: 20%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 10px;
+  padding: 5px;
+  bottom: -80px;
+  transition: 0.6s;
+  transition-property: bottom;
+  padding-bottom: -10px;
+  z-index: 2;
+}
+
+
+
+.price {
+  color: rgb(255, 255, 255);
+ font-size: 12px;
+ margin-left: 10px;
+ font-weight: 500;
+}
+
+.cart-icon-btn {
+  color:rgb(255, 255, 255);
+  font-size: 17px;
+  transform: color 0.5s, scale 0.5s,outline 0.5s;
+}
+
+.cart-icon-btn:hover {
+  color: rgb(19, 177, 185);
+  transform: scale(1.4);
+  outline: orangered;
+}
+
+
+.like-count {
+  color: rgb(255, 255, 255);
+  font-size: 11px;
+}
+
+.bi-heart-fill {
+  color: rgb(255, 255, 255);
+}
+
+.image:hover .more {
+  bottom: 0;
+}
+
+
+@media (max-width: 1080px) {
+  .image {
+      flex: 100%;
+      max-width: 480px;
+  }
+}
+
+@media (max-width: 400px) {
+  .image .details p {
+      font-size: 16px;
+  }
+}
+.card{
+  height: 350px;
+  width: 250px;
+} */
+
+
+.container {
+  width: 300px;
+  margin: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.image {
+  position: relative;
+  width: 100%;
+}
+
+.image img {
+  width: 100%;
+  height: auto;
+  border-bottom: 1px solid #ddd;
+}
+
+.details {
+  padding: 10px;
+}
+
+.details h2 {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0 0 5px;
+}
+
+.details p {
+  font-size: 14px;
+  color: #555;
+  margin: 0;
+}
+
+.more {
+  padding: 10px;
+  background-color: #f9f9f9;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.price {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+}
+
+.cart-icon-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.cart-icon-btn:hover {
+  background-color: #0056b3;
+}
+
+.cart-icon-btn i {
+  font-size: 18px;
+}

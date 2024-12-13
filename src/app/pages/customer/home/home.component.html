@@ -1,0 +1,235 @@
+<div class="main">
+
+    <!-- Navbar -->
+    <div>
+      <nav class="navbar navbar-expand-lg navbar-custom fixed-top" data-bs-theme="dark">
+        <div class="container-fluid">
+          
+          <!-- Logo -->
+          <a class="navbar-brand d-flex align-items-center" href="#">
+            <img src="../../../assets/logo1.jpg" alt="Logo" class="custom-logo" style="height: 40px;" />
+            <span class="brand-name">Kiyawana.lk</span>
+          </a>
+    
+          <!-- Search Form -->
+          <form class="d-flex search-form mx-auto">
+            <input
+              class="form-control search-input"
+              type="search"
+              placeholder="Search for books, authors, genres..."
+              name="searchTerm"
+            />
+            <button class="btn btn-light search-btn" type="submit">Search</button>
+          </form>
+    
+          <!-- Cart and Account -->
+          <div class="d-flex gap-2">
+            <button 
+              type="button" 
+              class="btn btn-outline-light"
+              routerLink="/cart"
+            >
+              <i class="bi bi-cart"></i> Cart
+            </button>
+            <button 
+              type="button" 
+              class="btn btn-primary"
+              routerLink="/st01"
+            >
+              Sign Up
+            </button>
+            <button 
+              type="button" 
+              class="btn btn-outline-primary"
+              routerLink="/login"
+            >
+              Sign In
+            </button>
+          </div>
+    
+        </div>
+      </nav>
+    </div>
+    
+    
+      <!-- Banner Section -->
+      <section class="banner">
+        <div class="inner">
+          <div class="banner-div">
+            <h1>Welcome to Kiyawana.lk</h1>
+            <h2>Your Gateway to Books and Knowledge!</h2>
+            
+            <button class="sign-up-button">Browse Books</button>
+          </div>
+          <div class="banner-canvas">
+            <canvas id="banner-canvas"></canvas>
+          </div>
+        </div>
+      </section>
+    
+    
+      
+      <!-- <div class="container">
+        <h1>Book Categories</h1>
+    
+         Main Categories
+        <div id="main-categories">
+            <h2>Main Categories</h2>
+            <ul>
+                <li>Fiction</li>
+                <li>Non-fiction</li>
+                <li>Children's Books</li>
+            </ul>
+        </div>
+      </div> 
+    -->
+    
+    <div class="carousel-container">
+      <h2 style="color: #257261;">Book Categories</h2>
+      <button class="carousel-btn prev" (click)="moveCarousel(-1)">&#10094;</button>
+      <div class="carousel">
+        <div *ngFor="let category of categories" class="carousel-item">
+          <img [src]="category.image" alt="{{ category.name }}" class="category-image"/>
+          <p class="category-name">{{ category.name }}</p>
+        </div>
+      </div>
+      <button class="carousel-btn next" (click)="moveCarousel(1)">&#10095;</button>
+    </div>
+    
+    
+    
+<!--      
+    Book Card
+    <section id="product1" class="section-p1">
+    
+      <h2>Featured Books</h2>
+      <p>Explore Our Latest Collection</p>
+    
+      <div class="pro-container">
+          <div class="pro">
+              <img src="https://grantha.lk/media/catalog/product/cache/175651ac17c935233c05d95a2405d148/i/m/img_20231206_0007.jpg" alt="">
+              <div class="des">
+                  <span>Camellia</span>
+                  <h5>Author Name</h5>
+                  
+                  <h4>LKR870</h4>
+              </div>
+              <button class="add-to-cart">Add to Cart</button> 
+          </div>
+    
+          <div class="pro">
+            <img src="https://grantha.lk/media/catalog/product/cache/175651ac17c935233c05d95a2405d148/w/h/whatsapp_image_2024-07-22_at_10.30.39.jpeg" alt="">
+            <div class="des">
+                <span>Camellia</span>
+                <h5>Author Name</h5>
+                
+                <h4>LKR870</h4>
+            </div>
+            <button class="add-to-cart">Add to Cart</button>
+        </div>
+    
+        <div class="pro">
+          <img src="https://grantha.lk/media/catalog/product/cache/175651ac17c935233c05d95a2405d148/i/m/img_20231206_0007.jpg" alt="">
+          <div class="des">
+              <span>Camellia</span>
+              <h5>Author Name</h5>
+              
+              <h4>LKR870</h4>
+          </div>
+          <button class="add-to-cart">Add to Cart</button>
+      </div>
+    
+      <div class="pro">
+        <img src="https://grantha.lk/media/catalog/product/cache/175651ac17c935233c05d95a2405d148/i/m/img_20231206_0007.jpg" alt="">
+        <div class="des">
+            <span>Camellia</span>
+            <h5>Author Name</h5>
+            
+            <h4>LKR870</h4>
+        </div>
+        <button class="add-to-cart">Add to Cart</button>
+    </div>
+    
+    <div class="pro">
+      <img src="https://grantha.lk/media/catalog/product/cache/175651ac17c935233c05d95a2405d148/i/m/img_20231206_0007.jpg" alt="">
+      <div class="des">
+          <span>Camellia</span>
+          <h5>Author Name</h5>
+          
+          <h4>LKR870</h4>
+      </div>
+      <button class="add-to-cart">Add to Cart</button>
+    </div>
+    
+    <div class="pro">
+      <img src="https://grantha.lk/media/catalog/product/cache/175651ac17c935233c05d95a2405d148/i/m/img_20231206_0007.jpg" alt="">
+      <div class="des">
+          <span>Camellia</span>
+          <h5>Author Name</h5>
+          
+          <h4>LKR870</h4>
+      </div>
+      <button class="add-to-cart">Add to Cart</button>
+    </div>
+    
+    <div class="pro">
+      <img src="https://grantha.lk/media/catalog/product/cache/175651ac17c935233c05d95a2405d148/i/m/img_20231206_0007.jpg" alt="">
+      <div class="des">
+          <span>Camellia</span>
+          <h5>Author Name</h5>
+          
+          <h4>LKR870</h4>
+      </div>
+      <button class="add-to-cart">Add to Cart</button>
+    </div>
+    
+    <div class="pro">
+      <img src="https://grantha.lk/media/catalog/product/cache/175651ac17c935233c05d95a2405d148/i/m/img_20231206_0007.jpg" alt="">
+      <div class="des">
+          <span>Camellia</span>
+          <h5>Author Name</h5>
+          
+          <h4>LKR870</h4>
+      </div>
+      <button class="add-to-cart">Add to Cart</button>
+    </div>
+    
+      </div>
+    
+      </section>
+      
+    <section id="banner3">
+    
+      <div class="banner-box">
+          
+          
+          
+      </div>
+    
+      <div class="banner-box banner-box2">
+          
+          
+          
+      </div>
+    
+      
+    
+    
+    </section> -->
+
+    <div>
+      <h2>SEE ALL BEST SELLING BOOKS</h2>
+    </div>
+    <br>
+  
+    <div class="carousel-container" *ngIf="dataLoaded">
+      <div class="carousel book-carousel">
+        <div class="card2 shadow" *ngFor="let book of booksData" >
+         <app-book-card [book]="book"></app-book-card>
+        </div>
+      </div>
+      <button class="carousel-control prev" (click)="prev()">&#10094;</button>
+      <button class="carousel-control next" (click)="next()">&#10095;</button>
+    </div>
+  </div>
+     

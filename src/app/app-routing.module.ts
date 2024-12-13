@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { HomeComponent } from './pages/home/home.component';
+import { HomeComponent } from './pages/customer/home/home.component';
 import { SignInComponent } from './pages/sign-in/sign-in.component';
 import { St01Component } from './pages/sign-up/sign-up-users/st01/st01.component';
 import { St02Component } from './pages/sign-up/sign-up-users/st02/st02.component';
@@ -16,6 +16,7 @@ const routes: Routes = [
   { path: 'st02', component: St02Component },
   { path: 'reset', component: ResetPasswordComponent },
   { path: 'new', component: NewPasswordComponent },
+  { path: 'customer', loadChildren: () => import('./pages/customer/customer.module').then(m => m.CustomerModule) },
 ];
 
 @NgModule({
