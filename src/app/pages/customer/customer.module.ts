@@ -9,7 +9,7 @@ import { CartCardComponent } from '../../shared/cards/cart-card/cart-card.compon
 import { BookCardComponent } from '../../shared/cards/book-card/book-card.component';
 import { CategoryCardComponent } from '../../shared/cards/category/category-card/category-card.component';
 import { CheckoutFormComponent } from './checkout-form/checkout-form.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -25,7 +25,8 @@ import { ReactiveFormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     CustomerRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ]
 })
 export class CustomerModule { }

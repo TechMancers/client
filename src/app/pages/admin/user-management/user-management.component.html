@@ -1,50 +1,60 @@
 <div class="container">
-    <h1>User Management</h1>
-  
-    <!-- Search Users -->
-    <div class="search-bar">
-      <input 
-        type="text" 
-        placeholder="Search by name or email..." 
-        [(ngModel)]="searchQuery" 
-        (keyup.enter)="searchUsers()" 
-      />
-      <button (click)="searchUsers()">Search</button>
-    </div>
-  
-    <!-- User List -->
-    <table class="user-table">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Email</th>
-          <th>Status</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let user of users">
-          <td>{{ user.name }}</td>
-          <td>{{ user.email }}</td>
-          <td>{{ user.isActive ? 'Active' : 'Inactive' }}</td>
-          <td>
-            <button (click)="viewDetails(user.id)">Details</button>
-            <button (click)="viewPurchaseHistory(user.id)">Purchase History</button>
-            <button (click)="toggleState(user)" [ngClass]="{'btn-danger': user.isBanned}">
-              {{ user.isBanned ? 'Unban' : 'Ban' }}
-            </button>
-            <button (click)="openSuspendDialog(user)">Suspend</button>
-            <button (click)="deleteUser(user.id)" class="btn-danger">Delete</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  
-    <!-- Pagination -->
-    <div class="pagination">
-      <button (click)="loadPage(currentPage - 1)" [disabled]="currentPage <= 1">Previous</button>
-      <span>Page {{ currentPage }}</span>
-      <button (click)="loadPage(currentPage + 1)" [disabled]="!hasMore">Next</button>
-    </div>
+  <h1>User Management</h1>
+
+  <!-- Search Users -->
+  <div class="search-bar">
+    <input
+      type="text"
+      placeholder="Search by name or email..."
+      [(ngModel)]="searchQuery"
+      (keyup.enter)="searchUsers()"
+    />
+    <button (click)="searchUsers()">Search</button>
   </div>
-  
+
+  <!-- User List -->
+  <table class="user-table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users">
+        <td>{{ user.name }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.isActive ? "Active" : "Inactive" }}</td>
+        <td>
+          <button (click)="viewDetails(user.id)">Details</button>
+          <button (click)="viewPurchaseHistory(user.id)">
+            Purchase History
+          </button>
+          <button
+            (click)="toggleState(user)"
+            [ngClass]="{ 'btn-danger': user.isBanned }"
+          >
+            {{ user.isBanned ? "Unban" : "Ban" }}
+          </button>
+          <button (click)="openSuspendDialog(user)">Suspend</button>
+          <button (click)="deleteUser(user.id)" class="btn-danger">
+            Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Pagination -->
+  <div class="pagination">
+    <button (click)="loadPage(currentPage - 1)" [disabled]="currentPage <= 1">
+      Previous
+    </button>
+    <span>Page {{ currentPage }}</span>
+    <button (click)="loadPage(currentPage + 1)" [disabled]="!hasMore">
+      Next
+    </button>
+  </div>
+</div>
