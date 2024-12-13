@@ -1,0 +1,125 @@
+<br> <br> <div class="container mt-5 p-5 py-5 px-5 bg-white">
+
+  <form [formGroup]="bookForm"  enctype="multipart/form-data">
+
+    <!-- First Row -->
+    <div class="row mb-3 mt-3">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="book_name">Book Name</label>
+          <input
+            id="book_name"
+            type="text"
+            class="form-control"
+            formControlName="book_name"
+            [ngClass]="{ 'is-invalid': bookForm.get('book_name')?.touched && bookForm.get('book_name')?.invalid }"
+          />
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="author_name">Author Name</label>
+          <input
+            id="author_name"
+            type="text"
+            class="form-control"
+            formControlName="author_name"
+            [ngClass]="{ 'is-invalid': bookForm.get('author_name')?.touched && bookForm.get('author_name')?.invalid }"
+          />
+        </div>
+      </div>
+    </div>
+
+    <!-- Description -->
+    <div class="form-group mb-3">
+      <label for="description">Description</label>
+      <textarea
+        id="description"
+        class="form-control"
+        rows="10"
+        formControlName="description"
+        [ngClass]="{ 'is-invalid': bookForm.get('description')?.touched && bookForm.get('description')?.invalid }"
+      ></textarea>
+      <div *ngIf="bookForm.get('description')?.errors?.['wordLimitExceeded']" class="invalid-feedback">
+        Description must not exceed 1000 words.
+      </div>
+    </div>
+
+    <!-- Second Row -->
+    <div class="row mb-3">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="price">Price</label>
+          <input
+            id="price"
+            type="number"
+            class="form-control"
+            formControlName="price"
+            [ngClass]="{ 'is-invalid': bookForm.get('price')?.touched && bookForm.get('price')?.invalid }"
+          />
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="stock">Stock</label>
+          <input
+            id="stock"
+            type="number"
+            class="form-control"
+            formControlName="stock"
+            [ngClass]="{ 'is-invalid': bookForm.get('stock')?.touched && bookForm.get('stock')?.invalid }"
+          />
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="category_id">Category ID</label>
+          <select id="category_id" class="form-control" formControlName="category_id">
+            <option value="" disabled>Select Category</option>
+            <option value="001">001</option>
+            <option value="002">002</option>
+            <option value="003">003</option>
+            <option value="004">004</option>
+          </select>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Book Image -->
+    <div class="form-group mb-3">
+      <label for="book_image">Book Image</label>
+      <br>
+      <input
+        id="book_image"
+        type="file"
+        class="form-control-file"
+
+        [ngClass]="{ 'is-invalid': bookForm.get('book_image')?.errors?.['invalidSize'] }"
+      />
+    </div>
+
+    <!-- Buttons -->
+    <div class="d-flex justify-content-end mt-3">
+      <button
+        type="submit"
+        class="btn btn-primary btn-lg me-2 btn-custom"
+        [disabled]="bookForm.invalid"
+      >
+
+      </button>
+      <button
+        type="button"
+        class="btn btn-lg btn-custom btn-red"
+
+      >
+        Cancel
+      </button>
+    </div>
+
+  </form>
+</div>
+<br>
