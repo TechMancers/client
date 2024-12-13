@@ -12,6 +12,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CategoryManagementComponent } from './category-management/category-management.component';
 import { UserManagementComponent } from './user-management/user-management.component';
 import { BookUploadComponent } from './book-upload/book-upload.component';
+import { BookListComponent } from './book-list/book-list.component';
 
 
 
@@ -20,7 +21,8 @@ import { BookUploadComponent } from './book-upload/book-upload.component';
     AdminComponent,
     CategoryManagementComponent,
     UserManagementComponent,
-    BookUploadComponent
+    BookUploadComponent,
+    BookListComponent
   ],
   imports: [
     CommonModule,
