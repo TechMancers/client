@@ -1,5 +1,5 @@
 .sidenav {
-    background: #38414a;
+    background: #800000;
     transition: all 0.2s ease;
     position: fixed;
     z-index: 1;
@@ -116,9 +116,10 @@
   .body {
     width: calc(100% - 5rem);
     margin-left: 5rem;
+    margin-top: 80px;
     z-index: 0;
     position: relative;
-    top: 10%;
+    top: 50%;
     transition: all 0.2s ease;
     background: #f0f0f0;
     padding: 20px;
@@ -137,7 +138,7 @@
   }
   
   .top-nav {
-    background: #0f2557;
+    background: #404040;
     color: #fff;
     padding: 0.938rem;
     display: flex;
@@ -146,6 +147,8 @@
     position: fixed;
     z-index: 1;
     width: calc(100%);
+    top: 0;
+    height: 80px;
   }
   
   .admin-details {
@@ -197,6 +200,7 @@
     .body {
       width: 100%;
       margin-left: 0;
+      margin-top: 60px;
     }
   
     .body-trimmed {

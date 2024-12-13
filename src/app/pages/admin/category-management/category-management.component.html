@@ -1,4 +1,89 @@
-<p>category-management works!</p>
-<p>category-management works!</p>
-<p>category-management works!</p>
-<p>category-management works!</p>
+<app-alert></app-alert>
+
+<div class="category-management">
+  <div class="header">
+    <h4>Category Management</h4>
+    <button class="add-button" (click)="openAddCategoryModal()">Add New Category</button>
+  </div>
+
+  <div class="category-list" *ngIf="categories.length > 0; else noCategories">
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Category Name</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let category of categories; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ category.name }}</td>
+          <td class="gap-3">
+            <button class="edit-button" style="margin-right: 5px;" (click)="openEditCategoryModal(category)">
+              Edit
+            </button>
+            <button class="delete-button" (click)="openDeleteConfirm(category)">
+              Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <ng-template #noCategories>
+    <p>No categories found. Please add a new category.</p>
+  </ng-template>
+</div>
+
+<app-modal id="edit-category-modal">
+  <div class="modal-header">
+    <h2>Edit Category</h2>
+  </div>
+  <div class="modal-body">
+    <label for="edit-category-name">Category Name:</label>
+    <input
+      id="edit-category-name"
+      type="text"
+      [(ngModel)]="selectedCategory.name"
+    />
+  </div>
+  <div class="modal-footer">
+    <button class="save-button" (click)="updateCategory(selectedCategory)">Save</button>
+    <button class="cancel-button" (click)="closeModal('edit-category-modal')">Cancel</button>
+  </div>
+</app-modal>
+
+<app-modal id="add-category-modal">
+  <div class="modal-header">
+    <h2>Add New Category</h2>
+  </div>
+  <div class="modal-body">
+    <label for="new-category-name">Category Name:</label>
+    <input
+      id="new-category-name"
+      type="text"
+      [(ngModel)]="newCategoryName"
+    />
+  </div>
+  <div class="modal-footer">
+    <button class="save-button" (click)="addNewCategory()">Add</button>
+    <button class="cancel-button" (click)="closeModal('add-category-modal')">Cancel</button>
+  </div>
+</app-modal>
+
+<app-modal id="delete-category-modal">
+  <div class="modal-header">
+    <h2>Delete Category</h2>
+  </div>
+  <div class="modal-body">
+    <p>Are you sure you want to delete the category "{{ selectedCategory.name }}"?</p>
+  </div>
+  <div class="modal-footer">
+    <button class="delete-button" (click)="deleteCategory(selectedCategory)">Delete</button>
+    <button class="cancel-button" (click)="closeModal('delete-category-modal')">Cancel</button>
+  </div>
+</app-modal>
+
+<p>vsdvs</p>

@@ -1,0 +1,80 @@
+/* Add any additional styles for your footer here */
+
+.footer {
+    padding: 0 0; /* Adjust padding as needed */
+   
+    background-color: #b52727;
+    position:sticky ;
+    width: 100%;
+    height: fit-content;
+}
+
+.footer-logo {
+    width: 14vw; /* Adjust the max-width of the logo */
+   margin-right: -20px;
+   margin-top: 30px;
+   display: flex;
+    
+}
+
+/* Adjust margin for all buttons */
+.btn-footer {
+    margin-right: 1vh; /* Reduce the right margin between buttons */
+    display: flex;
+}
+
+/* Style for the five buttons */
+.btn-footer {
+   
+    padding: 0px 35px;
+    border-radius: 20px;
+    font-weight: 450;
+    text-align: center;
+   
+    
+    display: inline-block;
+}
+
+/* Dark blue background on hover for buttons */
+.btn-footer:hover {
+    background-color: #001f3f; /* Dark blue color */
+    color: #fff; /* White text color on hover */
+}
+
+/* Social media icons */
+.bi {
+    font-size: 2vh; /* Adjust the size of the icons */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Add a shadow to the icons */
+}
+
+/* Gray color on hover for social media icons */
+.btn-link:hover .bi {
+    color: #999; /* Gray color on hover */
+}
+
+/* Responsive styles for the row */
+@media (max-width: 991.98px) {
+    .align-items-center {
+        flex-direction: column; /* Stack items vertically on medium-sized screens and below */
+        align-items: center; /* Align items to the center on medium-sized screens and below */
+    }
+
+    .footer-buttons {
+        margin-top: 20px; /* Add spacing between the logo and buttons on medium-sized screens and below */
+        width: 100%; /* Make sure buttons take full width */
+        justify-content: center; /* Center the buttons */
+        flex-wrap: nowrap; /* Keep the buttons in one line */
+        overflow-x: auto; /* Allow horizontal scrolling if needed */
+    }
+
+    .footer-buttons .btn-footer {
+        flex-grow: 1; /* Allow buttons to grow */
+        flex-shrink: 1; /* Allow buttons to shrink */
+        min-width: 120px; /* Minimum width for buttons */
+        margin: 5px; /* Margin between buttons */
+    }
+
+    .footer-buttons .btn-footer {
+        flex-shrink: 0; /* Prevent buttons from shrinking */
+    }
+}

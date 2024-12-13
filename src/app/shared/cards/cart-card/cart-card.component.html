@@ -1,0 +1,44 @@
+<div class="card shadow d-flex justify-content-center align-items-center">
+    <div class="row d-flex justify-content-center align-items-center container-fluid">
+      <!-- Column 1 -->
+      <div class="col image">
+        <div class="card-body">
+          <img [src]="cartItem.thumbnail_url" alt="art" class="rounded card-img-left img-fluid " />
+        </div>
+      </div>
+      <!-- Column 2 -->
+      <div class="col ">
+        <div class="card-body">
+          <p class="artwork-name"><strong> {{cartItem.name}}</strong></p>
+          <p class="artist-name"><strong>{{cartItem.author_name}}</strong></p>
+        </div>
+      </div>
+      <!-- Column 3 -->
+      <div class="col">
+        <div class="card-body ">
+          <p class="price"><strong>{{  cartItem.price*cartItem.quantity | currency:'USD':'symbol':'1.2-2'}}</strong></p>
+  
+        </div>
+      </div>
+      <!-- Column 4 -->
+      <div class="col">
+        <div class="card-body">
+          <div class="counter-container">
+            <div class="counter d-flex align-items-center justify-content-evenly">
+              <button class="btn btn-icon" (click)="decrement()"><i class="bi bi-dash-circle-fill"></i></button>
+              <span class="counter-value">{{cartItem.quantity}}</span>
+              <button class="btn btn-icon" (click)="increment()"><i class="bi bi-plus-circle-fill"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Column 5 -->
+      <div class="col">
+        <div class="card-body d-flex justify-content-evenly">
+          <button class="btn btn-icon" (click)="singleDelete()"><i class="bi bi-x-circle-fill"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+  

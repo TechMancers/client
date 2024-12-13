@@ -1,0 +1,71 @@
+.card{
+    height: 90%;
+    min-width: 65vw;
+    padding-left: -1%;
+    padding-right: -1%;
+  }
+  
+  @media (max-width: 768px) {
+    .card-img-left {
+        max-width: 100px;
+        max-height: 100px;
+    }
+  
+    .counter-container {
+        padding: 1px 10px;
+    }
+  }
+  .price{
+    padding-top: 12%;
+  
+  }
+  
+  .artist-name{
+    font-size: 80%;
+    color: rgb(107, 107, 107);
+    margin-top: -12px;
+  }
+  
+  .artwork-name{
+    font-size: 100%;
+    color: rgb(0, 0, 0);
+    margin-top: 10x;
+  }
+  
+  
+  
+  .btn {
+    background-color: transparent !important;
+    border: none !important;
+    padding: 0.5rem 1rem; 
+    font-size: 1.5rem;
+  }
+  
+  .btn:focus {
+    outline: none !important; /* Remove focus outline */
+  }
+  
+  .counter-container {
+    background-color: #e7e7e7; /* Gray background color */
+    border-radius: 50px; /* Rounded corners */
+    padding: 2px 15px; /* Padding for the counter section */
+  }
+  
+  /* Optional: Adjust the size and color of the icons */
+  .counter-container .btn-icon i {
+    /* Adjust icon size */
+    color: #333; /* Icon color */
+  }
+  
+  .btn-icon {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+  }
+  
+  /* Adjust padding to match the size of the icons */
+  .btn-icon i {
+    padding: 2px; /* Adjust as needed */
+  }
+  
+  
