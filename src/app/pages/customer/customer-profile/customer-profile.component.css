@@ -55,13 +55,13 @@ a {
 }
 
 .logout-btn {
-  background-color: #dc3545;
+  background-color: #ca4c59;
   margin-left: 40px;
   margin-top: 10px;
 }
 
 .logout-btn:hover {
-  background-color: #dc3545;
+  background-color: #ca4c59;
 }
 
 .edit-profile-btn .bi,
