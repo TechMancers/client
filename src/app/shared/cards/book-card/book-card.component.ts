@@ -40,7 +40,3 @@ export class BookCardComponent implements OnInit {
 
 }
 }
-// goToPreview(art: any) {
-//   this.router.navigate(['/preview', art.artwork_id]);
-//   console.log('art', art.artwork_id);
-// }
