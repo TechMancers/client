@@ -15,6 +15,8 @@ import { ResetPasswordComponent } from './pages/forgot-password/reset-password/r
 import { St01Component } from './pages/sign-up/sign-up-users/st01/st01.component';
 import { St02Component } from './pages/sign-up/sign-up-users/st02/st02.component';
 
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'; 
+
 @NgModule({
   declarations: [
 
@@ -31,7 +33,9 @@ import { St02Component } from './pages/sign-up/sign-up-users/st02/st02.component
     AdminModule,
     CustomerModule,
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     provideClientHydration(),

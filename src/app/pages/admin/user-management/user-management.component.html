@@ -1,18 +1,67 @@
 <div class="container">
-  <h1>User Management</h1>
+  <h4 class="title">User Management</h4>
 
-  <!-- Search Users -->
+  <!-- Search Bar and Filters -->
   <div class="search-bar">
-    <input
-      type="text"
-      placeholder="Search by name or email..."
-      [(ngModel)]="searchQuery"
-      (keyup.enter)="searchUsers()"
-    />
-    <button (click)="searchUsers()">Search</button>
+    <div>
+      <input
+        type="text"
+        placeholder="Search by name or email..."
+        [(ngModel)]="filters.searchQuery"
+        (keyup.enter)="searchUsers()"
+        class="search-input"
+      />
+      <button (click)="searchUsers()" class="search-btn">Search</button>
+    </div>
+
+    <!-- Filters -->
+    <div class="filters">
+      <label>
+        <input
+          type="checkbox"
+          [(ngModel)]="filters.isSuspended"
+          [value]="true"
+          (change)="applyFilters()"
+          class="filter-checkbox"
+        />
+        Suspended
+      </label>
+      <label>
+        <input
+          type="checkbox"
+          [(ngModel)]="filters.isBanned"
+          [value]="true"
+          (change)="applyFilters()"
+          class="filter-checkbox"
+        />
+        Banned
+      </label>
+      <label>
+        <input
+          type="checkbox"
+          [(ngModel)]="filters.isActive"
+          [value]="true"
+          (change)="applyFilters()"
+          class="filter-checkbox"
+        />
+        Active
+      </label>
+      <label>
+        Role:
+        <select
+          [(ngModel)]="filters.role"
+          (change)="applyFilters()"
+          class="filter-select"
+        >
+          <option value="">All</option>
+          <option value="admin">Admins</option>
+          <option value="customer">Customers</option>
+        </select>
+      </label>
+    </div>
   </div>
 
-  <!-- User List -->
+  <!-- Users Table -->
   <table class="user-table">
     <thead>
       <tr>
@@ -24,22 +73,57 @@
     </thead>
     <tbody>
       <tr *ngFor="let user of users">
-        <td>{{ user.name }}</td>
+        <td>{{ user.FName }} {{ user.LName }}</td>
         <td>{{ user.email }}</td>
-        <td>{{ user.isActive ? "Active" : "Inactive" }}</td>
         <td>
-          <button (click)="viewDetails(user.id)">Details</button>
-          <button (click)="viewPurchaseHistory(user.id)">
+          <span *ngIf="user.isSuspended" class="status suspended"
+            >Suspended</span
+          >
+          <span *ngIf="user.isBanned && !user.isSuspended" class="status banned"
+            >Banned</span
+          >
+          <span
+            *ngIf="user.isActive && !user.isBanned && !user.isSuspended"
+            class="status active"
+            >Active</span
+          >
+          <span
+            *ngIf="!user.isActive && !user.isBanned && !user.isSuspended"
+            class="status inactive"
+            >Inactive</span
+          >
+        </td>
+        <td>
+          <button
+            (click)="openUserDetailsModal(user.user_id)"
+            class="btn primary"
+            style="margin-right: 5px"
+          >
+            Details
+          </button>
+          <button
+            (click)="openPurchaseHistoryModal(user.user_id)"
+            class="btn secondary"
+            style="margin-right: 5px"
+          >
             Purchase History
           </button>
           <button
             (click)="toggleState(user)"
             [ngClass]="{ 'btn-danger': user.isBanned }"
+            class="btn ban"
+            style="margin-right: 5px"
           >
             {{ user.isBanned ? "Unban" : "Ban" }}
           </button>
-          <button (click)="openSuspendDialog(user)">Suspend</button>
-          <button (click)="deleteUser(user.id)" class="btn-danger">
+          <button
+            (click)="openSuspendDialog(user)"
+            class="btn suspend"
+            style="margin-right: 5px"
+          >
+            Suspend
+          </button>
+          <button (click)="deleteUser(user.user_id)" class="btn danger">
             Delete
           </button>
         </td>
@@ -49,12 +133,142 @@
 
   <!-- Pagination -->
   <div class="pagination">
-    <button (click)="loadPage(currentPage - 1)" [disabled]="currentPage <= 1">
+    <button
+      (click)="loadPage(currentPage - 1)"
+      [disabled]="currentPage === 1"
+      class="btn pagination-btn"
+    >
       Previous
     </button>
-    <span>Page {{ currentPage }}</span>
-    <button (click)="loadPage(currentPage + 1)" [disabled]="!hasMore">
+    <span>Page {{ currentPage }} of {{ totalPages }}</span>
+    <button
+      (click)="loadPage(currentPage + 1)"
+      [disabled]="currentPage === totalPages"
+      class="btn pagination-btn"
+    >
       Next
     </button>
   </div>
 </div>
+
+<app-modal id="user-details-modal">
+  <div class="modal-header">
+    <h4>User Details</h4>
+  </div>
+  <div class="modal-body">
+    <div *ngIf="userDetails">
+      <div class="user-info">
+        <label for="user-name">Full Name:</label>
+        <input
+          id="user-name"
+          type="text"
+          [value]="userDetails.FName + ' ' + userDetails.LName"
+          disabled
+        />
+      </div>
+      <div class="user-info">
+        <label for="user-email">Email:</label>
+        <input
+          id="user-email"
+          type="email"
+          [value]="userDetails.email"
+          disabled
+        />
+      </div>
+      <div class="user-info">
+        <label for="user-status">Status:</label>
+        <input
+          id="user-status"
+          type="text"
+          [value]="userDetails.isActive ? 'Active' : 'Inactive'"
+          disabled
+        />
+      </div>
+      <div class="user-info">
+        <label for="user-role">Role:</label>
+        <input id="user-role" type="text" [value]="userDetails.role" disabled />
+      </div>
+    </div>
+    <div *ngIf="!userDetails">
+      <p>Loading user details...</p>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button class="cancel-button" (click)="closeModal('user-details-modal')">
+      Close
+    </button>
+  </div>
+</app-modal>
+
+<app-modal id="purchase-history-modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h4>Purchase History</h4>
+    </div>
+    <div class="modal-body">
+      <div *ngFor="let purchase of purchaseHistory" class="card request-card">
+        <div class="d-flex" style="height: auto">
+          <div class="card-body">
+            <div class="d-flex justify-content-between">
+              <div>
+                <span class="fs-6">Purchase ID: </span>
+                <span class="fs-6"> {{ purchase.purchase_id }} </span> |
+                <span class="fs-6">Date: </span>
+                <span class="fs-6">
+                  {{ purchase.purchase_datetime | date : "yyyy-MM-dd HH:mm" }}
+                </span>
+              </div>
+              <div>
+                <span class="fs-6"
+                  >Payment Method: {{ purchase.paymentMethod }}</span
+                >
+              </div>
+            </div>
+            <div
+              *ngFor="let book of purchase.cartItems"
+              style="margin-top: 10px"
+              class="item-card"
+            >
+              <div class="d-flex">
+                <div class="card d-flex gray-background" style="width: 100%">
+                  <div class="row">
+                    <div class="col-3 profile-pic">
+                      <img
+                        [src]="book.cover_image"
+                        alt="book"
+                        class="book-image"
+                        style="width: 80px"
+                      />
+                    </div>
+                    <div class="col-6 artwork-details text-left">
+                      <div>
+                        <span class="detail-label">Book Title: </span
+                        >{{ book.book_name }}
+                      </div>
+                      <div>
+                        <span class="detail-label">Author: </span
+                        >{{ book.book_author }}
+                      </div>
+                      <div>
+                        <span class="detail-label">Price: </span
+                        >{{ book.book_price }}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button
+        class="cancel-button"
+        (click)="closeModal('purchase-history-modal')"
+      >
+        Close
+      </button>
+    </div>
+  </div>
+</app-modal>
