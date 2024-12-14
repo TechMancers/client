@@ -19,7 +19,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { HTTP_INTERCEPTORS} from '@angular/common/http';
 
-import { HTTP_INTERCEPTORS} from '@angular/common/http';
 import { AuthInterceptor } from './shared/services/auth.interceptor';
 @NgModule({
   declarations: [
