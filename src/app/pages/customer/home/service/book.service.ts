@@ -26,5 +26,9 @@ export class BookService {
 
 }
 
+getbooks(): Observable<any> {
+  return this.http.get<any>(`${this.apiUrl}/books`);
+
 }
 
+}

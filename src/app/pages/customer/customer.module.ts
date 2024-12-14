@@ -13,8 +13,8 @@ import { SearchBookComponent } from './search-book/search-book.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
-import { PurchaseHistoryComponent } from './purchase-history-card/purchase-history.component';
 import { CustomerProfileComponent } from './customer-profile/customer-profile.component';
+import { PurchaseHistoryComponent } from './purchase-history-card/purchase-history.component';
 
 @NgModule({
   declarations: [

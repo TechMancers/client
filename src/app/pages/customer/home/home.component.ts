@@ -20,13 +20,18 @@ import { CategoryService } from './service/category.service';
 })
 export class HomeComponent implements OnInit, AfterViewInit {
   booksData: any = {};
-  currentIndex: number = 0;
-  currentArtistIndex: number = 0;
+  currentBookIndex: number = 0; // Index for book carousel
+  currentCategoryIndex: number = 0; // Index for category carousel
+  visibleBookItems: number = 4; // Number of visible book items
+  visibleCategoryItems: number = 3; // Number of visible category items
+  categoryItemWidth: number = 33.33; // Default item width for categories
   itemWidth: number = 25;
   gap: number = 16;
   dataLoaded: boolean = false;
   bookData: any;
   categoryData: any[] = [];
+  bestSellingBooksData: any[] = [];
+
 
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object,
@@ -40,14 +45,14 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.getBestSellingBooks();
-    this.updateItemWidth();
     this.loadCategoryData();
+    this.getBooks();
   }
 
   getBestSellingBooks(): void {
     this.bookService.getBestSellingBooks().subscribe(
       (data: any[]) => {
-        this.booksData = data;
+        this.bestSellingBooksData = data; 
         this.dataLoaded = true;
       },
       (error: any) => {
@@ -56,79 +61,18 @@ export class HomeComponent implements OnInit, AfterViewInit {
     );
   }
 
-  next(): void {
-    if (this.currentIndex < this.bookData.length - 100 / this.itemWidth) {
-      this.currentIndex++;
-    } else {
-      this.currentIndex = 0;
-    }
-    this.updateCarousel('.book-carousel', this.currentIndex);
+  
+  getBooks(): void {
+    this.bookService.getbooks().subscribe(
+      (data: any[]) => {
+        this.booksData = data;
+      },
+      (error: any) => {
+        console.log(error);
+      }
+    );
   }
-
-  prev(): void {
-    if (this.currentIndex > 0) {
-      this.currentIndex--;
-    } else {
-      this.currentIndex = this.bookData.length - 100 / this.itemWidth;
-    }
-    this.updateCarousel('.book-carousel', this.currentIndex);
-  }
-
-  updateCarousel(selector: string, index: number): void {
-    const carousel = document.querySelector(selector) as HTMLElement;
-    const gapAdjustment = (this.gap / window.innerWidth) * 100;
-    const translateValue = -(index * (this.itemWidth + gapAdjustment));
-    carousel.style.transform = `translateX(${translateValue}%)`;
-  }
-  @HostListener('window:resize', ['$event'])
-  onResize(event: Event): void {
-    this.updateItemWidth();
-  }
-
-  updateItemWidth(): void {
-    const width = window.innerWidth;
-    if (width >= 1200) {
-      this.itemWidth = 25;
-    } else if (width >= 992 && width < 1200) {
-      this.itemWidth = 33.33;
-    } else if (width >= 768 && width < 992) {
-      this.itemWidth = 50;
-    } else {
-      this.itemWidth = 100;
-    }
-    this.updateCarousel('.book-carousel', this.currentIndex);
-  }
-
-  // categories = [
-  //   { name: 'Children\'s Books', image: 'https://www.booktrust.org.uk/globalassets/images/news-and-features/blogs-2023/december/author-books-of-2023-16x9.jpg?w=1200&h=675&quality=70&anchor=middlecenter' },
-  //   { name: 'Fiction', image: 'https://www.scholastic.com/content/dam/scholastic/educators/book-lists/110823-historical-fiction-nonfiction-16-9.png.corpimagerendition.xxl.1400.788.png' },
-  //   { name: 'Non-fiction', image: 'https://www.scholastic.com/content/dam/scholastic/educators/book-lists/nonfiction-books-grades-1-2-16-9.png.corpimagerendition.xxl.1400.788.png' },
-
-  //   { name: 'Mystery & Thriller', image: 'https://www.usatoday.com/gcdn/presto/2023/03/30/USAT/20d038bf-d2d5-46f1-9628-de1f6508ff12-Summer_trillers_2023-collage.jpg?crop=3263,1836,x0,y709&width=660&height=371&format=pjpg&auto=webp' },
-  //   { name: 'Fantasy', image: 'https://www.beyondthebookends.com/wp-content/uploads/2024/09/Fantasy-Books-for-Tweens.jpg' },
-  //   { name: 'Romance', image: 'https://www.usatoday.com/gcdn/authoring/authoring-images/2024/03/29/USAT/73150237007-romance-books-for-summer.jpg?crop=3199,2401,x0,y49' }
-  // ];
-
-  // currentIndex1: number = 0;
-
-  // moveCarousel(direction: number): void {
-  //   const itemWidth = 400; // Item width + margin (adjust based on CSS)
-  //   const visibleItems = Math.floor(document.querySelector('.carousel-container')!.clientWidth / itemWidth);
-
-  //   // Update the current index
-  //   this.currentIndex1 += direction;
-
-  //   // Ensure the index stays in bounds
-  //   if (this.currentIndex1 < 0) {
-  //     this.currentIndex1 = 0;
-  //   } else if (this.currentIndex1 > this.categories.length - visibleItems) {
-  //     this.currentIndex1 = this.categories.length - visibleItems;
-  //   }
-
-  //   // Move the carousel
-  //   const carousel = document.querySelector('.carousel') as HTMLElement;
-  //   carousel.style.transform = `translateX(-${this.currentIndex1 * itemWidth}px)`;
-  // }
+  
 
   loadCategoryData(): void {
     this.categoryService.getcategories().subscribe(
@@ -147,4 +91,83 @@ export class HomeComponent implements OnInit, AfterViewInit {
   //   console.log('Navigating to category:', categoryId);
   //   this.router.navigate(['/'], { queryParams: { category_id: categoryId } });
   // }
+
+
+
+  // Carousel movement for books
+  moveBookCarousel(direction: number): void {
+    const maxIndex = this.booksData.length - this.visibleBookItems;
+    this.currentBookIndex += direction;
+
+    if (this.currentBookIndex < 0) {
+      this.currentBookIndex = 0;
+    } else if (this.currentBookIndex > maxIndex) {
+      this.currentBookIndex = maxIndex;
+    }
+
+    this.updateCarouselTransform('.book-carousel', this.currentBookIndex, this.itemWidth);
+  }
+
+  // Carousel movement for categories
+  moveCategoryCarousel(direction: number): void {
+    const maxIndex = this.categoryData.length - this.visibleCategoryItems;
+    this.currentCategoryIndex += direction;
+
+    if (this.currentCategoryIndex < 0) {
+      this.currentCategoryIndex = 0;
+    } else if (this.currentCategoryIndex > maxIndex) {
+      this.currentCategoryIndex = maxIndex;
+    }
+
+    this.updateCarouselTransform('.category-carousel', this.currentCategoryIndex, this.categoryItemWidth);
+  }
+
+  updateCarouselTransform(selector: string, index: number, itemWidth: number): void {
+    const carousel = document.querySelector(selector) as HTMLElement;
+    if (carousel) {
+      const translateValue = -(index * (itemWidth + this.gap));
+      carousel.style.transform = `translateX(${translateValue}%)`;
+    }
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(): void {
+    this.updateVisibleItems();
+  }
+
+  updateVisibleItems(): void {
+    const width = window.innerWidth;
+
+    // Update visible items and widths for books
+    if (width >= 1200) {
+      this.visibleBookItems = 4;
+      this.itemWidth = 25;
+    } else if (width >= 992 && width < 1200) {
+      this.visibleBookItems = 3;
+      this.itemWidth = 33.33;
+    } else if (width >= 768 && width < 992) {
+      this.visibleBookItems = 2;
+      this.itemWidth = 50;
+    } else {
+      this.visibleBookItems = 1;
+      this.itemWidth = 100;
+    }
+
+    // Update visible items and widths for categories
+    if (width >= 1200) {
+      this.visibleCategoryItems = 3;
+      this.categoryItemWidth = 33.33;
+    } else if (width >= 768 && width < 1200) {
+      this.visibleCategoryItems = 2;
+      this.categoryItemWidth = 50;
+    } else {
+      this.visibleCategoryItems = 1;
+      this.categoryItemWidth = 100;
+    }
+
+    this.updateCarouselTransform('.book-carousel', this.currentBookIndex, this.itemWidth);
+    this.updateCarouselTransform('.category-carousel', this.currentCategoryIndex, this.categoryItemWidth);
+  }
 }
+
+

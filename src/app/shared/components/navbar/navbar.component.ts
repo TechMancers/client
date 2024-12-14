@@ -2,7 +2,8 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { isPlatformBrowser } from '@angular/common';
 import { PLATFORM_ID } from '@angular/core';
-
+import { AuthService } from '../../../pages/sign-in/service/auth.service';
+import { jwtDecode } from 'jwt-decode';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -16,6 +17,7 @@ export class NavbarComponent implements OnInit {
 
   constructor(
     private router: Router,
+    private authService: AuthService,
     @Inject(PLATFORM_ID) private platformId: Object
   ) {}
 
@@ -29,6 +31,12 @@ export class NavbarComponent implements OnInit {
       firebase_uid: 'someFirebaseUid',
       artist_name: 'Artist Name'
     };
+    // Subscribe to the isAuthenticated observable to update UI on login/logout
+    this.authService.isAuthenticated$.subscribe(
+      (authStatus) => {
+        this.isAuthenticated = authStatus;
+      }
+    );
   }
 
   // Method to handle search form submission
@@ -44,5 +52,16 @@ export class NavbarComponent implements OnInit {
     localStorage.setItem('artistName', artistName);
     // Navigate to the chat route
     this.router.navigate(['/chat']);
+  }
+
+
+  isAuthenticated: boolean = false;
+
+ 
+
+ 
+
+  logout(): void {
+    this.authService.logout();
   }
 }
