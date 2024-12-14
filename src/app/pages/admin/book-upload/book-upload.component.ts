@@ -38,18 +38,6 @@ export class BookUploadComponent implements OnInit{
 
   }
 
-  viewBookDetails(bookId: string) {
-    this.bookService.getBookById(bookId).subscribe({
-      next: (data) => {
-        this.selectedBook = data;  // Store the selected book details
-      },
-      error: (err) => {
-        this.errorMessage = 'Failed to fetch book details.';
-      }
-    });
-  }
-
-
   getBooks() {
     this.bookService.getBooks().subscribe({
       next: (data) => {
@@ -62,6 +50,19 @@ export class BookUploadComponent implements OnInit{
       }
     });
   }
+  viewBookDetails(bookId: string) {
+    this.bookService.getBookById(bookId).subscribe({
+      next: (data) => {
+        this.selectedBook = data;  // Store the selected book details
+      },
+      error: (err) => {
+        this.errorMessage = 'Failed to fetch book details.';
+      }
+    });
+  }
+
+
+
 
   deleteBook(bookId: string) {
     if (confirm('Are you sure you want to delete this book?')) {
