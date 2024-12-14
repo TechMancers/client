@@ -124,7 +124,6 @@ body {
   color: #dc3545;
 }
 
-/* Buttons */
 .btn {
   padding: 8px 16px;
   font-size: 0.9rem;
@@ -165,6 +164,7 @@ body {
   background-color: #f8f9fa;
   color: #e9b000;
   border: 1px solid #e9b000;
+  width: 100px;
 }
 
 .btn:hover {
@@ -222,10 +222,10 @@ span {
 }
 
 .modal-header {
-  background-color: #800000; /* Maroon */
+  background-color: #800000;
   color: white;
   padding: 15px;
-  font-size: 20px;
+  font-size: 10px;
   font-weight: bold;
   text-align: center;
   border-radius: 8px 8px 0 0;
@@ -269,12 +269,11 @@ span {
 }
 
 .save-button, .cancel-button {
-  padding: 12px 20px;
-  font-size: 16px;
-  font-weight: 600;
-  text-transform: uppercase;
+  color: white;
+  border: none;
   border-radius: 5px;
   cursor: pointer;
+  transition: background-color 0.3s ease;
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
@@ -360,4 +359,13 @@ span {
 
 .detail-label {
   font-weight: bold;
+}
+
+.ban-button {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
