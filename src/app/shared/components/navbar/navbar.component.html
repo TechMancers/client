@@ -24,8 +24,9 @@
         <form class="d-flex searchbox"  (submit)="onSearchSubmit()">
           <input class="form-control me-sm-2" style="border-radius: 5px; height: 40px;" type="search" placeholder="Search"  name="searchTerm">
           <button class="btn btn-light my-2 my-s m-0" type="submit" style="border-radius: 4px;">Search</button>
-         <button class="btn btn-signin" routerLink="/signin" type="button">Sign In</button>
-<button class="btn btn-signup" routerLink="/signup" type="button">Sign Up</button>
+         <button class="btn btn-signin"  *ngIf="!isAuthenticated" routerLink="/login" type="button">Sign In</button>
+    <button class="btn btn-signup" *ngIf="!isAuthenticated" routerLink="/st01" type="button">Sign Up</button>
+   <!-- <button class="btn btn-signin"  *ngIf="isAuthenticated" (click)="logout()" type="button">Logout</button> -->
 
       </form>
       

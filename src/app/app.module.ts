@@ -5,7 +5,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-
 import { AdminModule } from './pages/admin/admin.module';
 import { CustomerModule } from './pages/customer/customer.module';
 
@@ -15,8 +14,10 @@ import { ResetPasswordComponent } from './pages/forgot-password/reset-password/r
 import { St01Component } from './pages/sign-up/sign-up-users/st01/st01.component';
 import { St02Component } from './pages/sign-up/sign-up-users/st02/st02.component';
 
-import { FormsModule, ReactiveFormsModule } from '@angular/forms'; 
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+
+import { AuthInterceptor } from './shared/services/auth.interceptor';
 @NgModule({
   declarations: [
 
@@ -39,7 +40,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   ],
   providers: [
     provideClientHydration(),
-    provideHttpClient(withFetch())
+    provideHttpClient(withFetch()),
+    provideHttpClient(withFetch()),
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
   ],
   bootstrap: [AppComponent]
 })
