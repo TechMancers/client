@@ -1,108 +1,135 @@
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { BookUploadService } from './book-upload.service';
 import { Component, OnInit } from '@angular/core';
-
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { BookUploadService } from './book-upload.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-book-upload',
   templateUrl: './book-upload.component.html',
-  styleUrl: './book-upload.component.css',
+  styleUrls: ['./book-upload.component.css'],
 })
-export class BookUploadComponent implements OnInit{
-  books: any[] = []; // Array to hold all books
-  categories: any[] = []; // Array to hold all categories
-  errorMessage: string = '';
-  bookForm: any;
-  successMessage: string | null = null;
-  errorMessages: string | null = null;
-  newErrorMessage: string | null = null;
-  selectedBook: any = null;
+export class BookUploadComponent implements OnInit {
+  bookForm: FormGroup;
+  isEdit: boolean = false;
+  bookId: string | null = null;
+  categories: any[] = [];
 
-  constructor(private bookService:BookUploadService, private fb:FormBuilder ){
+  constructor(
+    private fb: FormBuilder,
+    private bookService: BookUploadService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {
     this.bookForm = this.fb.group({
-      name: ['', [Validators.required]],
-      author: ['', [Validators.required]],
-      price: ['', [Validators.required, Validators.min(0)]],
-      description: ['', [Validators.required, Validators.minLength(10)]],
-      stock: ['', [Validators.required, Validators.min(1)]],
-      category_id: ['', [Validators.required]]
+      book_name: ['', [Validators.required, Validators.minLength(3)]],
+      author_name: ['', [Validators.required, Validators.minLength(3)]],
+      description: ['', [Validators.required, Validators.maxLength(1000)]],
+      price: [0, [Validators.required, Validators.min(0)]],
+      stock: [0, [Validators.required, Validators.min(0)]],
+      category_id: ['', Validators.required],
+      book_image: [null],
     });
   }
 
-  ngOnInit():void{
-    this.getBooks();
+  ngOnInit(): void {
+    // Load categories
+    this.loadCategories();
 
-  }
-
-  viewBookDetails(bookId: string) {
-    this.bookService.getBookById(bookId).subscribe({
-      next: (data) => {
-        this.selectedBook = data;  // Store the selected book details
-      },
-      error: (err) => {
-        this.errorMessage = 'Failed to fetch book details.';
+    // Check if editing an existing book
+    this.route.params.subscribe((params) => {
+      this.bookId = params['id'] || null;
+      if (this.bookId) {
+        this.isEdit = true;
+        this.loadBookDetails();
       }
     });
   }
 
-
-  getBooks() {
-    this.bookService.getBooks().subscribe({
-      next: (data) => {
-        console.log('Books:', data); // Log to inspect data
-        this.books = data;
-      },
-      error: (err) => {
-        console.error('Error fetching books:', err);
-        this.errorMessage = 'Failed to fetch books.';
-      }
-    });
-  }
-
-  deleteBook(bookId: string) {
-    if (confirm('Are you sure you want to delete this book?')) {
-      this.bookService.deleteBook(bookId).subscribe({
-        next: () => {
-          this.successMessage = 'Book deleted successfully!';
-          this.newErrorMessage = null;
-          this.getBooks(); // Refresh the book list
+  // Fetch book details for editing
+  loadBookDetails(): void {
+    if (this.bookId) {
+      this.bookService.getBookById(this.bookId).subscribe(
+        (response) => {
+          this.bookForm.patchValue(response);
         },
-        error: (error) => {
-          console.error('Error deleting book:', error);
-          this.errorMessage = 'Failed to delete book. Please try again.';
-          this.successMessage = null;
+        (error) => {
+          console.error('Error fetching book details:', error);
+          Swal.fire('Error', 'Failed to load book details.', 'error');
         }
-      });
+      );
     }
   }
 
-  onSubmit() {
-    if (this.bookForm.valid) {
-      this.bookService.addBook(this.bookForm.value).subscribe({
-        next: (response) => {
-          console.log('Book added successfully:', response);
-          this.successMessage = 'Book added successfully!';
-          this.errorMessages = null;
-          this.bookForm.reset();
+  // Load all categories
+  loadCategories(): void {
+    this.bookService.getAllCategories().subscribe(
+      (categories) => {
+        this.categories = categories;
+      },
+      (error) => {
+        console.error('Error fetching categories:', error);
+        Swal.fire('Error', 'Failed to load categories.', 'error');
+      }
+    );
+  }
+
+  // Submit form for add or edit
+  submitForm(): void {
+    if (this.bookForm.invalid) {
+      return;
+    }
+
+    const formData = new FormData();
+    Object.keys(this.bookForm.value).forEach((key) => {
+      const value = this.bookForm.get(key)?.value;
+      if (key === 'book_image' && value) {
+        formData.append(key, value);
+      } else {
+        formData.append(key, value);
+      }
+    });
+
+    if (this.isEdit && this.bookId) {
+      this.bookService.updateBook(this.bookId, formData).subscribe(
+        () => {
+          Swal.fire('Success', 'Book updated successfully!', 'success');
+          this.router.navigate(['/books']);
         },
-        error: (error) => {
-          console.error('Error adding book:', error);
-          this.errorMessage = 'Failed to add book. Please try again.';
-          this.successMessage = null;
+        (error) => {
+          console.error('Error updating book:', error);
+          Swal.fire('Error', 'Failed to update book.', 'error');
         }
-      });
+      );
     } else {
-      this.errorMessage = 'Please fill in all fields correctly.';
-      this.successMessage = null;
+      this.bookService.addBook(formData).subscribe(
+        () => {
+          Swal.fire('Success', 'Book added successfully!', 'success');
+          this.router.navigate(['/books']);
+        },
+        (error) => {
+          console.error('Error adding book:', error);
+          Swal.fire('Error', 'Failed to add book.', 'error');
+        }
+      );
     }
+  }
+
+  // Handle file input change
+  onFileChange(event: any): void {
+    const file = event.target.files[0];
+    if (file) {
+      if (file.size > 2 * 1024 * 1024) {
+        // File size validation (2MB limit)
+        this.bookForm.get('book_image')?.setErrors({ invalidSize: true });
+      } else {
+        this.bookForm.get('book_image')?.setValue(file);
+      }
+    }
+  }
+
+  // Cancel form and navigate back
+  cancel(): void {
+    this.router.navigate(['/books']);
   }
 }
-
-
-
-
-
-
-
-
-
