@@ -109,7 +109,7 @@ export class SignInComponent implements OnInit, AfterViewInit {
   // Navigate based on the role of the user
   navigateBasedOnRole(role: string) {
     if (role === 'admin') {
-      this.router.navigate(['/st01']); // Admin route
+      this.router.navigate(['/category-management']); // Admin route
     } else if (role === 'customer') {
       this.router.navigate(['/']); // Customer route
     } else {

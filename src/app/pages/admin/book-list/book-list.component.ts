@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { BookUploadService } from './../book-upload/book-upload.service';
 
 @Component({
@@ -14,7 +15,7 @@ export class BookListComponent implements OnInit {
   errorMessage: string | null = null; // Error message
   Math = Math;
 
-  constructor(private bookService: BookUploadService) {}
+  constructor(private bookService: BookUploadService, private router: Router) {}
 
   ngOnInit(): void {
     this.getBooks();
@@ -64,10 +65,8 @@ export class BookListComponent implements OnInit {
     }
   }
 
-  // Placeholder for update functionality
-  updateBook(book: any): void {
-    console.log(`Updating book: ${book.name}`);
-    // Logic to handle book update can be implemented here
+  updateBook(book: any) {
+    this.router.navigate(['/admin/book-upload'], { state: { book, isEdit: true } });
   }
 
   // Pagination logic
@@ -91,4 +90,6 @@ export class BookListComponent implements OnInit {
   changePage(page: number): void {
     this.currentPage = page;
   }
+
+  
 }
