@@ -55,6 +55,27 @@
 
 <section  class="related-artworks">
     <div class="container">
-        
+        <div class="row">
+            <div class="col-lg-12">
+                <h2 class="body2">Related Books</h2>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="gallery">
+            <div class="column" *ngFor="let column of columns">
+                <div class="gallery-item" *ngFor="let image of column">
+                    <img [src]="image.cover_image" alt="{{ image.title }}" (click)="viewBook(image.book_id)" />
+                    <div class="title-overlay">
+                        <p class="fs-5">{{image.author}}</p>
+                        <div class="more">
+                            <p class="price">
+                                {{image.price | currency  : "USD" : "symbol" : "1.2-2"}}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </section>

@@ -43,6 +43,7 @@ export class BookPreviewComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngAfterViewInit(): void {
       this.fetchBookDetails();
+      this.fetchRelatedBooks();
   }
 
   ngOnDestroy(): void {
@@ -81,16 +82,46 @@ export class BookPreviewComponent implements OnInit, AfterViewInit, OnDestroy {
   addCart(bookDetails: any){
   }
 
+  columns: any[][] = [[], [], []];
+  currentIndex = 0;
+  itemWidth = 25;
+  gap = 16;
+
+
+
   fetchRelatedBooks(): void {
     this.bookPreviewService.getRelatedBooks(this.book_id).subscribe(
       (response) => {
         if (response.success) {
           this.relatedBooks = response.data;
+          console.log(this.relatedBooks);
         } else {
           console.error('Failed to fetch related books', response.message);
         }
       }
     );
+  }
+
+  viewBook(book_id: string): void {
+    this.router.navigate(['/book-preview', book_id]);  
+  }
+
+  updateColumns() {
+    console.log('related is here');
+    const width = window.innerWidth;
+
+    let numColumns = 3;
+    if (width < 600) {
+      numColumns = 1;
+    } else if (width < 992) {
+      numColumns = 2;
+    }
+
+    this.columns = Array.from({ length: numColumns }, () => []);
+    this.relatedBooks.forEach((image, index) => {
+      console.log('image',image, index % numColumns)
+      this.columns[index % numColumns].push(image);
+    });
   }
 
   fetchComments(): void {
