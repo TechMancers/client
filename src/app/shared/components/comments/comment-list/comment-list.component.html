@@ -1,0 +1,29 @@
+<div class="comments mt-1">
+  
+    <app-comment-form
+      submitLabel="Write"
+      (handleSubmit)="addComment({ text: $event, parentId: null })"
+    >
+    </app-comment-form>
+    <div class="show-button" *ngIf="comments.length > 0">
+      <button class="btn btn-outline-dark mb-3" (click)="toggleComments()">
+        {{ showComments ? 'Hide Comments' : 'View Comments' }}
+      </button>
+    </div>
+    <div class="comments-container" *ngIf="showComments">
+      <app-comment
+        *ngFor="let rootComment of getRootComments()"
+        [comment]="rootComment"
+        [replies]="getReplies(rootComment.comment_id)"
+        [activeComment]="activeComment"
+        (setActiveComment)="setActiveComment($event)"
+        [repliesCount]="getRepliesCount(rootComment.comment_id)"
+        (addComment)="addComment($event)"
+        (deleteComment)="deleteComment($event)"
+        (updateComment)="updateComment($event.text, $event.commentId)"
+        [currentUserId]="currentUserId"
+      >
+      </app-comment>
+    </div>
+  </div>
+  

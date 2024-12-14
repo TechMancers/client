@@ -1,0 +1,69 @@
+<div class="container d-flex p-0 mt-1 mb-1">
+  <div class="comment-image-container">
+    <img [src]="profilePhoto" class="rounded-circle profile-photo"/>
+  </div>
+  <div class="comment-right-part">
+    <div class="comment-name-content" (click)="toggleCommentActions()">
+      <div class="comment-content">
+        <div class="body2">{{ comment.username }}</div>
+        &nbsp;
+        &nbsp;
+        <div class="body1">{{ createdAt }}</div>
+      </div>
+      <div class="body1" *ngIf="!isEditing()">{{ comment.content }}</div>
+      <app-comment-form
+        *ngIf="isEditing()"
+        submitLabel="Update"
+        [hasCancelButton]="true"
+        [initialText]="comment.content"
+        (handleSubmit)="updateComment.emit({ text: $event, commentId: comment.comment_id})"
+        (handleCancel)="setActiveComment.emit(null)"
+      ></app-comment-form>
+    </div>
+    <div class="comment-actions body3" *ngIf="showActions">
+      <div
+        *ngIf="canReply"
+        class="comment-action"
+        (click)="setActiveComment.emit({ id: comment.comment_id, type: activeCommentType.replying })"
+      >
+        Reply
+      </div>
+      <div
+        *ngIf="canEdit"
+        class="comment-action"
+        (click)="setActiveComment.emit({ id: comment.comment_id, type: activeCommentType.editing })"
+      >
+        Edit
+      </div>
+      <div
+        *ngIf="canDelete"
+        class="comment-action"
+        (click)="deleteComment.emit(comment.comment_id)"
+      >
+        Delete
+      </div>
+    </div>
+    <app-comment-form
+      *ngIf="isReplying()"
+      submitLabel="Reply"
+      (handleSubmit)="addComment.emit({ text: $event, parentId: replyId })"
+    ></app-comment-form>
+    <div class="replies-toggle" *ngIf="repliesCount > 0" (click)="toggleReplies()" >
+      {{ repliesCount }} {{ repliesCount > 1 ? 'replies' : 'reply' }}
+    </div>
+    <div class="replies" *ngIf="replies.length > 0 && showReplies">
+      <app-comment
+        *ngFor="let reply of replies"
+        [comment]="reply"
+        [replies]="[]"
+        [activeComment]="activeComment"
+        [currentUserId]="currentUserId"
+        [parentId]="comment.comment_id"
+        (setActiveComment)="setActiveComment.emit($event)"
+        (deleteComment)="deleteComment.emit($event)"
+        (addComment)="addComment.emit($event)"
+        (updateComment)="updateComment.emit($event)"
+      ></app-comment>
+    </div>
+  </div>
+</div>

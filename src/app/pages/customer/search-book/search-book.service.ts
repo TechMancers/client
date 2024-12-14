@@ -17,7 +17,7 @@ export class SearchBookService {
     if (categories.length > 0) {
       params.categories = categories.join(',');
     }
-    return this.http.get<any[]>(`${this.apiUrl}/search`, { params });
+    return this.http.get<any[]>(`${this.apiUrl}/search/${searchTerm}`);
   }
 
   getBooksByCategoryId(categoryId: number): Observable<any[]> {

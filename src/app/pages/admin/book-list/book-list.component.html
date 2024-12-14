@@ -1,45 +1,91 @@
-<div class="container mt-4">
-  <h2 class="mb-4">Book List</h2>
+<div class="container p-5 bg-white">
+  <h2 class="title">Books List</h2>
 
   <!-- Error Message -->
   <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
     {{ errorMessage }}
   </div>
+        
+        <div class="search-bar">         
+            <button routerLink="book-upload" class="add-btn">+ Add Book</button>            
+            <input
+              id="searchQuery"
+              type="text"
+              class="form-control"
+              [(ngModel)]="searchQuery"
+              (keyup)="handleSearch()"
+              placeholder="Search by book name"
+            />
+          <button class="search-btn">Search</button>            
+        </div>
+     
+
 
   <!-- Table for Book List -->
-  <table class="table table-striped table-bordered">
-    <thead class="table-dark">
-      <tr>
-        <th>#</th>
-        <th>Name</th>
-        <th>Author</th>
-        <th>Price</th>
-        <th>Description</th>
-        <th>Stock</th>
-        <th>Category</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
+  <table class="book-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Book Name</th>
+          <th>Author</th>
+          <th>Price</th>
+          <th>Stock</th>
+          <th>Category</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+
       <!-- Loop through books array -->
       <tr *ngFor="let book of books; let i = index">
         <td>{{ i + 1 }}</td>
         <td>{{ book.name }}</td>
         <td>{{ book.author }}</td>
         <td>{{ book.price | currency }}</td>
-        <td>{{ book.description }}</td>
         <td>{{ book.stock }}</td>
         <td>{{ book.category_id }}</td>
         <td>
-          <button class="btn btn-primary btn-sm me-2" (click)="viewBook(book.id)">View</button>
+          <button class="btn btn-warning btn-sm me-2" (click)="updateBook(book)">Edit</button>
           <button class="btn btn-danger btn-sm" (click)="deleteBook(book.id)">Delete</button>
         </td>
       </tr>
+    </tbody>
+  </table>
+</div>
 
       <!-- Show message if no books are available -->
       <tr *ngIf="books.length === 0">
         <td colspan="8" class="text-center">No books available</td>
       </tr>
-    </tbody>
-  </table>
-</div>
+    
+    <!-- Pagination Controls -->
+    <div class="pagination">
+      <button
+        type="button"
+        class="btn btn-secondary"
+        (click)="prePage()"
+        [disabled]="currentPage === 1"
+      >
+        Previous
+      </button>
+      <div>
+        <span *ngFor="let page of [].constructor(Math.ceil(books.length / recordsPerPage)); let i = index">
+          <button
+            class="btn btn-outline-primary me-1"
+            [class.active]="currentPage === i + 1"
+            (click)="changePage(i + 1)"
+          >
+            {{ i + 1 }}
+          </button>
+        </span>
+      </div>
+      <button
+        type="button"
+        class="btn btn-secondary"
+        (click)="nextPage()"
+        [disabled]="currentPage === Math.ceil(books.length / recordsPerPage)"
+      >
+        Next
+      </button>
+    
+  </div>
