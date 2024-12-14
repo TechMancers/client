@@ -93,7 +93,7 @@
   
   .navbar{
     width: 100%;
-  background-color:  #00674F;
+  background-color:  #b52727;
   }
   
   .searchbox{
@@ -105,8 +105,8 @@
 .btn-signin,
 .btn-signup {
   background-color: white; /* White background */
-  color: #00674F; /* Red color text to match the navbar theme */
-  border: 1px solid #00674F; /* Border to match text color */
+  color: #b52727; /* Red color text to match the navbar theme */
+  border: 1px solid #b52727; /* Border to match text color */
   border-radius: 5px; /* Rounded corners */
   padding: 5px 15px; /* Padding for the buttons */
   font-size: 1rem; /* Adjust font size */
@@ -118,7 +118,7 @@
 /* Hover effect for Sign In and Sign Up Buttons */
 .btn-signin:hover,
 .btn-signup:hover {
-  background-color: #00674F; /* Background changes to red */
+  background-color: #b52727; /* Background changes to red */
   color: white; /* Text color changes to white */
   transform: scale(1.05); /* Slight zoom-in effect */
 }
