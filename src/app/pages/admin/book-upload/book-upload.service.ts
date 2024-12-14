@@ -12,16 +12,20 @@ export class BookUploadService {
   constructor(private http: HttpClient) {}
 
      // add a book
-  addBook(book: {
-    name: string;
-    author: string;
-    price: number;
-    description: string;
-    stock: number;
-    category_id: number;
-  }): Observable<any> {
-    return this.http.post(`${this.apiUrl}/add`, book);
+  // addBook(book: {
+  //   name: string;
+  //   author: string;
+  //   price: number;
+  //   description: string;
+  //   stock: number;
+  //   category_id: number;
+  // }): Observable<any> {
+  //   return this.http.post(`${this.apiUrl}/add`, book);
+  // }
+  addBook(bookData: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/add`, bookData);
   }
+
 
    // Update a book
    updateBook(

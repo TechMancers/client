@@ -34,11 +34,12 @@ export class BookUploadComponent implements OnInit{
       price: ['', [Validators.required, Validators.min(0)]],
       description: ['', [Validators.required, Validators.minLength(10)]],
       stock: ['', [Validators.required, Validators.min(1)]],
-      category_id: ['', [Validators.required]]
-
+      category_id: ['', [Validators.required]],
+      cover_image: ['']
 
     });
   }
+
 
   ngOnInit():void{
     this.getBooks();
@@ -90,26 +91,7 @@ export class BookUploadComponent implements OnInit{
     }
   }
 
-  // onSubmit() {
-  //   if (this.bookForm.valid) {
-  //     this.bookService.addBook(this.bookForm.value).subscribe({
-  //       next: (response) => {
-  //         console.log('Book added successfully:', response);
-  //         this.successMessage = 'Book added successfully!';
-  //         this.errorMessages = null;
-  //         this.bookForm.reset();
-  //       },
-  //       error: (error) => {
-  //         console.error('Error adding book:', error);
-  //         this.errorMessage = 'Failed to add book. Please try again.';
-  //         this.successMessage = null;
-  //       }
-  //     });
-  //   } else {
-  //     this.errorMessage = 'Please fill in all fields correctly.';
-  //     this.successMessage = null;
-  //   }
-  // }
+
   addBook() {
     const newBook = this.bookForm.value; // Get new book data from the form
 
@@ -171,22 +153,34 @@ export class BookUploadComponent implements OnInit{
       this.selectedBook = null; // Clear selected book if in edit mode
     }
   }
+  // submitForm() {
+  //   if (this.bookForm.valid) {
+  //     if (this.isEdit) {
+  //       this.updateBook();
+  //     } else {
+  //       this.addBook();
+  //     }
+  //   } else {
+  //     this.errorMessage = 'Please fill in all fields correctly.';
+  //   }
+  // }
+
   submitForm() {
     if (this.bookForm.valid) {
-      if (this.isEdit) {
-        this.updateBook();
-      } else {
-        this.addBook();
-      }
+      this.bookService.addBook(this.bookForm.value).subscribe({
+        next: (response) => {
+          this.successMessage = 'Book added successfully!';
+          this.errorMessage = null;
+          this.bookForm.reset();
+        },
+        error: (error) => {
+          this.errorMessage = 'Failed to add book. Please try again.';
+          this.successMessage = null;
+        },
+      });
     } else {
       this.errorMessage = 'Please fill in all fields correctly.';
     }
-  }
-
-
-  wordLimitValidator(control: FormControl) {
-    const words = control.value?.trim().split(/\s+/).length || 0;
-    return words > 1000 ? { wordLimitExceeded: true } : null;
   }
 
   // Increment book stock
