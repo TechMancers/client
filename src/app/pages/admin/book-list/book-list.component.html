@@ -1,33 +1,31 @@
-<div class="container mt-5 p-5 py-5 px-5 bg-white">
-  <h2 class="mb-4">Books List</h2>
+<div class="container p-5 bg-white">
+  <h2 class="title">Books List</h2>
 
   <!-- Error Message -->
   <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
     {{ errorMessage }}
   </div>
-
-  <!-- Search Bar -->
-  <div class="form-group mb-3">
-    <label for="searchQuery">Search</label>
-    <input
-      id="searchQuery"
-      type="text"
-      class="form-control"
-      [(ngModel)]="searchQuery"
-      (keyup)="handleSearch()"
-      placeholder="Search by book name or author"
-    />
-  </div>
+        
+        <div class="search-bar">         
+            <button routerLink="book-upload" class="add-btn">+ Add Book</button>            
+            <input
+              id="searchQuery"
+              type="text"
+              class="form-control"
+              [(ngModel)]="searchQuery"
+              (keyup)="handleSearch()"
+              placeholder="Search by book name"
+            />
+          <button class="search-btn">Search</button>            
+        </div>
+     
 
 
   <!-- Table for Book List -->
-  <div class="table-responsive mt-3">
-    <table class="table table-bordered table-hover">
-      <thead class="table-light">
+  <table class="book-table">
+      <thead>
         <tr>
-<th>#</th>
-
-
+          <th>#</th>
           <th>Book Name</th>
           <th>Author</th>
           <th>Price</th>
@@ -44,12 +42,11 @@
         <td>{{ book.name }}</td>
         <td>{{ book.author }}</td>
         <td>{{ book.price | currency }}</td>
-        
         <td>{{ book.stock }}</td>
         <td>{{ book.category_id }}</td>
         <td>
           <button class="btn btn-warning btn-sm me-2" (click)="updateBook(book)">Edit</button>
-          <button class="btn btn-danger btn-sm" (click)="deleteBook(book.id)">Deactivate</button>
+          <button class="btn btn-danger btn-sm" (click)="deleteBook(book.id)">Delete</button>
         </td>
       </tr>
     </tbody>
@@ -62,7 +59,7 @@
       </tr>
     
     <!-- Pagination Controls -->
-    <div class="d-flex justify-content-between mt-3">
+    <div class="pagination">
       <button
         type="button"
         class="btn btn-secondary"
@@ -90,5 +87,5 @@
       >
         Next
       </button>
-    </div>
+    
   </div>

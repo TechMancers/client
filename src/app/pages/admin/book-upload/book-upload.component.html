@@ -1,5 +1,5 @@
-<br> <br> <div class="container mt-5 p-5 py-5 px-5 bg-white">
-  <h2>{{ isEdit ? 'Edit Book' : 'Add Book' }}</h2>
+<div class="container mt-4 p-5 py-5 px-5 bg-white">
+  <h2 class="title">{{ isEdit ? 'Edit Book' : 'Add Book' }}</h2>
   <form [formGroup]="bookForm" (ngSubmit)="submitForm()" enctype="multipart/form-data">
 
 
@@ -115,8 +115,7 @@
     <div class="d-flex justify-content-end mt-3">
       <button
         type="submit"
-        class="btn btn-primary btn-lg me-2 btn-custom"
-        
+        class="btn btn-primary btn-lg me-2 btn-custom"     
       >
         {{ isEdit ? 'Update' : 'Add' }}
       </button>
