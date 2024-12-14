@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { BookService } from '../book-card/book.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-book-card',
@@ -10,17 +11,19 @@ export class BookCardComponent implements OnInit {
 
   @Input() book: any;
   @Input() userId!: string;
-  router: any;
 
   goToPreview(book: any) {
-    this.router.navigate(['/login', book.book_id]);
-
+    this.router.navigate(['/book-preview', book.book_id]);
+    console.log('Book:', book.book_id);
   }
   addToCart(arg0: any) {
     throw new Error('Method not implemented.');
   }
  
-  constructor( private bookService:BookService) {}
+  constructor( private bookService:BookService,
+    private router: Router,
+    private route: ActivatedRoute 
+  ) {}
 
   ngOnInit(): void {
     console.log('Book page');
