@@ -42,7 +42,7 @@ export class NavbarComponent implements OnInit {
   // Method to handle search form submission
   onSearchSubmit(): void {
     if (this.searchTerm.trim()) {
-      this.router.navigate(['/search-art'], { queryParams: { q: this.searchTerm } });
+      this.router.navigate(['/search-book'], { queryParams: { q: this.searchTerm } });
     }
   }
 
@@ -57,9 +57,9 @@ export class NavbarComponent implements OnInit {
 
   isAuthenticated: boolean = false;
 
- 
 
- 
+
+
 
   logout(): void {
     this.authService.logout();

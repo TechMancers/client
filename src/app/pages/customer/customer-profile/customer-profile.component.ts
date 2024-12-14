@@ -52,7 +52,7 @@ export class CustomerProfileComponent implements OnInit {
     this.CustomerProfileService.getCustomerWishList(userId).subscribe(
       (data: any[]) => {
         this.booksData = data.map((book: any) => ({
-          book_cover_image: book.cover_image,
+          book_img_url: book.book_img_url,
           book_name: book.book_name,
           book_price: book.book_price,
           author_name: book.author_name,
@@ -76,8 +76,8 @@ export class CustomerProfileComponent implements OnInit {
       this.filteredBooks = this.booksData;
     } else {
       this.filteredBooks = this.booksData.filter((book) =>
-        book.artwork_name.toLowerCase().includes(searchKeyword) ||
-        book.artist_name.toLowerCase().includes(searchKeyword)
+        book.book_name.toLowerCase().includes(searchKeyword) ||
+        book.author_name.toLowerCase().includes(searchKeyword)
       );
     }
   }
