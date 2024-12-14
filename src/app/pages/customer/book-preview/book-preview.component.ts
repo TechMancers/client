@@ -1,20 +1,17 @@
-// book-preview.component.ts
-import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { BookPreviewService } from './book-preview.service';
 import { Subject, Subscription } from 'rxjs';
-import { response } from 'express';
 
 @Component({
   selector: 'app-book-preview',
   templateUrl: './book-preview.component.html',
   styleUrls: ['./book-preview.component.css']
 })
-export class BookPreviewComponent implements OnInit, AfterViewInit, OnDestroy {
+export class BookPreviewComponent implements OnInit, OnDestroy {
   
   thumbnail: string = '';
-  
   book_id!: string;
   bookDetails: any = {};
   relatedBooks: any[] = [];
@@ -36,14 +33,13 @@ export class BookPreviewComponent implements OnInit, AfterViewInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    // Subscribe to route parameters to detect changes in the book_id
     this.routeSub = this.route.params.subscribe(params => {
       this.book_id = params['book_id'];
-    });
-  }
-
-  ngAfterViewInit(): void {
       this.fetchBookDetails();
       this.fetchRelatedBooks();
+      this.updateColumns();
+    });
   }
 
   ngOnDestroy(): void {
@@ -79,15 +75,10 @@ export class BookPreviewComponent implements OnInit, AfterViewInit, OnDestroy {
     )
   }
 
-  addCart(bookDetails: any){
-  }
-
   columns: any[][] = [[], [], []];
   currentIndex = 0;
   itemWidth = 25;
   gap = 16;
-
-
 
   fetchRelatedBooks(): void {
     this.bookPreviewService.getRelatedBooks(this.book_id).subscribe(
@@ -95,6 +86,7 @@ export class BookPreviewComponent implements OnInit, AfterViewInit, OnDestroy {
         if (response.success) {
           this.relatedBooks = response.data;
           console.log(this.relatedBooks);
+          this.updateColumns();  // Make sure to update the columns after fetching related books
         } else {
           console.error('Failed to fetch related books', response.message);
         }
@@ -119,7 +111,7 @@ export class BookPreviewComponent implements OnInit, AfterViewInit, OnDestroy {
 
     this.columns = Array.from({ length: numColumns }, () => []);
     this.relatedBooks.forEach((image, index) => {
-      console.log('image',image, index % numColumns)
+      console.log('image', image, index % numColumns);
       this.columns[index % numColumns].push(image);
     });
   }
@@ -155,5 +147,9 @@ export class BookPreviewComponent implements OnInit, AfterViewInit, OnDestroy {
       () => alert('Book removed from wishlist'),
       error => console.error('Error removing from wishlist', error)
     );
+  }
+
+  addCart(bookDetails:any): void {
+    alert('Book added to cart');
   }
 }
