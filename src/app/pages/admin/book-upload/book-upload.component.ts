@@ -153,17 +153,6 @@ export class BookUploadComponent implements OnInit{
       this.selectedBook = null; // Clear selected book if in edit mode
     }
   }
-  // submitForm() {
-  //   if (this.bookForm.valid) {
-  //     if (this.isEdit) {
-  //       this.updateBook();
-  //     } else {
-  //       this.addBook();
-  //     }
-  //   } else {
-  //     this.errorMessage = 'Please fill in all fields correctly.';
-  //   }
-  // }
   submitForm() {
     if (this.bookForm.valid) {
       this.bookService.addBook(this.bookForm.value).subscribe({
@@ -180,12 +169,6 @@ export class BookUploadComponent implements OnInit{
     } else {
       this.errorMessage = 'Please fill in all fields correctly.';
     }
-  }
-
-
-  wordLimitValidator(control: FormControl) {
-    const words = control.value?.trim().split(/\s+/).length || 0;
-    return words > 1000 ? { wordLimitExceeded: true } : null;
   }
 
   // Increment book stock

@@ -98,7 +98,6 @@
     </div>
 
 
-    <!-- Book Image -->
     <div class="form-group mb-3">
       <label for="book_image">Book Image</label>
       <br>
@@ -135,35 +134,68 @@
 </div>
 <br>
 
-<!--<table class="table table-bordered">
-  <thead>
-    <tr>
-      <th>Book ID</th>
-      <th>Book Name</th>
-      <th>Author</th>
-      <th>Stock</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let book of books">
-      <td>{{ book.book_id }}</td>
-      <td>{{ book.book_name }}</td>
-      <td>{{ book.author_name }}</td>
-      <td>{{ book.stock }}</td>
-      <td>
-
-        <button class="btn btn-success me-2" (click)="incrementStock(book.book_id, 1)">
-          +
-        </button>
-
-        <button class="btn btn-danger" (click)="decrementStock(book.book_id, 1)">
-          -
-        </button>
-      </td>
-    </tr>
-  </tbody>
-</table> -->
 
 
 
+
+
+
+
+
+
+<div class="container mt-4 p-5">
+  <h2>{{ isEdit ? 'Edit Book' : 'Add Book' }}</h2>
+
+  <form [formGroup]="bookForm" (ngSubmit)="submitForm()">
+    <!-- Book Name -->
+    <div class="form-group">
+      <label for="name">Book Name</label>
+      <input id="name" type="text" class="form-control" formControlName="name" />
+    </div>
+
+    <!-- Author Name -->
+    <div class="form-group">
+      <label for="author">Author Name</label>
+      <input id="author" type="text" class="form-control" formControlName="author" />
+    </div>
+
+    <!-- Price -->
+    <div class="form-group">
+      <label for="price">Price</label>
+      <input id="price" type="number" class="form-control" formControlName="price" />
+    </div>
+
+    <!-- Description -->
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea id="description" class="form-control" rows="5" formControlName="description"></textarea>
+    </div>
+
+    <!-- Stock -->
+    <div class="form-group">
+      <label for="stock">Stock</label>
+      <input id="stock" type="number" class="form-control" formControlName="stock" />
+    </div>
+
+    <!-- Category -->
+    <div class="form-group">
+      <label for="category_id">Category</label>
+      <select id="category_id" class="form-control" formControlName="category_id">
+        <!-- Add category options here dynamically -->
+      </select>
+    </div>
+
+    <!-- Cover Image -->
+    <div class="form-group">
+      <label for="cover_image">Cover Image</label>
+      <input type="file" class="form-control-file" formControlName="cover_image" />
+    </div>
+
+    <div class="d-flex justify-content-end mt-3">
+      <button type="submit" class="btn btn-primary">Add Book</button>
+    </div>
+
+    <div *ngIf="successMessage" class="alert alert-success">{{ successMessage }}</div>
+    <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+  </form>
+</div>
