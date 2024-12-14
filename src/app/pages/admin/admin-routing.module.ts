@@ -6,13 +6,13 @@ import { CategoryManagementComponent } from './category-management/category-mana
 import { UserManagementComponent } from './user-management/user-management.component';
 import { BookUploadComponent } from './book-upload/book-upload.component';
 import { BookListComponent } from './book-list/book-list.component';
-
+import { AuthGuard } from '../../shared/services/auth.Guard.service';
 const routes: Routes = [
   {
     path: '',
     component: AdminComponent,
     children: [
-      { path: '', redirectTo: 'category-management', pathMatch: 'full' },
+     
       { path: 'category-management', component: CategoryManagementComponent },
       { path: 'user-management', component: UserManagementComponent },
       { path: 'book-upload', component: BookUploadComponent },

@@ -7,7 +7,7 @@
     </div>
     <div class="more">
       <p class="price">{{book.book_price| currency:'USD':'symbol':'1.2-2'}}</p>
-      <button class="btn cart-icon-btn"(click)="addCart(book); $event.stopPropagation()">
+      <button class="btn cart-icon-btn" (click)="addToCart(book); $event.stopPropagation()">
         <i class="bi bi-cart-plus-fill"></i> Add to Cart
       </button>
     </div>
