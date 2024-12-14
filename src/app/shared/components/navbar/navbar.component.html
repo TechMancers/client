@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
     <div class="container-fluid">
       <!-- Artista Logo -->
-      <img src="./../../../../assets/logo.png" alt="Artista Logo" class="custom-logo img-fluid" />
+      <img src="./../../../../assets/logo.png" alt="Kiyawanalk Logo" class="custom-logo img-fluid" />
   
       <!-- Toggle button -->
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
@@ -22,11 +22,11 @@
   
         <!-- Search Bar -->
         <form class="d-flex searchbox"  (submit)="onSearchSubmit()">
-          <input class="form-control me-sm-2" style="border-radius: 5px; height: 40px;" type="search" placeholder="Search"  name="searchTerm">
+          <input class="form-control me-sm-2" style="border-radius: 5px; height: 40px; background-color: #391802; border: none;" type="search" placeholder="Search"  name="searchTerm">
           <button class="btn btn-light my-2 my-s m-0" type="submit" style="border-radius: 4px;">Search</button>
          <button class="btn btn-signin"  *ngIf="!isAuthenticated" routerLink="/login" type="button">Sign In</button>
     <button class="btn btn-signup" *ngIf="!isAuthenticated" routerLink="/st01" type="button">Sign Up</button>
-   <!-- <button class="btn btn-signin"  *ngIf="isAuthenticated" (click)="logout()" type="button">Logout</button> -->
+   <button class="btn btn-signin"  *ngIf="isAuthenticated" (click)="logout()" type="button">Logout</button>
 
       </form>
       
