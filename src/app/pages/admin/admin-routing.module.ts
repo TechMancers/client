@@ -6,7 +6,7 @@ import { CategoryManagementComponent } from './category-management/category-mana
 import { UserManagementComponent } from './user-management/user-management.component';
 import { BookUploadComponent } from './book-upload/book-upload.component';
 import { BookListComponent } from './book-list/book-list.component';
-
+import { AuthGuard } from '../../shared/services/auth.Guard.service';
 const routes: Routes = [
   {
     path: '',

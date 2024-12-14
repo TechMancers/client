@@ -6,14 +6,14 @@ import { CustomerProfileComponent } from './customer-profile/customer-profile.co
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { SearchBookComponent } from './search-book/search-book.component';
 import { BookPreviewComponent } from './book-preview/book-preview.component';
-
+import { AuthGuard } from '../../shared/services/auth.Guard.service';
 
 const routes: Routes = [
   { path: 'cart', component: CartComponent },
   { path: 'checkout', component: CheckoutFormComponent },
   { path: 'customer-profile', component: CustomerProfileComponent},
   { path: 'edit-profile/:userId', component: EditProfileComponent},
-  { path: 'search-book', component: SearchBookComponent},
+  { path: 'search-book', component: SearchBookComponent,canActivate: [AuthGuard]},
   { path: 'book-preview/:book_id', component: BookPreviewComponent},
 
 
