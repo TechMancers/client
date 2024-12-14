@@ -2,7 +2,6 @@ import { ImageUploadService } from './../../../shared/services/image-upload.serv
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { BookUploadService } from './book-upload.service';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 
 
 @Component({
@@ -28,58 +27,25 @@ export class BookUploadComponent implements OnInit{
 
 
 
-  constructor(
-    private bookService: BookUploadService,
-    private fb: FormBuilder,
-    private router: Router,
-    private imageUploadService:ImageUploadService,
-    private route: ActivatedRoute
-  ) {
+  constructor(private bookService:BookUploadService, private fb:FormBuilder ,private imageUploadService:ImageUploadService){
     this.bookForm = this.fb.group({
       name: ['', [Validators.required]],
       author: ['', [Validators.required]],
       price: ['', [Validators.required, Validators.min(0)]],
       description: ['', [Validators.required, Validators.minLength(10)]],
       stock: ['', [Validators.required, Validators.min(1)]],
-      category_id: ['', [Validators.required]]
+      category_id: ['', [Validators.required]],
+      cover_image: ['']
+
     });
-
-    // Retrieve state data if navigating from Book List
-    const navigation = this.router.getCurrentNavigation();
-    const state = navigation?.extras.state as { book: any; isEdit: boolean };
-    if (state) {
-      this.isEdit = state.isEdit || false;
-      this.selectedBook = state.book || null;
-
-      if (this.isEdit && this.selectedBook) {
-        this.bookForm.patchValue(this.selectedBook);
-      }
-    }
   }
+
 
   ngOnInit():void{
     this.getBooks();
     this.getBooksByCategory(this.categories[0]);
     this.getCategories();
 
-    // Check if navigation state contains book data for editing
-    const navigation = this.router.getCurrentNavigation();
-    const state = navigation?.extras.state;
-    if (state && state['isEdit'] && state['book']) {
-      this.isEdit = true;
-      const book = state['book'];
-      this.selectedBook = book;
-
-      // Populate the form with book data
-      this.bookForm.patchValue({
-        name: book.name,
-        author: book.author,
-        price: book.price,
-        description: book.description,
-        stock: book.stock,
-        category_id: book.category_id,
-      });
-    }
   }
 
   getBooks() {
@@ -125,26 +91,7 @@ export class BookUploadComponent implements OnInit{
     }
   }
 
-  // onSubmit() {
-  //   if (this.bookForm.valid) {
-  //     this.bookService.addBook(this.bookForm.value).subscribe({
-  //       next: (response) => {
-  //         console.log('Book added successfully:', response);
-  //         this.successMessage = 'Book added successfully!';
-  //         this.errorMessages = null;
-  //         this.bookForm.reset();
-  //       },
-  //       error: (error) => {
-  //         console.error('Error adding book:', error);
-  //         this.errorMessage = 'Failed to add book. Please try again.';
-  //         this.successMessage = null;
-  //       }
-  //     });
-  //   } else {
-  //     this.errorMessage = 'Please fill in all fields correctly.';
-  //     this.successMessage = null;
-  //   }
-  // }
+
   addBook() {
     const newBook = this.bookForm.value; // Get new book data from the form
 
@@ -163,11 +110,7 @@ export class BookUploadComponent implements OnInit{
     });
   }
 
-  updateBook(book: any): void {
-    this.router.navigate(['/admin/book-upload'], { state: { book, isEdit: true } });
-  }
-
-  saveUpdatedBook() {
+  updateBook() {
     if (this.selectedBook && this.selectedBook.id) {
       const bookId = this.selectedBook.id; // Use the selected book's ID
       const updatedBook = this.bookForm.value; // Get updated data from the form
@@ -191,7 +134,6 @@ export class BookUploadComponent implements OnInit{
       this.errorMessage = 'No book selected for updating.';
     }
   }
-
   onFileChange(event: Event) {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
@@ -207,16 +149,34 @@ export class BookUploadComponent implements OnInit{
   }
   cancel() {
     if (confirm('Are you sure you want to cancel? All unsaved changes will be lost.')) {
-      this.router.navigate(['/admin/app-book-list']);
+      this.bookForm.reset(); // Reset the form
+      this.selectedBook = null; // Clear selected book if in edit mode
     }
   }
+  // submitForm() {
+  //   if (this.bookForm.valid) {
+  //     if (this.isEdit) {
+  //       this.updateBook();
+  //     } else {
+  //       this.addBook();
+  //     }
+  //   } else {
+  //     this.errorMessage = 'Please fill in all fields correctly.';
+  //   }
+  // }
   submitForm() {
     if (this.bookForm.valid) {
-      if (this.isEdit) {
-        this.saveUpdatedBook();
-      } else {
-        this.addBook();
-      }
+      this.bookService.addBook(this.bookForm.value).subscribe({
+        next: (response) => {
+          this.successMessage = 'Book added successfully!';
+          this.errorMessage = null;
+          this.bookForm.reset();
+        },
+        error: (error) => {
+          this.errorMessage = 'Failed to add book. Please try again.';
+          this.successMessage = null;
+        },
+      });
     } else {
       this.errorMessage = 'Please fill in all fields correctly.';
     }
