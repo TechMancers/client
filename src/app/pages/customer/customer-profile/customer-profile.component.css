@@ -34,20 +34,20 @@ a {
 }
 
 .edit-profile-btn {
-  background-color: #0052cc;
+  background-color: #f0ad4e;
   margin-top: 20px;
   margin-left: 40px;
   margin-right: 50px;
 }
 
 .edit-profile-btn:hover {
-  background-color: #003a99;
+  background-color: #f0ad4e;
 }
 
 .delete-btn {
   background-color: #6c757d;
   margin-left: 40px;
-  margin-top: 230px;
+  margin-top: 90px;
 }
 
 .delete-btn:hover {
@@ -55,13 +55,13 @@ a {
 }
 
 .logout-btn {
-  background-color: #0F969C;
+  background-color: #ca4c59;
   margin-left: 40px;
   margin-top: 10px;
 }
 
 .logout-btn:hover {
-  background-color: #0d8288;
+  background-color: #ca4c59;
 }
 
 .edit-profile-btn .bi,

@@ -1,3 +1,4 @@
+import { ImageUploadService } from './../../../shared/services/image-upload.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { BookUploadService } from './book-upload.service';
 import { Component, OnInit } from '@angular/core';
@@ -19,10 +20,14 @@ export class BookUploadComponent implements OnInit{
   newErrorMessage: string | null = null;
   selectedBook: any = null;
   isEdit: boolean = false;
+  isCategoryEdit = false;
+  selectedCategory: string = ''; // Currently selected category
+  uploadedImageUrl: string | null = null; // To store the uploaded image URL
+  selectedFile: File | null = null; // To store the selected file
 
 
 
-  constructor(private bookService:BookUploadService, private fb:FormBuilder ){
+  constructor(private bookService:BookUploadService, private fb:FormBuilder ,private imageUploadService:ImageUploadService){
     this.bookForm = this.fb.group({
       name: ['', [Validators.required]],
       author: ['', [Validators.required]],
@@ -30,11 +35,15 @@ export class BookUploadComponent implements OnInit{
       description: ['', [Validators.required, Validators.minLength(10)]],
       stock: ['', [Validators.required, Validators.min(1)]],
       category_id: ['', [Validators.required]]
+
+
     });
   }
 
   ngOnInit():void{
     this.getBooks();
+    this.getBooksByCategory(this.categories[0]);
+    this.getCategories();
 
   }
 
@@ -180,16 +189,100 @@ export class BookUploadComponent implements OnInit{
     return words > 1000 ? { wordLimitExceeded: true } : null;
   }
 
+  // Increment book stock
+incrementStock(bookId: string, quantity: number) {
+  this.bookService.incrementBookStock(bookId, quantity).subscribe({
+    next: (response) => {
+      alert('Stock incremented successfully!');
+      this.getBooks(); // Refresh the book list to update stock
+    },
+    error: (err) => {
+      console.error('Error incrementing stock:', err);
+      alert('Failed to increment stock.');
+    }
+  });
+}
+
+// Decrement book stock
+decrementStock(bookId: string, quantity: number) {
+  this.bookService.decrementBookStock(bookId, quantity).subscribe({
+    next: (response) => {
+      alert('Stock decremented successfully!');
+      this.getBooks(); // Refresh the book list to update stock
+    },
+    error: (err) => {
+      console.error('Error decrementing stock:', err);
+      alert('Failed to decrement stock.');
+    }
+  });
+}
+
+getBooksByCategory(categoryId: string): void {
+  this.bookService.getBooksByCategory(categoryId).subscribe({
+    next: (data) => {
+      this.books = data;
+    },
+    error: (err) => {
+      console.error('Error fetching books by category:', err);
+      this.errorMessage = 'Failed to fetch books for the selected category.';
+    }
+  });
+}
+onCategoryChange(event: any): void {
+  const categoryId = event.target.value;
+  this.getBooksByCategory(categoryId);
+}
 
 
-
+getCategories(): void {
+  this.bookService.getAllCategories().subscribe(
+    // next: (data) => {
+    //   // Assuming the backend returns an object like { categories: [...] }
+    //   this.categories = data || [];  // Safely access categories in response
+    //   console.log('Categories:', this.categories);
+    // },
+    (data:any) => {
+      this.categories = data.categories;
+      console.log(this.categories);
+    },
+     (err) => {
+      console.error('Error fetching categories:', err);
+      this.errorMessage = 'Failed to fetch categories.';
+    },
+  );
 }
 
 
 
 
 
+uploadImage(): void {
+  if (!this.selectedFile) {
+    this.errorMessage = 'Please select an image to upload.';
+    return;
+  }
+
+  const formData = new FormData();
+  formData.append('file', this.selectedFile); // Append the selected file
+  formData.append('folder', 'books'); // Folder to upload the image
+  formData.append('uploadType', 'image');
+
+  this.imageUploadService.imageUpload(formData, 'books', 'image').subscribe({
+    next: (response: any) => {
+      this.uploadedImageUrl = response.url; // Assuming the backend returns the image URL
+      this.bookForm.patchValue({ book_image: this.uploadedImageUrl }); // Update form with image URL
+      this.successMessage = 'Image uploaded successfully!';
+      this.errorMessage = null;
+    },
+    error: (err) => {
+      console.error('Error uploading image:', err);
+      this.errorMessage = 'Failed to upload image. Please try again.';
+    },
+  });
+}
 
 
 
 
+
+}

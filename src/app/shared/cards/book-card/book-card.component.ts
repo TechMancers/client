@@ -8,15 +8,18 @@ import { BookService } from '../book-card/book.service';
 })
 export class BookCardComponent implements OnInit {
 
- 
+  @Input() book: any;
   @Input() userId!: string;
-  goToPreview(arg0: any) {
-    throw new Error('Method not implemented.');
+  router: any;
+
+  goToPreview(book: any) {
+    this.router.navigate(['/login', book.book_id]);
+
   }
   addToCart(arg0: any) {
     throw new Error('Method not implemented.');
   }
-  @Input() book: any;
+ 
   constructor( private bookService:BookService) {}
 
   ngOnInit(): void {
@@ -37,3 +40,7 @@ export class BookCardComponent implements OnInit {
 
 }
 }
+// goToPreview(art: any) {
+//   this.router.navigate(['/preview', art.artwork_id]);
+//   console.log('art', art.artwork_id);
+// }
