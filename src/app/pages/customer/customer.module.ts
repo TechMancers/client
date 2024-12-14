@@ -15,6 +15,13 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { CustomerProfileComponent } from './customer-profile/customer-profile.component';
 import { PurchaseHistoryComponent } from './purchase-history-card/purchase-history.component';
+import { BookPreviewComponent } from './book-preview/book-preview.component';
+
+import { CommentComponent } from '../../shared/components/comments/comment/comment.component';
+import { CommentListComponent } from '../../shared/components/comments/comment-list/comment-list.component';
+import { CommentFormComponent } from '../../shared/components/comments/comment-form/comment-form.component';
+import { CommentsService } from '../../shared/services/comments.service';
+
 
 @NgModule({
   declarations: [
@@ -30,13 +37,18 @@ import { PurchaseHistoryComponent } from './purchase-history-card/purchase-histo
     EditProfileComponent,
     PurchaseHistoryComponent,
     CustomerProfileComponent,
-
+    BookPreviewComponent,
+    CommentComponent,
+    CommentListComponent,
+    CommentFormComponent
   ],
   imports: [
     CommonModule,
     CustomerRoutingModule,
     ReactiveFormsModule,
-    FormsModule
-  ]
+    FormsModule,
+
+  ],
+  providers: [CommentsService],
 })
 export class CustomerModule { }

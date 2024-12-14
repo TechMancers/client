@@ -1,0 +1,11 @@
+.comments-container{
+    max-height: 700px;
+    overflow-y: scroll;
+}
+.show-button{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+}
