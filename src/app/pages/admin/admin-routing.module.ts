@@ -12,7 +12,7 @@ const routes: Routes = [
     path: '',
     component: AdminComponent,
     children: [
-      { path: '', redirectTo: 'category-management', pathMatch: 'full' },
+     
       { path: 'category-management', component: CategoryManagementComponent },
       { path: 'user-management', component: UserManagementComponent },
       { path: 'book-upload', component: BookUploadComponent },
