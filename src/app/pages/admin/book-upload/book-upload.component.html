@@ -1,6 +1,6 @@
 <br> <br> <div class="container mt-5 p-5 py-5 px-5 bg-white">
-  <h2>{{ isEdit ? 'Edit Book' : 'Add Book' }}</h2>
-  <form [formGroup]="bookForm" (ngSubmit)="submitForm()" enctype="multipart/form-data">
+
+  <form [formGroup]="bookForm"  enctype="multipart/form-data">
 
     <!-- First Row -->
     <div class="row mb-3 mt-3">
@@ -97,7 +97,7 @@
         id="book_image"
         type="file"
         class="form-control-file"
-        (change)="onFileChange($event)"
+
         [ngClass]="{ 'is-invalid': bookForm.get('book_image')?.errors?.['invalidSize'] }"
       />
     </div>
@@ -109,17 +109,17 @@
         class="btn btn-primary btn-lg me-2 btn-custom"
         [disabled]="bookForm.invalid"
       >
-        {{ isEdit ? 'Update' : 'Add' }}
+
       </button>
       <button
         type="button"
         class="btn btn-lg btn-custom btn-red"
-        (click)="cancel()"
+
       >
         Cancel
       </button>
     </div>
-      
+
   </form>
 </div>
 <br>
