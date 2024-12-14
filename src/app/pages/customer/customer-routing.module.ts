@@ -5,7 +5,7 @@ import { CheckoutFormComponent } from './checkout-form/checkout-form.component';
 import { CustomerProfileComponent } from './customer-profile/customer-profile.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { SearchBookComponent } from './search-book/search-book.component';
-
+import { BookPreviewComponent } from './book-preview/book-preview.component';
 
 
 const routes: Routes = [
@@ -13,7 +13,8 @@ const routes: Routes = [
   { path: 'checkout', component: CheckoutFormComponent },
   { path: 'customer-profile', component: CustomerProfileComponent},
   { path: 'edit-profile/:userId', component: EditProfileComponent},
-  { path: 'search-book', component: SearchBookComponent}
+  { path: 'search-book', component: SearchBookComponent},
+  { path: 'book-preview/:book_id', component: BookPreviewComponent},
 
 
 ];

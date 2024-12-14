@@ -1,0 +1,59 @@
+.comment-image-container{
+    margin-right: 10px;
+    width: fit-content;
+}
+
+.comment-right-part{
+    margin-bottom: 10px;
+}
+.comment-content{
+    display: flex;
+    width: 100%; 
+}
+.comment-name-content{
+    border-radius: 5px;
+    width: fit-content;
+    padding: 2px 4px;
+}
+.comment-name-content:hover{
+    background-color: #f2f2f2;
+    cursor: pointer;
+}
+
+.comment-actions{
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    width: fit-content;
+}
+
+.profile-photo{
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+}
+
+.body1 {
+    font-size:  0.9rem;
+    font-weight: 500;
+    line-height: 1.625rem;
+    color: #4e4d4d;
+  }
+  
+  .body2 {
+    font-size:  0.9rem;
+    font-weight: 600;
+    line-height: 1.625rem;
+  }
+  .body3{
+    font-size: 0.7rem;
+    font-weight: 500;
+    line-height: 1.25rem;
+    color: #0f969c;
+  }
+
+  .replies-toggle{
+    color: #0f969c;
+    cursor: pointer;
+  }
