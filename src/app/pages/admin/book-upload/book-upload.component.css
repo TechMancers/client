@@ -16,6 +16,13 @@
   margin-bottom: 15px; /* Adjust spacing as needed */
 }
 
+.form-group label {
+  font-size: 1.2rem; /* Matches h3 font size */
+  font-weight: bold;  /* Optional: Make it bold like h3 */
+  color: #333;        /* Optional: Set color */
+}
+
+
 /* Common styles for both buttons */
 .btn-custom {
   width: 150px; /* Fixed width for equal length */
@@ -24,14 +31,14 @@
 
 /* Styles for the Add/Update button */
 .btn-primary {
-  background-color: #0f2557; /* Bootstrap primary color */
-  border-color: #0f2557;
-  color: white;
+  background-color: #ffc107; /* Bootstrap primary color */
+  border-color: #ffc107;
+  color: #000000;
 }
 
 .btn-primary:hover {
-  background-color: #0e204f; /* Slightly darker shade for hover */
-  border-color: #0e204f;
+  background-color: #ffbd07; /* Slightly darker shade for hover */
+  border-color: #ffbd07;
 }
 
 
@@ -46,6 +53,23 @@
   background-color: #b02a37;
   border-color: #881f28;
 }
+
+.title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #800000; 
+  padding: 20px;
+  margin-bottom: 30px;
+  border-radius: 8px;
+  color: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  font-size: 28px;
+  margin: 0;
+  font-weight: 600;
+}
+
+
 
 
 

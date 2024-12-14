@@ -37,7 +37,8 @@
   
   .search-bar {
     display: flex;
-    justify-content: space-between;
+    align-items: center; /* Align items vertically in the center */
+    gap: 2px; /* Add space between the elements */
     margin-bottom: 20px;
     margin-top: 20px;
     padding: 0 20px;
@@ -47,7 +48,7 @@
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    width: 300px;
+    flex: 1; /* Allow the input field to grow and take available space */
     font-size: 1rem;
   }
   
@@ -58,7 +59,17 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    margin-left: 10px;
+    transition: background-color 0.3s ease;
+  }
+
+  .add-btn {
+    padding: 10px 20px;
+    background-color: #3faffa;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 150px;
     transition: background-color 0.3s ease;
   }
   
@@ -82,25 +93,25 @@
     border-radius: 5px;
   }
   
-  /* User Table */
-  .user-table {
+  /* Book Table */
+  .book-table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
   }
   
-  .user-table th,
-  .user-table td {
+  .book-table th,
+  .book-table td {
     padding: 12px;
     text-align: left;
   }
   
-  .user-table th {
+  .book-table th {
     background-color: #3faffa;
     color: white;
   }
   
-  .user-table tr:nth-child(even) {
+  .book-table tr:nth-child(even) {
     background-color: #f9f9f9;
   }
 
