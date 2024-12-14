@@ -10,6 +10,7 @@ import { BookCardComponent } from '../../shared/cards/book-card/book-card.compon
 import { CategoryCardComponent } from '../../shared/cards/category/category-card/category-card.component';
 import { CheckoutFormComponent } from './checkout-form/checkout-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { PurchaseHistoryComponent } from './purchase-history-card/purchase-history.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     BookCardComponent,
     CheckoutFormComponent,
     HomeComponent,
-    CategoryCardComponent
+    CategoryCardComponent,
+    PurchaseHistoryComponent
   ],
   imports: [
     CommonModule,

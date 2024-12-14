@@ -5,7 +5,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-
 import { AdminModule } from './pages/admin/admin.module';
 import { CustomerModule } from './pages/customer/customer.module';
 
@@ -17,6 +16,8 @@ import { St02Component } from './pages/sign-up/sign-up-users/st02/st02.component
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+
+import { HTTP_INTERCEPTORS} from '@angular/common/http';
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,7 +39,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   ],
   providers: [
     provideClientHydration(),
-    provideHttpClient(withFetch())
+    provideHttpClient(withFetch()),
   ],
   bootstrap: [AppComponent]
 })
