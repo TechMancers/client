@@ -227,7 +227,7 @@ section.banner {
 }
 
 .carousel-control:hover {
-  background-color: rgba(195, 78, 10, 0.932);
+  background-color: rgba(249, 246, 244, 0.932);
 }
 
 @media (max-width: 1200px) {
