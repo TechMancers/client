@@ -74,41 +74,6 @@ General Adjustments
   background-color: #138496;
 }
 
-/* Buttons */
-.btn {
-  padding: 8px 12px;
-  font-size: 0.9rem;
-  transition: all 0.3s ease;
-}
-
-.btn-primary {
-  background-color: #0069d9;
-  border: none;
-}
-
-.btn-primary:hover {
-  background-color: #0056b3;
-}
-
-.btn-outline-primary {
-  color: #0069d9;
-  border-color: #0069d9;
-}
-
-.btn-outline-primary:hover {
-  background-color: #0069d9;
-  color: #fff;
-}
-
-.btn-outline-light {
-  color: #f8f9fa;
-  border-color: #f8f9fa;
-}
-
-.btn-outline-light:hover {
-  background-color: #f8f9fa;
-  color: #2e3b4e;
-}
 
 /* Responsive Adjustments */
 @media (max-width: 768px) {
@@ -130,7 +95,7 @@ section.banner {
   background-size: cover;
   background-position: center;
   color:#684d4d;
-  text-align: start;
+  text-align: left;
   padding: 100px 20px;
 }
 
@@ -259,7 +224,7 @@ section.banner {
 }
 
 .carousel-control:hover {
-  background-color: rgba(58, 215, 223, 0.7);
+  background-color: rgba(195, 78, 10, 0.932);
 }
 
 @media (max-width: 1200px) {
@@ -291,20 +256,20 @@ section.banner {
 .category-name {
   margin-top: 10px;
   font-size: 25px;
-  color: #276f75;
+  color: #754d27;
 }
 
 .category-name:hover {
   margin-top: 10px;
   font-size: 25px;
-  color: #246487;
+  color: #874c24;
 }
 
 .carousel-btn {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background-color: rgba(40, 123, 239, 0.5);
+  background-color: rgb(201, 101, 51);
   color: #fff;
   border: none;
   font-size: 24px;
@@ -323,7 +288,7 @@ section.banner {
 }
 
 .carousel-btn:hover {
-  background-color: rgba(58, 215, 223, 0.7);
+  background-color: rgba(223, 94, 58, 0.7);
 }
 
 
@@ -570,11 +535,11 @@ section.banner {
 }
 
 .btn-primary:hover {
-  background-color: #0056b3;
+  background-color: #b8390a;
 }
 
 .btn-outline-primary:hover {
-  background-color: #0069d9;
+  background-color: #d74f0c;
   color: #fff;
 }
 
@@ -595,19 +560,19 @@ section.banner {
 
 .banner h1 {
   font-size: 3rem;
-  color: #257261;
+  color: #724025;
   text-align: left;
 }
 
 .banner h2 {
   font-size: 1.5rem;
   margin-top: 10px;
-  color: #257261;
+  color: #a85725;
   text-align: left;
 }
 
 .sign-up-button {
-  background: linear-gradient(135deg, #2eabc1, #1b7384);
+  background: linear-gradient(135deg, #c16b2e, #b85628);
   color: #ffffff;
   border: none;
   border-radius: 30px;
@@ -622,7 +587,7 @@ section.banner {
 }
 
 .sign-up-button:hover {
-  background: linear-gradient(135deg, #1b7384, #145a66);
+  background: linear-gradient(135deg, #e57f62, #cf5b26);
   transform: translateY(-4px) scale(1.05);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
@@ -656,15 +621,14 @@ section.banner {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background-color: rgba(40, 123, 239, 0.5);
+  background-color: rgba(230, 112, 80, 0.5);
   color: #fff;
-  border: none;
   font-size: 24px;
   cursor: pointer;
 }
 
 .carousel-btn:hover {
-  background-color: rgba(58, 215, 223, 0.7);
+  background-color: rgba(243, 127, 65, 0.7);
 }
 
 /* Responsive Adjustments */
@@ -692,13 +656,20 @@ section.banner {
   }
 }
 
+.best-books-container h3{
+  color: #58050f;
+  text-align: center;
+
+}
+
 
 .all-books-container {
   margin: 2rem 0;
 }
 
 .all-books-container h3 {
-  color: #257261;
+  color: #9b3319;
+  text-align: center;
   margin-bottom: 1rem;
 }
 

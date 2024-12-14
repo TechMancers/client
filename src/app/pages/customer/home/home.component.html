@@ -21,7 +21,7 @@
 
   <!-- Category Carousel -->
   <div class="carousel-container mt-5" *ngIf="categoryData.length > 0">
-    <h3 class="explore-categories-text">Explore Categories</h3>
+    <h3 class="explore-categories-text" style="text-align: center; color: white; padding-bottom: 20px;">Explore Categories</h3>
     <div class="carousel category-carousel">
       <div class="card1 shadow" *ngFor="let category of categoryData">
         <app-category-card [title]="category.name" [categoryId]="category.category_id"></app-category-card>
@@ -32,8 +32,8 @@
   </div>
  
 
-  <div>
-    <h2> BEST SELLING BOOKS</h2>
+  <div class="best-books-container">
+    <h3> BEST SELLING BOOKS</h3>
   </div>
   <br />
 
