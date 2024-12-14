@@ -13,5 +13,10 @@ export const navbarData = [
     routeLink: '/book-upload',
     icon: 'bi bi-book',
     label: 'Book Management',
+  },
+  {
+    routeLink: '/app-book-list',
+    icon: 'bi bi-journal-bookmark-fill',
+    label: 'Books List',
   }
 ];

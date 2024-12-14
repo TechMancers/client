@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UserManagementService } from './user-management.service';
+import { ModalService } from '../../../shared/components/modal/modal.service';
+import { AlertService } from '../../../shared/components/alert/alert.service';
+import { CartItem, Purchase } from './bookItems';
 
 @Component({
   selector: 'app-user-management',
@@ -8,23 +11,50 @@ import { UserManagementService } from './user-management.service';
 })
 export class UserManagementComponent implements OnInit {
   users: any[] = [];
-  searchQuery: string = '';
+  userDetails: any;
+  purchaseHistory: any[] = [];
+  filters: any = {
+    searchQuery: '',
+    isSuspended: null,
+    isBanned: null,
+    isActive: null,
+    role: '',
+  };
   currentPage: number = 1;
-  hasMore: boolean = true;
+  totalPages: number = 1;
+  limit: number = 10;
 
-
-  constructor(private userService: UserManagementService) {}
+  constructor(
+    private userService: UserManagementService,
+    public modalService: ModalService,
+    private alertService: AlertService
+  ) {}
 
   ngOnInit(): void {
     this.loadUsers();
   }
 
   loadUsers(): void {
-    const queryParams = { page: this.currentPage, query: this.searchQuery };
-    console.log('Query Params:', queryParams, 'Current Page:', this.currentPage);
+    const queryParams = {
+      search: this.filters.searchQuery || '',
+      isSuspended:
+        this.filters.isSuspended === null
+          ? null
+          : this.filters.isSuspended
+          ? 1
+          : 0,
+      isBanned:
+        this.filters.isBanned === null ? null : this.filters.isBanned ? 1 : 0,
+      isActive:
+        this.filters.isActive === null ? null : this.filters.isActive ? 1 : 0,
+      role: this.filters.role || null,
+      page: this.currentPage ? +this.currentPage : 1,
+      limit: this.limit ? +this.limit : 10,
+    };
+
     this.userService.fetchUsers(queryParams).subscribe((response) => {
       this.users = response.data;
-      this.hasMore = response.hasMore;
+      this.totalPages = response.pagination.totalPages;
     });
   }
 
@@ -33,22 +63,25 @@ export class UserManagementComponent implements OnInit {
     this.loadUsers();
   }
 
+  applyFilters(): void {
+    this.currentPage = 1;
+    this.loadUsers();
+  }
+
   loadPage(page: number): void {
-    if (page < 1) return;
+    if (page < 1 || page > this.totalPages) return;
     this.currentPage = page;
     this.loadUsers();
   }
 
   viewDetails(userId: string): void {
     this.userService.getUserDetails(userId).subscribe((user) => {
-      console.log('User Details:', user);
       alert(JSON.stringify(user));
     });
   }
 
   viewPurchaseHistory(userId: string): void {
     this.userService.getPurchaseHistory(userId).subscribe((history) => {
-      console.log('Purchase History:', history);
       alert(JSON.stringify(history));
     });
   }
@@ -77,5 +110,56 @@ export class UserManagementComponent implements OnInit {
         this.users = this.users.filter((user) => user.id !== userId);
       });
     }
+  }
+
+  openUserDetailsModal(userId: string) {
+    this.userService.getUserDetails(userId).subscribe({
+      next: (data) => {
+        this.userDetails = data.data;
+        this.modalService.open('user-details-modal');
+      },
+      error: () => {
+        this.alertService.showMessage('Error fetching user details', false);
+      },
+    });
+  }
+
+  openPurchaseHistoryModal(userId: string) {
+    this.userService.getPurchaseHistory(userId).subscribe({
+      next: (data) => {
+        if (data.success) {
+          this.purchaseHistory = data.data.map((purchase: Purchase) => {
+            // Ensure cartItems is always an array
+            if (!Array.isArray(purchase.cartItems)) {
+              purchase.cartItems = [purchase.cartItems];
+            }
+
+            // Log to check the purchase and cartItems
+            console.log('Purchase:', purchase);
+            console.log('Cart Items:', purchase.cartItems);
+
+            return purchase;
+          });
+
+          console.log(this.purchaseHistory, 'purchase_history');
+          this.modalService.open('purchase-history-modal');
+        } else {
+          let errorMessage = 'An error occurred.';
+          if (data.message) {
+            errorMessage = data.message;
+          } else if (data.type) {
+            errorMessage = `Error Type: ${data.type}`;
+          }
+          this.alertService.showMessage(errorMessage, false);
+        }
+      },
+      error: () => {
+        this.alertService.showMessage('Error fetching purchase history', false);
+      },
+    });
+  }
+
+  closeModal(modalId: string) {
+    this.modalService.close(modalId);
   }
 }
