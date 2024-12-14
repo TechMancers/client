@@ -207,10 +207,13 @@ section.banner {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background-color:#684d4d;
-  color: white;
+  background-color:#ffe5c0;
+  color: rgb(226, 86, 16);
+  font-size: 25px;
+  font-weight: 600;
   border: none;
-  padding: 10px;
+  border-radius: 10px;
+  padding: 20px;
   cursor: pointer;
   z-index: 10;
 }
@@ -545,7 +548,7 @@ section.banner {
 
 .btn-outline-light:hover {
   background-color: #f8f9fa;
-  color: #2e3b4e;
+  color: #4e372e;
 }
 
 /* Banner Section */
@@ -562,6 +565,7 @@ section.banner {
   font-size: 3rem;
   color: #724025;
   text-align: left;
+  padding-left: 20px;
 }
 
 .banner h2 {
@@ -569,6 +573,7 @@ section.banner {
   margin-top: 10px;
   color: #a85725;
   text-align: left;
+  padding-left: 20px;
 }
 
 .sign-up-button {
@@ -577,6 +582,8 @@ section.banner {
   border: none;
   border-radius: 30px;
   padding: 12px 24px;
+  margin: 20px;
+  margin-top: 40px;
   font-size: 18px;
   font-weight: bold;
   text-transform: uppercase;
