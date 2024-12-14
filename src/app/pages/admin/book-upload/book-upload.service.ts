@@ -45,38 +45,30 @@ export class BookUploadService {
 
   // Get a single book by ID
   getBookById(bookId: string): Observable<any> {
-    return this.http.get(`${this.apiUrl}/books/${bookId}`);
+    return this.http.get(`${this.apiUrl}/getBookById/${bookId}`);
   }
 
   // Get all books
   getBooks(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/books`);
+    return this.http.get<any[]>(`${this.apiUrl}/allBooks`);
   }
 
   // Get the stock of a specific book
   getBookStock(bookId: string): Observable<{ stock: number }> {
-    return this.http.get<{ stock: number }>(`${this.apiUrl}/books/${bookId}/stock`);
+    return this.http.get<{ stock: number }>(`${this.apiUrl}/checkStock/${bookId}`);
   }
 
-  // Decrement book stock
   decrementBookStock(bookId: string, quantity: number): Observable<any> {
-    return this.http.put(`${this.apiUrl}/books/decrement-stock`, {
-      bookId,
-      quantity,
-    });
+    return this.http.post(`${this.apiUrl}/decrement-stock`, { bookId, quantity });
   }
 
-  // Increment book stock
   incrementBookStock(bookId: string, quantity: number): Observable<any> {
-    return this.http.put(`${this.apiUrl}/books/increment-stock`, {
-      bookId,
-      quantity,
-    });
+    return this.http.post(`${this.apiUrl}/increment-stock`, { bookId, quantity });
   }
 
-  // Get all categories
+
   getAllCategories(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/categories`);
+    return this.http.get<any[]>(`${this.apiUrl}/categories`);  // Adjust endpoint based on your API
   }
 
   // Get a single category by ID
