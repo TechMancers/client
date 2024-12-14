@@ -1,3 +1,4 @@
+<app-navbar></app-navbar>
 <div class="header__wrapper">
   <div class="container cols__container">
     <div class="row">
@@ -51,13 +52,13 @@
 
         <div class="tab-content">
           <div class="tab-pane fade show active" id="wishlist" role="tabpanel">
-            <nav class="navbar bg-light p-3">
+            <!-- <nav class="navbar bg-light p-3">
               <div class="container-fluid">
                 <form class="d-flex w-100" role="search">
                   <input #searchkeyword (keyup)="searchByKeyword(searchkeyword.value)" class="form-control me-2 rounded-pill border border-primary" type="search" placeholder="Search" aria-label="Search" />
                 </form>
               </div>
-            </nav>
+            </nav> -->
             <div class="WishList row row-cols-1 row-cols-md-3 g-4" style="margin-top:0.5px;">
               <div class="col" *ngFor="let book of filteredBooks">
                 <app-book-card [book]="book"></app-book-card>
@@ -73,4 +74,4 @@
   </div>
 </div>
 
-<!-- <app-footer></app-footer> -->
+<app-footer></app-footer>

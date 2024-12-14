@@ -19,11 +19,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
-
 import { AuthInterceptor } from './shared/services/auth.interceptor';
+
+
 @NgModule({
   declarations: [
-
     AppComponent,
     SignInComponent,
     NewPasswordComponent,
@@ -45,7 +45,7 @@ import { AuthInterceptor } from './shared/services/auth.interceptor';
     provideClientHydration(),
     provideHttpClient(withFetch()),
     provideHttpClient(withFetch()),
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
+
   ],
   bootstrap: [AppComponent]
 })

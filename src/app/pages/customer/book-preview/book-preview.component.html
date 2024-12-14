@@ -1,0 +1,84 @@
+<app-navbar></app-navbar>
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+        <div class="preview-container">
+          <div
+            class="artwork"
+            [ngStyle]="{ 'background-image': 'url(' + thumbnail + ')' }"
+          >
+            <img [src]="thumbnail" alt="Artwork" class="artwork-preview" />
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="tab-content">
+          <h1 class="header-art header-margin">
+            {{ bookDetails.name }}
+          </h1>
+          <h2 class="body1 under">
+            <i><span>by</span>&nbsp; {{ bookDetails.author }}</i>
+          </h2>
+          &nbsp;
+          <p class="body2">
+            Category:
+            <span class="body1">{{ bookDetails.category_name }}</span>
+          </p>
+          <div class="artwork-details">
+            <h5 class="body2">Book Description</h5>
+            <p class="body1">
+              {{ bookDetails.description }}
+            </p>
+          </div>
+          <p class="body1 mt-5">
+            <span class="header-art">{{ bookDetails.price | currency }}</span>
+          </p>
+          <div class="d-grid gap-3 artwork-details-content-pricing-buttons">
+            <div class="d-grid gap-2">
+              <button
+                [ngClass]="['btn', addToWishButtonClass]"
+                type="button"
+                (click)="toggleAddToWish()"
+              >
+                <span class="">{{ addToWishButtonText }}</span>
+              </button>
+              <button class="addToCart" type="button" (click)="addCart(bookDetails)">
+                <span class="">Add To Cart</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section  class="related-artworks">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2 class="body2">Related Books</h2>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="gallery">
+            <div class="column" *ngFor="let column of columns">
+                <div class="gallery-item" *ngFor="let image of column">
+                    <img [src]="image.cover_image" alt="{{ image.title }}" (click)="viewBook(image.book_id)" />
+                    <div class="title-overlay">
+                        <p class="fs-5">{{image.author}}</p>
+                        <div class="more">
+                            <p class="price">
+                                {{image.price | currency  : "USD" : "symbol" : "1.2-2"}}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<app-footer></app-footer>
