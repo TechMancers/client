@@ -9,7 +9,12 @@ import { CartCardComponent } from '../../shared/cards/cart-card/cart-card.compon
 import { BookCardComponent } from '../../shared/cards/book-card/book-card.component';
 import { CategoryCardComponent } from '../../shared/cards/category/category-card/category-card.component';
 import { CheckoutFormComponent } from './checkout-form/checkout-form.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { SearchBookComponent } from './search-book/search-book.component';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+
+import { PurchaseHistoryComponent } from './purchase-history-card/purchase-history.component';
+import { CustomerProfileComponent } from './customer-profile/customer-profile.component';
 
 @NgModule({
   declarations: [
@@ -20,12 +25,18 @@ import { ReactiveFormsModule } from '@angular/forms';
     BookCardComponent,
     CheckoutFormComponent,
     HomeComponent,
-    CategoryCardComponent
+    CategoryCardComponent,
+    SearchBookComponent,
+    EditProfileComponent,
+    PurchaseHistoryComponent,
+    CustomerProfileComponent,
+
   ],
   imports: [
     CommonModule,
     CustomerRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ]
 })
 export class CustomerModule { }
