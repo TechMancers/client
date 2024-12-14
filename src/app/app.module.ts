@@ -1,10 +1,9 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
-import { HttpClientModule, provideHttpClient, withFetch } from '@angular/common/http';
+import { HttpClientModule, provideHttpClient, withFetch, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-
 
 import { AdminModule } from './pages/admin/admin.module';
 import { CustomerModule } from './pages/customer/customer.module';
@@ -15,10 +14,9 @@ import { ResetPasswordComponent } from './pages/forgot-password/reset-password/r
 import { St01Component } from './pages/sign-up/sign-up-users/st01/st01.component';
 import { St02Component } from './pages/sign-up/sign-up-users/st02/st02.component';
 
-import { FormsModule, ReactiveFormsModule } from '@angular/forms'; 
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
-import { HTTP_INTERCEPTORS} from '@angular/common/http';
 import { AuthInterceptor } from './shared/services/auth.interceptor';
 @NgModule({
   declarations: [
@@ -42,6 +40,7 @@ import { AuthInterceptor } from './shared/services/auth.interceptor';
   ],
   providers: [
     provideClientHydration(),
+    provideHttpClient(withFetch()),
     provideHttpClient(withFetch()),
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
   ],

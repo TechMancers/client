@@ -11,6 +11,7 @@ import { CartItem, Purchase } from './bookItems';
 })
 export class UserManagementComponent implements OnInit {
   users: any[] = [];
+  selectedUser: any ={}; 
   userDetails: any;
   purchaseHistory: any[] = [];
   filters: any = {
@@ -86,12 +87,34 @@ export class UserManagementComponent implements OnInit {
     });
   }
 
+  openBanModal(user: any): void {
+    this.modalService.open('ban-user-modal');
+    this.selectedUser = user;
+  }
+    
+
   toggleState(user: any): void {
-    const payload = { isBanned: !user.isBanned };
-    this.userService.updateUserState(user.id, payload).subscribe(() => {
-      user.isBanned = !user.isBanned;
+    const action = user.isBanned ? 'unban' : 'ban'; 
+    const payload = {
+      isBanned: !user.isBanned,
+      isActive: user.isActive === undefined ? true : !user.isActive
+    };
+  
+    this.modalService.open('ban-user-modal');
+    this.userService.updateUserState(user.user_id, payload).subscribe({
+      next: (response) => {
+        user.isBanned = payload.isBanned;
+        user.isActive = payload.isActive;
+        this.alertService.showMessage(`${action.charAt(0).toUpperCase() + action.slice(1)}d user successfully`, true);
+        this.closeModal('ban-user-modal');
+      },
+      error: (err) => {
+        console.error('Error updating user state:', err);
+        this.alertService.showMessage(`Error ${action}ing user`, false);
+      }
     });
   }
+  
 
   openSuspendDialog(user: any): void {
     const reason = prompt('Enter suspension reason:');
@@ -153,8 +176,12 @@ export class UserManagementComponent implements OnInit {
           this.alertService.showMessage(errorMessage, false);
         }
       },
-      error: () => {
-        this.alertService.showMessage('Error fetching purchase history', false);
+      error: (err) => {
+        if (err.status === 404) {
+          this.alertService.showMessage('No purchase history found for this user.', false);
+        } else {
+          this.alertService.showMessage('Error fetching purchase history', false);
+        }
       },
     });
   }

@@ -1,7 +1,6 @@
 <div class="container">
   <h4 class="title">User Management</h4>
 
-  <!-- Search Bar and Filters -->
   <div class="search-bar">
     <div>
       <input
@@ -61,7 +60,6 @@
     </div>
   </div>
 
-  <!-- Users Table -->
   <table class="user-table">
     <thead>
       <tr>
@@ -109,7 +107,7 @@
             Purchase History
           </button>
           <button
-            (click)="toggleState(user)"
+            (click)="openBanModal(user)"
             [ngClass]="{ 'btn-danger': user.isBanned }"
             class="btn ban"
             style="margin-right: 5px"
@@ -121,7 +119,7 @@
             class="btn suspend"
             style="margin-right: 5px"
           >
-            Suspend
+            {{ user.isSuspended ? "Unsuspend" : "Suspend" }}
           </button>
           <button (click)="deleteUser(user.user_id)" class="btn danger">
             Delete
@@ -131,7 +129,6 @@
     </tbody>
   </table>
 
-  <!-- Pagination -->
   <div class="pagination">
     <button
       (click)="loadPage(currentPage - 1)"
@@ -270,5 +267,25 @@
         Close
       </button>
     </div>
+  </div>
+</app-modal>
+
+<app-modal id="ban-user-modal">
+  <div class="modal-header">
+    <h2>{{ selectedUser.isBanned ? "Unban" : "Ban" }} User</h2>
+  </div>
+  <div class="modal-body">
+    <p>
+      Are you sure you want to {{ selectedUser.isBanned ? "unban" : "ban" }} the
+      user?
+    </p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn ban-button" (click)="toggleState(selectedUser)">
+      Confirm
+    </button>
+    <button class="btn cancel-button" (click)="closeModal('ban-user-modal')">
+      Cancel
+    </button>
   </div>
 </app-modal>
