@@ -2,6 +2,7 @@ import { ImageUploadService } from './../../../shared/services/image-upload.serv
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { BookUploadService } from './book-upload.service';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -27,7 +28,8 @@ export class BookUploadComponent implements OnInit{
 
 
 
-  constructor(private bookService:BookUploadService, private fb:FormBuilder ,private imageUploadService:ImageUploadService){
+  constructor(private bookService:BookUploadService, private fb:FormBuilder ,private imageUploadService:ImageUploadService, private router: Router
+  ){
     this.bookForm = this.fb.group({
       name: ['', [Validators.required]],
       author: ['', [Validators.required]],
@@ -45,6 +47,27 @@ export class BookUploadComponent implements OnInit{
     this.getBooks();
     this.getBooksByCategory(this.categories[0]);
     this.getCategories();
+
+     // Check if navigation state contains book data for editing
+     const navigation = this.router.getCurrentNavigation();
+     const state = navigation?.extras.state;
+     if (state && state['isEdit'] && state['book']) {
+       this.isEdit = true;
+       const book = state['book'];
+       this.selectedBook = book;
+ 
+       // Populate the form with book data
+       this.bookForm.patchValue({
+         name: book.name,
+         author: book.author,
+         price: book.price,
+         description: book.description,
+         stock: book.stock,
+         category_id: book.category_id,
+       });
+     }
+   }
+ 
 
   }
 
@@ -138,15 +161,19 @@ export class BookUploadComponent implements OnInit{
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
       const file = input.files[0];
-      if (file.size > 5 * 1024 * 1024) { // Check if file size exceeds 5MB
+      const allowedTypes = ['image/jpeg', 'image/png', 'image/jpg'];
+      if (!allowedTypes.includes(file.type)) {
+        this.bookForm.get('book_image')?.setErrors({ invalidType: true });
+      } else if (file.size > 5 * 1024 * 1024) {
         this.bookForm.get('book_image')?.setErrors({ invalidSize: true });
       } else {
         this.bookForm.get('book_image')?.setErrors(null); // Clear errors
-        // Store the file in the form group or handle as required
-        this.bookForm.patchValue({ book_image: file });
+        this.selectedFile = file; // Set selected file
+        this.uploadImage(); // Automatically upload the image
       }
     }
   }
+  
   cancel() {
     if (confirm('Are you sure you want to cancel? All unsaved changes will be lost.')) {
       this.bookForm.reset(); // Reset the form
@@ -181,6 +208,19 @@ export class BookUploadComponent implements OnInit{
       this.errorMessage = 'Please fill in all fields correctly.';
     }
   }
+
+  submitForm() {
+    if (this.bookForm.valid) {
+      if (this.isEdit) {
+        this.saveUpdatedBook();
+      } else {
+        this.addBook();
+      }
+    } else {
+      this.errorMessage = 'Please fill in all fields correctly.';
+    }
+  }
+
 
 
   wordLimitValidator(control: FormControl) {
