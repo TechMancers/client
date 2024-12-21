@@ -39,7 +39,7 @@
 }
 
 .details h2:hover {
-  color: #007bff;
+  color: #ff4000;
 }
 
 .details p {
@@ -50,7 +50,7 @@
 }
 
 .details p:hover {
-  color: #007bff;
+  color: #ff4000;
 }
 
 .more {
@@ -82,7 +82,7 @@
 }
 
 .cart-icon-btn:hover {
-  background-color: #0056b3;
+  background-color: #f5c49d;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 

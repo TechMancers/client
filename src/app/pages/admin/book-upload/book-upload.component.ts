@@ -180,17 +180,6 @@ export class BookUploadComponent implements OnInit{
       this.selectedBook = null; // Clear selected book if in edit mode
     }
   }
-  // submitForm() {
-  //   if (this.bookForm.valid) {
-  //     if (this.isEdit) {
-  //       this.updateBook();
-  //     } else {
-  //       this.addBook();
-  //     }
-  //   } else {
-  //     this.errorMessage = 'Please fill in all fields correctly.';
-  //   }
-  // }
   submitForm() {
     if (this.bookForm.valid) {
       this.bookService.addBook(this.bookForm.value).subscribe({
@@ -324,4 +313,4 @@ uploadImage(): void {
 
 
 
-}
+
